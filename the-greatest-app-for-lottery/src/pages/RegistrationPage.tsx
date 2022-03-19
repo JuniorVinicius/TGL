@@ -1,5 +1,5 @@
 import React from "react";
-import { Conteiner } from "./../UI/Conteiner/Conteiner";
+import { Conteiner } from "../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
 
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
@@ -11,12 +11,14 @@ const LoginPage = () => {
       <Conteiner>
         <AplicationTitle />
         <FormAuth
-          title="Authentication"
+          marginTop={true}
+          title="Registration"
           buttonSubmitColor="var(--main-green)"
-          buttonSubmitTitle="Log In"
-          buttonActionTitle="Sign Up"
+          buttonSubmitTitle="Register"
+          buttonActionTitle="Back"
           arrowSubmitRight={true}
-          arrowActionRight={true}
+          arrowActionLeft={true}
+          sizeButton={56}
         />
       </Conteiner>
 
