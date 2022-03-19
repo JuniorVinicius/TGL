@@ -11,6 +11,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     font-family: 'Helvetica Neue', sans-serif;
     background-color: var(--background);
+    overflow-x: hidden;
   }
   body html #root {
     height: 100%;

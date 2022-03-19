@@ -12,43 +12,17 @@ import {
 } from "./../components/Form/Form";
 import Footer from "../components/Footer";
 import { Button } from "./../UI/Button/Button";
-
+import { BoxText, Text, Span } from "./../components/AplicationTitle/index";
 
 const LoginPage = () => {
   return (
     <>
       <Conteiner>
-        <div
-          style={{
-            width: "340px",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "65px",
-              textAlign: "center",
-              color: "var(--text)",
-              fontStyle: "italic",
-              fontWeight: "bold",
-            }}
-          >
-            The Geatest App
-            <br />
-            <span
-              style={{
-                fontSize: "22px",
-                background: "var(--main-green)",
-                color: "#fff",
-                padding: "7px 60px",
-                borderRadius: "100px",
-              }}
-            >
-              for
-            </span>
-            <br />
-            <span style={{ fontSize: "83px" }}>LOTTERY</span>
-          </h1>
-        </div>
+        <BoxText>
+          <Text>The Geatest App</Text>
+          <Span>for</Span>
+          <Text fontSize="83px">LOTTERY</Text>
+        </BoxText>
 
         <BoxForm>
           <Title>Authentication</Title>

@@ -11,6 +11,7 @@ export const Title = styled.h2`
 export const BoxForm = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 30px;
 `;
 
 export const Form = styled.form`
@@ -18,8 +19,9 @@ export const Form = styled.form`
   height: 337px;
   background: var(--card-color);
   border-radius: 14px;
+  border: 1px solid var(--border);
   box-shadow: 0px 3px 25px #00000014;
-  margin: 30px 0px;
+  margin: 25px 0px;
 `;
 
 export const BoxInput = styled.div`
