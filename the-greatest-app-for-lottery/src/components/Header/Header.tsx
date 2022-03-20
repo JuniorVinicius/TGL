@@ -4,7 +4,12 @@ import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
 import { useState } from "react";
 
-const Header = () => {
+type HeaderType = {
+  homeButton?: boolean;
+};
+
+const Header = (props: HeaderType) => {
+  const { homeButton } = props;
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -15,7 +20,7 @@ const Header = () => {
       <HeaderBox className={`${clicked ? "clicked" : ""}`}>
         <Box>
           <span className={`${clicked && "clicked-logo"}`}>TGL</span>
-          <Button fontSize={20}>Home</Button>
+          {homeButton && <Button fontSize={20}>Home</Button>}
         </Box>
 
         <Box className={`box-logout ${clicked ? "clicked" : ""}`}>

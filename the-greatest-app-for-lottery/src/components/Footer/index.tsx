@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <FooterComponent>
-        <Text>Copyright 2020 Luby Software</Text>
+        <Text>Copyright 2022 Luby Software</Text>
       </FooterComponent>
     </>
   );
