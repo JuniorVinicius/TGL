@@ -14,13 +14,14 @@ import { Box } from "../UI/Conteiner/Conteiner";
 import ActionButton from "../UI/Button/ActionButtons";
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import Cart from './../components/Cart/index';
 
 const NewBet = () => {
   return (
     <>
       <Header homeButton={true} />
 
-      <MainConteiner>
+      <MainConteiner className="new-bet">
         <BoxBetNumbers>
           <TitleBet>
             <Emphasis>NEW BET</Emphasis> FOR MEGA-SENA
@@ -42,7 +43,7 @@ const NewBet = () => {
 
           <Numbers />
 
-          <Box>
+          <Box className="main-box">
             <Box>
               <ActionButton name="Complete game" />
               <ActionButton name="Clear game" />
@@ -51,12 +52,19 @@ const NewBet = () => {
             <ActionButton
               name="Add to cart"
               hasBackground={true}
-              icon={<AiOutlineShoppingCart size={25} style={{marginRight: '28px'}}/>}
+              icon={
+                <AiOutlineShoppingCart
+                  size={25}
+                  style={{ marginRight: "28px" }}
+                />
+              }
             />
           </Box>
         </BoxBetNumbers>
 
-        <section></section>
+        <section>
+            <Cart/>
+        </section>
       </MainConteiner>
 
       <Footer />

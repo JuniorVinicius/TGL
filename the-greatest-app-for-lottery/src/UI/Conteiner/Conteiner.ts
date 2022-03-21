@@ -17,4 +17,7 @@ export const Conteiner = styled.div`
 export const Box = styled.div`
     display: flex;
     justify-content: space-between;
+    &.main-box{
+      margin-bottom: 100px;
+    }
 `;

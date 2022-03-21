@@ -8,16 +8,9 @@ export default createGlobalStyle`
     box-sizing: border-box;
     scrollbar-width: thin;
     scrollbar-color: var(--text) transparent;
-  }
-  body {
-    -webkit-font-smoothing: antialiased !important;
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: var(--background);
-    overflow-x: hidden;
 
-
-    /* Works on Chrome, Edge, and Safari */
-    &::-webkit-scrollbar {
+     /* Works on Chrome, Edge, and Safari */
+     &::-webkit-scrollbar {
       width: 7px;
     }
 
@@ -30,6 +23,12 @@ export default createGlobalStyle`
       border-radius: 20px;
       border: 1px solid transparent;
     }
+  }
+  body {
+    -webkit-font-smoothing: antialiased !important;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: var(--background);
+    overflow-x: hidden;
   }
   body html #root {
     height: 100%;
@@ -48,5 +47,7 @@ export default createGlobalStyle`
       --base-number-background: #ADC0C4;
       --text-number: #fff;
       --main-button: #27C383;
+      --background-save-button: #F4F4F4;
+      --background-save-button-border: #E2E2E2;
   }
 `;
