@@ -6,12 +6,30 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text) transparent;
   }
   body {
     -webkit-font-smoothing: antialiased !important;
     font-family: 'Helvetica Neue', sans-serif;
     background-color: var(--background);
     overflow-x: hidden;
+
+
+    /* Works on Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--text);
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
   }
   body html #root {
     height: 100%;
@@ -27,5 +45,8 @@ export default createGlobalStyle`
       --placeholder: #9D9D9D;
       --light-gray: #C1C1C1;
       --icon-gray: #535351;
+      --base-number-background: #ADC0C4;
+      --text-number: #fff;
+      --main-button: #27C383;
   }
 `;

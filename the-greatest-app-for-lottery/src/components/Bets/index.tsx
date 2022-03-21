@@ -1,10 +1,27 @@
-import { BoxBet, Barr, Content, ConteinerText, Register, TagGame } from "./BetsSave";
+import {
+  BoxBet,
+  Barr,
+  Content,
+  ConteinerText,
+  Register,
+  TagGame,
+} from "./BetsSave";
 
-const Bet = () => {
+type GameType = {
+  numbers?: string;
+  date?: string;
+  amount?: string;
+  typeGame?: string;
+  color?: string;
+};
+
+const Bet = (props: GameType) => {
+  const { numbers, date, amount, typeGame, color } = props;
+
   return (
     <>
       <BoxBet>
-        <Barr />
+        <Barr color={color}/>
         <Content>
           <ConteinerText className="first-conteiner">
             01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15
@@ -15,7 +32,7 @@ const Bet = () => {
           </ConteinerText>
 
           <ConteinerText>
-            <TagGame>Lotofácil</TagGame>
+            <TagGame color={color}>{typeGame}</TagGame>
           </ConteinerText>
         </Content>
       </BoxBet>

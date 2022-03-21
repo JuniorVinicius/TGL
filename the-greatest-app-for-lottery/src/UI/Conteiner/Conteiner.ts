@@ -13,3 +13,8 @@ export const Conteiner = styled.div`
     margin-top: 0px;
   }
 `;
+
+export const Box = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;

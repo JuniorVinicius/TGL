@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type BetType = {
+  color?: string;
+};
+
 export const BoxBet = styled.section`
   margin-left: 10%;
   display: flex;
@@ -12,8 +16,9 @@ export const BoxBet = styled.section`
 export const Content = styled.section`
   padding: 5px 15px;
 `;
-export const Barr = styled.div`
-  background: #000;
+
+export const Barr = styled.div<BetType>`
+  background: ${(props) => props.color};
   height: 103px;
   width: 6px;
   border-radius: 3px;
@@ -49,11 +54,11 @@ export const Register = styled.span`
     font-size: 14px;
   }
 `;
-export const TagGame = styled.span`
+export const TagGame = styled.span<BetType>`
   font-size: 20px;
   font-style: italic;
   font-weight: bold;
-  color: #000;
+  color: ${(props) => props.color};
 
   @media (max-width: 600px) {
     font-size: 16px;

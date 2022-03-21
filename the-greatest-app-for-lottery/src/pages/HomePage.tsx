@@ -54,9 +54,9 @@ const HomePage = () => {
           <Filter color="#F79C31">Lotomania</Filter>
         </Card>
 
-        <Bet/>
-        <Bet/>
-        <Bet/>
+        <Bet typeGame="Lotofácil" color="#7F3992" />
+        <Bet typeGame="Mega-Sena" color="#01AC66" />
+        <Bet typeGame="Lotomania" color="#F79C31" />
 
       </MainConteiner>
 
