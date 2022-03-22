@@ -8,6 +8,6 @@ export const MainConteiner = styled.main`
 
     &.new-bet{
         display: flex;
-
+        justify-content: space-between;
     }
 `

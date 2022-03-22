@@ -11,7 +11,7 @@ export const BoxBetSave = styled.div`
   border: 1px solid #e2e2e2;
   border-radius: 10px;
   margin-top: 41px;
-  margin-left: 41px;
+ 
 `;
 
 export const TitleCart = styled.p`
@@ -38,20 +38,20 @@ export const Item = styled.li`
 `;
 
 export const BoxContentItem = styled.div<ItemType>`
-  padding: 5px 10px;
+  padding: 8px 10px;
   border-left: 4px solid ${(props) => props.color};
   border-radius: 4px 0px 0px 4px;
 `;
 
 export const ListNumbers = styled.p`
-  color: var(--text);
+  color: var(--text-light);
   font-size: 15px;
   font-weight: bold;
   font-style: italic;
   margin-bottom: 6px;
 `;
 export const TypeGame = styled.p<ItemType>`
-  color: var(--text);
+  color: var(--text-light);
   font-size: 16px;
 
   & > span:first-child {

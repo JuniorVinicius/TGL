@@ -9,6 +9,7 @@ import {
   Label,
   Description,
   BoxBetNumbers,
+  BoxCart
 } from "./../components/NewBetContent/index";
 import { Box } from "../UI/Conteiner/Conteiner";
 import ActionButton from "../UI/Button/ActionButtons";
@@ -19,7 +20,7 @@ import Cart from './../components/Cart/index';
 const NewBet = () => {
   return (
     <>
-      <Header homeButton={true} />
+      <Header homeButton={true} hasCartButton={true}/>
 
       <MainConteiner className="new-bet">
         <BoxBetNumbers>
@@ -62,9 +63,9 @@ const NewBet = () => {
           </Box>
         </BoxBetNumbers>
 
-        <section>
+        <BoxCart>
             <Cart/>
-        </section>
+        </BoxCart>
       </MainConteiner>
 
       <Footer />

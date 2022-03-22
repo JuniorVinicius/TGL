@@ -3,13 +3,15 @@ import { Button } from "./../../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
 import { useState } from "react";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 type HeaderType = {
   homeButton?: boolean;
+  hasCartButton?: boolean;
 };
 
 const Header = (props: HeaderType) => {
-  const { homeButton } = props;
+  const { homeButton, hasCartButton } = props;
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -34,9 +36,18 @@ const Header = (props: HeaderType) => {
           </ConteinerButton>
         </Box>
 
-        <button onClick={handleClick}>
-          <GoThreeBars size={20} />
-        </button>
+        <div className="box-buttons">
+          <button onClick={handleClick}>
+            <GoThreeBars size={20} />
+          </button>
+
+          {hasCartButton && <div>
+            <button>
+              <AiOutlineShoppingCart size={20} />
+            </button>
+            10
+          </div>}
+        </div>
       </HeaderBox>
 
       <LogoBar className={`${clicked && "clicked-bar"}`} />

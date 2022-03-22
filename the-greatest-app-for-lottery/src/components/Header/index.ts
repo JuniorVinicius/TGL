@@ -9,19 +9,45 @@ export const HeaderBox = styled.header`
   justify-content: space-between;
   padding-left: 10%;
 
-  & > button {
+  & > .box-buttons {
+    display: none;
+    margin-right: 10%;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div {
+      width: 40px;
+      padding: 2px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      color: var(--text);
+      cursor:  pointer;
+      margin-left: 10px;
+      & > button {
+        background: unset;
+        border: unset;
+        color: var(--text);
+      }
+    }
+
+    @media (max-width: 1000px) {
+      display: flex;
+    }
+  }
+  & > div > button:first-child {
     display: none;
     background: unset;
     border: unset;
     color: var(--text);
-
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
       display: flex;
-      margin-right: 10%;
     }
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 768px) {
     &.clicked {
       padding-left: 0;
     }
@@ -40,7 +66,7 @@ export const Box = styled.div`
     margin-right: 74px;
     cursor: pointer;
 
-    @media (max-width: 650px) {
+    @media (max-width: 768px) {
       margin-right: 15px;
 
       &.clicked-logo {
@@ -51,7 +77,10 @@ export const Box = styled.div`
 
   &.box-logout {
     margin-right: 16%;
-    @media (max-width: 650px) {
+    @media (max-width: 1000px) {
+      margin-right: 0%;
+    }
+    @media (max-width: 768px) {
       display: none;
       &.clicked {
         display: flex;
@@ -64,7 +93,6 @@ export const Box = styled.div`
         align-items: center;
         flex-direction: column;
         top: 79px;
-        margin: 0;
       }
     }
   }
@@ -77,7 +105,7 @@ export const ConteinerButton = styled.div`
     margin-right: 0px;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 768px) {
     margin: 3% 0%;
   }
 `;
@@ -91,7 +119,7 @@ export const LogoBar = styled.div`
   top: 74px;
   left: 9.6%;
 
-  @media (max-width: 650px) {
+  @media (max-width: 768px) {
     &.clicked-bar {
       left: 6%;
     }

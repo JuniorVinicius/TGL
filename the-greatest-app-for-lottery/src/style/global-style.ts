@@ -39,6 +39,7 @@ export default createGlobalStyle`
       --card-color: #FFFFFF;
       --border: #DDDDDD;
       --text: #707070;
+      --text-light: #868686;
       --main-green: #B5C401;
       --lines-gray: #EBEBEB;
       --placeholder: #9D9D9D;

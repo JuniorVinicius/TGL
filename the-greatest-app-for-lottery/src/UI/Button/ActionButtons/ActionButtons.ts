@@ -22,4 +22,10 @@ export const Button = styled.button<ButtonType>`
         filter: brightness(1.2);
     }
 
+    @media (max-width: 530px) {
+        margin-right: 0px;
+        margin-bottom: 10px;
+        width: 200px;
+  }
+
 `

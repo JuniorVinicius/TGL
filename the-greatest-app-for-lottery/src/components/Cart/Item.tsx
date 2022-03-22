@@ -15,7 +15,7 @@ const ItemCart = (props: ItemType) => {
       <Item>
         <IoTrashOutline
           size={50}
-          style={{ marginRight: "14px", cursor: "pointer", color: 'var(--text)' }}
+          style={{ marginRight: "14px", cursor: "pointer", color: 'var(--text-light)' }}
         />
         <BoxContentItem color={color}>
           <ListNumbers>

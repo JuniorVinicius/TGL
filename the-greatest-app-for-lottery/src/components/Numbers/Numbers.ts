@@ -6,6 +6,25 @@ export const BoxNumbers = styled.ul`
   align-items: center;
   grid-gap: 20px 12px;
   margin-bottom: 44px;
+
+  @media (max-width: 1400px) {
+    grid-template-areas: "li li li li li li li li";
+  }
+
+  @media (max-width: 1350px) {
+    grid-template-areas: "li li li li li li li";
+  }
+  @media (max-width: 1300px) {
+    grid-template-areas: "li li li li li li";
+  }
+
+  @media (max-width: 1000px) {
+    grid-gap: 10px 6px;
+  }
+
+  @media (max-width: 530px) {
+    grid-gap: 8px 2px;
+  }
 `;
 
 export const Number = styled.li`
@@ -22,8 +41,13 @@ export const Number = styled.li`
   color: var(--text-number);
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     filter: brightness(1.1);
   }
-  
+
+  @media (max-width: 530px) {
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+  }
 `;

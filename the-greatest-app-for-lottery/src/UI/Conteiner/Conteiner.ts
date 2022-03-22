@@ -15,9 +15,17 @@ export const Conteiner = styled.div`
 `;
 
 export const Box = styled.div`
-    display: flex;
-    justify-content: space-between;
-    &.main-box{
-      margin-bottom: 100px;
-    }
+  display: flex;
+  justify-content: space-between;
+
+  &.main-box {
+    margin-bottom: 100px;
+  }
+
+  @media (max-width: 530px){
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+    align-items: center;
+  }
 `;

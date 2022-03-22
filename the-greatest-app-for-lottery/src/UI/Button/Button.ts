@@ -23,4 +23,8 @@ export const Button = styled.button<ButtonStyle>`
     &:hover{
         filter: brightness(1.2);
     }
+
+    @media(max-width: 320px){
+        font-size: 14px;
+    }
 `
