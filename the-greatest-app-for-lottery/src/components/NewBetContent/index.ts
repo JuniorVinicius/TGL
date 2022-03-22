@@ -7,11 +7,11 @@ export const BoxBetNumbers = styled.section`
     margin-right: 10%;
   }
 
-  
   @media (max-width: 470px) {
     max-width: 484px;
     margin-right: 5%;
   }
+
   @media (max-width: 325px) {
     margin-left: 5%;
     margin-right: 10%;
@@ -21,14 +21,13 @@ export const BoxBetNumbers = styled.section`
 export const BoxCart = styled.section`
   margin-right: 14%;
 
-  @media (max-width: 1300px){
+  @media (max-width: 1300px) {
     margin-left: 5%;
   }
 
-  @media (max-width: 1000px){
-    display: none; 
+  @media (max-width: 1000px) {
+    display: none;
   }
-
 `;
 
 export const TitleBet = styled.p`

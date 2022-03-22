@@ -13,6 +13,8 @@ import { Button } from "./../../UI/Button/Button";
 
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+
 type FormType = {
   marginTop?: boolean;
   title: string;
@@ -24,11 +26,17 @@ type FormType = {
   arrowActionLeft?: boolean;
   arrowActionRight?: boolean;
   sizeButton?: number;
-  onSubmitForm?: () => void;
+  onSubmitForm: SubmitHandler<Inputs>;
   onForgetPassword?: () => void;
   onGoTo?: () => void;
 };
 
+
+type Inputs = {
+  name: string,
+  email: string,
+  password: string
+};
 const FormAuth = (props: FormType) => {
   const {
     marginTop,
@@ -46,23 +54,26 @@ const FormAuth = (props: FormType) => {
     onGoTo
   } = props;
 
+  const { register, handleSubmit } = useForm<Inputs>();
+
+
   return (
     <>
-      <BoxForm onSubmit={onSubmitForm}>
+      <BoxForm onSubmit={handleSubmit(onSubmitForm)} >
         <Title>{title}</Title>
         <Form>
           {title === "Registration" && (
             <BoxInput>
-              <Input type="text" name="name" placeholder="Name" />
+              <Input type="text" placeholder="Name" {...register("name")}/>
             </BoxInput>
           )}
           <BoxInput>
-            <Input type="text" name="email" placeholder="Email" />
+            <Input type="text" placeholder="Email"  {...register("email")}/>
           </BoxInput>
 
           {title !== "Reset password" && (
             <BoxInput>
-              <Input type="password" name="password" placeholder="Password" />
+              <Input type="password" placeholder="Password" {...register("password")}/>
             </BoxInput>
           )}
 

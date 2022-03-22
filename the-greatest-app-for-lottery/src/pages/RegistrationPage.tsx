@@ -6,11 +6,22 @@ import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
 
+
+type Inputs = {
+  name?: string
+  email?: string
+  password?: string
+}
+
 const RegistrationPage = () => {
   const navigate = useNavigate();
 
   const handleBackPage = () =>{
     navigate('/')
+  }
+
+  const handleRigister = (props: Inputs) => {
+    console.log(props);
   }
 
   return (
@@ -26,6 +37,7 @@ const RegistrationPage = () => {
           arrowSubmitRight={true}
           arrowActionLeft={true}
           sizeButton={56}
+          onSubmitForm={handleRigister}
           onGoTo={handleBackPage}
 
         />

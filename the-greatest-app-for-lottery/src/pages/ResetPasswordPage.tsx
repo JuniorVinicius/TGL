@@ -6,11 +6,21 @@ import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
 
+type Inputs = {
+  name?: string
+  email?: string
+  password?: string
+}
+
 const ResetPage = () => {
   const navigate = useNavigate();
 
   const handleBackPage = () => {
     navigate('/')
+  }
+
+  const handleResetPassword = (props: Inputs) => {
+    console.log(props);
   }
   return (
     <>
@@ -25,6 +35,7 @@ const ResetPage = () => {
           arrowSubmitRight={true}
           arrowActionLeft={true}
           sizeButton={56}
+          onSubmitForm={handleResetPassword}
           onGoTo={handleBackPage}
         />
       </Conteiner>
