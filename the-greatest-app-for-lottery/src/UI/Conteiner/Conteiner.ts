@@ -10,7 +10,8 @@ export const Conteiner = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    margin-top: 0px;
+    margin: 0px;
+    padding-right: 15px;
   }
 `;
 

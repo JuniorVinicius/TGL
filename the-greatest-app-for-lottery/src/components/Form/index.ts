@@ -20,6 +20,7 @@ export const BoxForm = styled.div`
   @media (max-width: 1024px) {
     margin-left: 0px;
   }
+
 `;
 
 export const Form = styled.form`
@@ -32,11 +33,9 @@ export const Form = styled.form`
 
   @media (max-width: 1024px) {
     width: 300px;
-    height: 300px;
   }
   @media (max-width: 425px) {
     width: 280px;
-    height: 280px;
   }
 `;
 

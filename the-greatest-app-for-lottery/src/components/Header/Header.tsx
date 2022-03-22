@@ -40,7 +40,11 @@ const Header = (props: HeaderType) => {
             TGL
           </span>
           {homeButton && (
-            <Button fontSize={20} onClick={handleClickHome}>
+            <Button
+              fontSize={20}
+              className="header-button"
+              onClick={handleClickHome}
+            >
               Home
             </Button>
           )}
@@ -48,10 +52,16 @@ const Header = (props: HeaderType) => {
 
         <Box className={`box-logout ${clicked ? "clicked" : ""}`}>
           <ConteinerButton>
-            <Button fontSize={20}>Account</Button>
+            <Button fontSize={20} className="header-button">
+              Account
+            </Button>
           </ConteinerButton>
           <ConteinerButton className="button-logout">
-            <Button fontSize={20} onClick={handleLogout}>
+            <Button
+              fontSize={20}
+              className="header-button"
+              onClick={handleLogout}
+            >
               Log out <BsArrowRight style={{ marginLeft: "10px" }} />
             </Button>
           </ConteinerButton>

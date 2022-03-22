@@ -10,8 +10,11 @@ export const BoxBetNumbers = styled.section`
   
   @media (max-width: 470px) {
     max-width: 484px;
-    margin-left: 5%;
     margin-right: 5%;
+  }
+  @media (max-width: 325px) {
+    margin-left: 5%;
+    margin-right: 10%;
   }
 `;
 
