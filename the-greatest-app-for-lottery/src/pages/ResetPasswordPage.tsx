@@ -1,11 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Conteiner } from "../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
-
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
 
-const LoginPage = () => {
+const ResetPage = () => {
+  const navigate = useNavigate();
+
+  const handleBackPage = () => {
+    navigate('/')
+  }
   return (
     <>
       <Conteiner>
@@ -19,6 +25,7 @@ const LoginPage = () => {
           arrowSubmitRight={true}
           arrowActionLeft={true}
           sizeButton={56}
+          onGoTo={handleBackPage}
         />
       </Conteiner>
 
@@ -27,4 +34,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ResetPage;

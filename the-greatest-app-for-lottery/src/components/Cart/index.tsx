@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../UI/Button/Button";
 import { BoxBetSave, Itens, TitleCart, Total, BoxSave } from "./Cart";
 import ItemCart from "./Item";
 import { BsArrowRight } from 'react-icons/bs';
 
 const Cart = () => {
+  const navigate = useNavigate();
+
+  const handleClickSave = () => {
+    navigate('/home')
+  }
   return (
     <>
       <BoxBetSave>
@@ -19,7 +25,7 @@ const Cart = () => {
         </Total>
 
         <BoxSave>
-          <Button fontSize={35} color="var(--main-button)">
+          <Button fontSize={35} color="var(--main-button)" onClick={handleClickSave}>
             Save<BsArrowRight style={{ marginLeft: "18px" }} />
           </Button>
         </BoxSave>

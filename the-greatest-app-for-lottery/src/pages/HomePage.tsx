@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Button } from "../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
@@ -14,6 +15,10 @@ import { Filter } from "./../components/Filter/index";
 import Bet from "../components/Bets";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const handleClickNewBet = () => {
+    navigate("/newbet");
+  };
   return (
     <>
       <Header homeButton={false} />
@@ -35,7 +40,11 @@ const HomePage = () => {
           </Filters>
 
           <ConteinerButton>
-            <Button color="var(--main-green)" fontSize={24}>
+            <Button
+              color="var(--main-green)"
+              fontSize={24}
+              onClick={handleClickNewBet}
+            >
               New Bet
               <BsArrowRight style={{ marginLeft: "10px" }} />
             </Button>
@@ -57,7 +66,6 @@ const HomePage = () => {
         <Bet typeGame="Lotofácil" color="#7F3992" />
         <Bet typeGame="Mega-Sena" color="#01AC66" />
         <Bet typeGame="Lotomania" color="#F79C31" />
-
       </MainConteiner>
 
       <Footer />

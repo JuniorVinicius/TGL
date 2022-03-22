@@ -14,7 +14,7 @@ import { Button } from "./../../UI/Button/Button";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 type FormType = {
-  marginTop?: boolean
+  marginTop?: boolean;
   title: string;
   buttonSubmitColor?: string;
   buttonSubmitTitle?: string;
@@ -24,6 +24,9 @@ type FormType = {
   arrowActionLeft?: boolean;
   arrowActionRight?: boolean;
   sizeButton?: number;
+  onSubmitForm?: () => void;
+  onForgetPassword?: () => void;
+  onGoTo?: () => void;
 };
 
 const FormAuth = (props: FormType) => {
@@ -38,11 +41,14 @@ const FormAuth = (props: FormType) => {
     arrowActionLeft,
     arrowActionRight,
     sizeButton,
+    onSubmitForm,
+    onForgetPassword,
+    onGoTo
   } = props;
 
   return (
     <>
-      <BoxForm>
+      <BoxForm onSubmit={onSubmitForm}>
         <Title>{title}</Title>
         <Form>
           {title === "Registration" && (
@@ -62,7 +68,7 @@ const FormAuth = (props: FormType) => {
 
           {title === "Authentication" && (
             <BoxForgetPassword>
-              <span>I forget my password</span>
+              <span onClick={onForgetPassword}>I forget my password</span>
             </BoxForgetPassword>
           )}
 
@@ -80,7 +86,7 @@ const FormAuth = (props: FormType) => {
         </Form>
 
         <BoxButton>
-          <Button size={sizeButton}>
+          <Button size={sizeButton} onClick={onGoTo}>
             {arrowActionLeft && <BsArrowLeft style={{ marginRight: "19px" }} />}
             {buttonActionTitle}
             {arrowActionRight && (

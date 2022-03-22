@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { HeaderBox, Box, ConteinerButton, LogoBar } from "./index";
 import { Button } from "./../../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
@@ -11,18 +13,37 @@ type HeaderType = {
 };
 
 const Header = (props: HeaderType) => {
+  const navigate = useNavigate();
+
   const { homeButton, hasCartButton } = props;
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
     setClicked(!clicked);
   };
+
+  const handleClickHome = () => {
+    navigate("/home");
+  };
+
+  const handleLogout = () => {
+    navigate("/");
+  };
   return (
     <>
       <HeaderBox className={`${clicked ? "clicked" : ""}`}>
         <Box>
-          <span className={`${clicked && "clicked-logo"}`}>TGL</span>
-          {homeButton && <Button fontSize={20}>Home</Button>}
+          <span
+            className={`${clicked && "clicked-logo"}`}
+            onClick={handleClickHome}
+          >
+            TGL
+          </span>
+          {homeButton && (
+            <Button fontSize={20} onClick={handleClickHome}>
+              Home
+            </Button>
+          )}
         </Box>
 
         <Box className={`box-logout ${clicked ? "clicked" : ""}`}>
@@ -30,7 +51,7 @@ const Header = (props: HeaderType) => {
             <Button fontSize={20}>Account</Button>
           </ConteinerButton>
           <ConteinerButton className="button-logout">
-            <Button fontSize={20}>
+            <Button fontSize={20} onClick={handleLogout}>
               Log out <BsArrowRight style={{ marginLeft: "10px" }} />
             </Button>
           </ConteinerButton>
@@ -41,12 +62,14 @@ const Header = (props: HeaderType) => {
             <GoThreeBars size={20} />
           </button>
 
-          {hasCartButton && <div>
-            <button>
-              <AiOutlineShoppingCart size={20} />
-            </button>
-            10
-          </div>}
+          {hasCartButton && (
+            <div>
+              <button>
+                <AiOutlineShoppingCart size={20} />
+              </button>
+              10
+            </div>
+          )}
         </div>
       </HeaderBox>
 

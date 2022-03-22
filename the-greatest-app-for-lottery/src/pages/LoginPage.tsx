@@ -1,11 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Conteiner } from "./../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
-
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate('/home');
+  }
+  const handleForgetPassword = () => {
+    navigate('/reset');
+  }
+  const handleSignUp = () => {
+    navigate('/register');
+  }
+
   return (
     <>
       <Conteiner>
@@ -17,6 +29,9 @@ const LoginPage = () => {
           buttonActionTitle="Sign Up"
           arrowSubmitRight={true}
           arrowActionRight={true}
+          onSubmitForm={handleLogin}
+          onForgetPassword={handleForgetPassword}
+          onGoTo={handleSignUp}
         />
       </Conteiner>
 
