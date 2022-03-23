@@ -16,8 +16,34 @@ import ActionButton from "../UI/Button/ActionButtons";
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Cart from './../components/Cart/index';
+import { useState } from 'react';
 
 const NewBet = () => {
+
+  const [random, setRandom] = useState<number[]>()
+
+  const randomNumbers = () =>{
+    const numbers: any[] = []
+    
+    let x = 0;
+    while(x <= 6){
+      const randomNumber = Math.floor(Math.random() * 15);
+      if (numbers.some((number) => number === randomNumber) || randomNumber === 0) {
+        x--;
+      } else {
+        if (numbers.length < 6) {
+          numbers.push(randomNumber);
+          x++;
+        } else {
+          break;
+        }
+      }
+    }
+
+    setRandom(numbers)
+
+  }
+
   return (
     <>
       <Header homeButton={true} hasCartButton={true}/>
@@ -42,11 +68,11 @@ const NewBet = () => {
             hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
           </Description>
 
-          <Numbers />
+          <Numbers randomValues={random}/>
 
           <Box className="main-box">
             <Box>
-              <ActionButton name="Complete game" />
+              <ActionButton name="Complete game" onHandleClick={randomNumbers}/>
               <ActionButton name="Clear game" />
             </Box>
 

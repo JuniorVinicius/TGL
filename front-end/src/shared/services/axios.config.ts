@@ -27,6 +27,10 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(async (response) => {
   console.log("response :>> ", response);
 
+  if(response.status === 200){
+    localStorage.setItem('token', response.data.token.token)
+  }
+
   return response;
 }, function (error: AxiosError){
     console.log('error :>> ', error);
