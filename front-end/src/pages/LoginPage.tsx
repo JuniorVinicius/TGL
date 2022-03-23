@@ -5,8 +5,8 @@ import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
 import { auth } from "../shared/services";
-
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Inputs = {
   name?: string;
@@ -16,15 +16,22 @@ type Inputs = {
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const {login} = auth()
+  const { login } = auth();
 
   const handleLogin = async (props: Inputs) => {
-    const { email, password} = props
+    const { email, password } = props;
     try {
-      const responseLogin = await login({email,password})
-      navigate('/home');
+      const response = await toast.promise(
+        login({ email, password }),
+        {
+          pending: 'Carregando...',
+          success: 'Seja bem vindo 👌',
+          error: 'Erro ao autenticar 🤯'
+        }
+    );
+      navigate("/home");
     } catch (error) {
-      console.log('error :>> ', error);
+      console.log(error);
     }
   };
   const handleForgetPassword = () => {
