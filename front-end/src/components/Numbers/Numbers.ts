@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+type Clicked = {
+  clicked?: boolean;
+  color?: string;
+};
+
 export const BoxNumbers = styled.ul`
   display: grid;
   grid-template-areas: "li li li li li li li li li";
@@ -27,11 +32,12 @@ export const BoxNumbers = styled.ul`
   }
 `;
 
-export const Number = styled.li`
+export const Number = styled.li<Clicked>`
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background-color: var(--base-number-background);
+  background-color: ${(props) =>
+    props.clicked ? props.color : "var(--base-number-background)"};
   list-style: none;
   display: flex;
   align-items: center;

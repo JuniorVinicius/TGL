@@ -1,30 +1,38 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Conteiner } from "./../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
+import { auth } from "../shared/services";
+
+
 
 type Inputs = {
-  name?: string
-  email?: string
-  password?: string
-}
+  name?: string;
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const {login} = auth()
 
-  const handleLogin = (props: Inputs) => {
-    // navigate('/home');
-    console.log(props);
-  }
+  const handleLogin = async (props: Inputs) => {
+    const { email, password} = props
+    try {
+      const responseLogin = await login({email,password})
+      navigate('/home');
+    } catch (error) {
+      console.log('error :>> ', error);
+    }
+  };
   const handleForgetPassword = () => {
-    navigate('/reset');
-  }
+    navigate("/reset");
+  };
   const handleSignUp = () => {
-    navigate('/register');
-  }
+    navigate("/register");
+  };
 
   return (
     <>
