@@ -27,7 +27,7 @@ const NewBet = () => {
     
     let x = 0;
     while(x <= 6){
-      const randomNumber = Math.floor(Math.random() * 15);
+      const randomNumber = Math.floor(Math.random() * 25) + 1;
       if (numbers.some((number) => number === randomNumber) || randomNumber === 0) {
         x--;
       } else {

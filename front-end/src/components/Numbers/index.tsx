@@ -1,30 +1,35 @@
 import { BoxNumbers, Number } from "./Numbers";
 import { useState, useEffect } from "react";
 
-const DUMMY_ARRAY: any[] = [];
-
-for (let x = 1; x <= 25; x++) {
-  DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
-}
+let DUMMY_ARRAY: any[] = [];
 
 interface IBet {
   randomValues?: number[];
 }
 
+for (let x = 1; x <= 25; x++) {
+  DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
+}
+
+const generateNumbers = (range: number) => {
+  DUMMY_ARRAY = []
+  for (let x = 1; x <= range; x++) {
+    DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
+  }
+}
+
 const Numbers = (props: IBet) => {
   const [color, setColor] = useState("");
-  const [clicked, setClicked] = useState(false);
   const [choosen, setChoosen] = useState<any[]>();
   const [count, setCount] = useState<number>(0);
 
   let { randomValues } = props;
-  
+
   const handleClick = (value: any) => {
     if (count >= 6 && value.clicked === false) {
       alert("maximum");
     } else {
       setColor("#0f0");
-      setClicked(!clicked);
 
       DUMMY_ARRAY.forEach((element) => {
         if (element.id === value.id) {
@@ -41,33 +46,37 @@ const Numbers = (props: IBet) => {
     verify();
   };
 
+  
   const verify = () => {
     const array = DUMMY_ARRAY.filter((number) => !!number.clicked);
     setChoosen(array);
   };
 
-  console.log("Cart :>> ", choosen);
-
   useEffect(() => {
-    DUMMY_ARRAY.forEach((element) => {
-      randomValues?.forEach((value) => {
-        if (element.id === value.toString()) {
-          setColor("#0f0");
-          element.clicked = !element.clicked;
-        }
-      });
-
-    });
-
-          
     if(randomValues){
-      verify();
-      setCount(randomValues.length);
+      generateNumbers(30)
+      DUMMY_ARRAY.forEach((element) => {
+        randomValues?.forEach((value) => {
+          if (element.id === value.toString() && !element.clicked) {
+            setColor("#0f0");
+            element.clicked = !element.clicked;
+          }
+        });
+  
+      });
+         
+      if(randomValues){
+        verify();
+        setCount(randomValues.length);
+      }
+  
+      console.log('randomValues :>> ', randomValues);
     }
+    
+  },[randomValues]);
 
-    console.log('randomValues :>> ', randomValues);
-
-  }, [randomValues]);
+  console.log("Cart :>> ", choosen);
+  console.log("Count :>> ", count);
 
   const numbers = DUMMY_ARRAY.map((number: any) => {
     return (
