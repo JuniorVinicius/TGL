@@ -1,35 +1,39 @@
 import { BoxNumbers, Number } from "./Numbers";
-import { useState, useEffect } from "react";
-
-let DUMMY_ARRAY: any[] = [];
+import { useState, useEffect, useContext, useCallback } from "react";
+import { ChosenNumbers } from "./../../context/test";
 
 interface IBet {
-  randomValues?: number[];
+  randomValues: any[];
 }
+
+let DUMMY_ARRAY: any[] = [];
 
 for (let x = 1; x <= 25; x++) {
   DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
 }
 
 const generateNumbers = (range: number) => {
-  DUMMY_ARRAY = []
+  DUMMY_ARRAY = [];
   for (let x = 1; x <= range; x++) {
     DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
   }
-}
+};
 
 const Numbers = (props: IBet) => {
   const [color, setColor] = useState("");
-  const [choosen, setChoosen] = useState<any[]>();
+  const [choosen, setChoosen] = useState<any[]>([]);
   const [count, setCount] = useState<number>(0);
+  const [click, setClick] = useState<boolean>(false);
+  const { setChosenValue } = useContext(ChosenNumbers);
 
   let { randomValues } = props;
 
   const handleClick = (value: any) => {
+    setClick(true);
     if (count >= 6 && value.clicked === false) {
       alert("maximum");
     } else {
-      setColor("#0f0");
+      setColor("#000");
 
       DUMMY_ARRAY.forEach((element) => {
         if (element.id === value.id) {
@@ -44,39 +48,49 @@ const Numbers = (props: IBet) => {
       });
     }
     verify();
+    setChosenValue(choosen);
   };
 
-  
-  const verify = () => {
+  const verify = useCallback(() => {
     const array = DUMMY_ARRAY.filter((number) => !!number.clicked);
     setChoosen(array);
-  };
+
+    // if(click){
+    //   setChosenValue(array);
+    // }
+    
+  },[]);
+
+  // const verify = () => {
+  //   const array = DUMMY_ARRAY.filter((number) => !!number.clicked);
+  //   setChoosen(array);
+
+    // // if(click){
+    // //   setChosenValue(array);
+    // // }
+    // // console.log(click);
+  // };
 
   useEffect(() => {
-    if(randomValues){
-      generateNumbers(30)
+    //verify()
+    if (randomValues) {
+      generateNumbers(25);
       DUMMY_ARRAY.forEach((element) => {
-        randomValues?.forEach((value) => {
+        randomValues.forEach((value) => {
           if (element.id === value.toString() && !element.clicked) {
-            setColor("#0f0");
+            setColor("#000");
             element.clicked = !element.clicked;
           }
         });
-  
       });
-         
-      if(randomValues){
-        verify();
-        setCount(randomValues.length);
-      }
-  
-      console.log('randomValues :>> ', randomValues);
+      setCount(randomValues.length);
     }
-    
-  },[randomValues]);
+    verify();
+    //setClick(true)
+    console.log(randomValues);
+  }, [randomValues]);
 
-  console.log("Cart :>> ", choosen);
-  console.log("Count :>> ", count);
+  // console.log("Cart :>> ", choosen);
 
   const numbers = DUMMY_ARRAY.map((number: any) => {
     return (

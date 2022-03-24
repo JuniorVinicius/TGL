@@ -9,44 +9,62 @@ import {
   Label,
   Description,
   BoxBetNumbers,
-  BoxCart
+  BoxCart,
 } from "./../components/NewBetContent/index";
 import { Box } from "../UI/Conteiner/Conteiner";
 import ActionButton from "../UI/Button/ActionButtons";
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import Cart from './../components/Cart/index';
-import { useState } from 'react';
+import Cart from "./../components/Cart/index";
+import { useState } from "react";
+import { useContext } from "react";
+import { ChosenNumbers } from "./../context/test";
+import { useEffect } from "react";
 
 const NewBet = () => {
+  const [random, setRandom] = useState<any[]>([]);
+  const [chosen, setChosen] = useState<any[]>([]);
+  const { chosenValue } = useContext(ChosenNumbers);
 
-  const [random, setRandom] = useState<number[]>()
+  useEffect(() => {
+    const numbers: any[] = [];
 
-  const randomNumbers = () =>{
-    const numbers: any[] = []
-    
-    let x = 0;
-    while(x <= 6){
-      const randomNumber = Math.floor(Math.random() * 25) + 1;
-      if (numbers.some((number) => number === randomNumber) || randomNumber === 0) {
-        x--;
-      } else {
-        if (numbers.length < 6) {
-          numbers.push(randomNumber);
-          x++;
+    chosenValue.forEach((element) => {
+      numbers.push(Number(element.id));
+    });
+    setChosen(numbers);
+  }, [chosenValue]);
+
+  const randomNumbers = () => {
+    const numbers: any[] = [];
+
+    numbers.push(...chosen);
+      let x = 0;
+      while (x <= 6) {
+        const randomNumber = Math.floor(Math.random() * 25) + 1;
+        if (
+          numbers.some((number) => number === randomNumber) ||
+          randomNumber === 0
+        ) {
+          x--;
         } else {
-          break;
+          if (numbers.length < 6) {
+            numbers.push(randomNumber);
+            x++;
+          } else {
+            break;
+          }
         }
-      }
+
+      setRandom(numbers);
     }
+  };
 
-    setRandom(numbers)
-
-  }
+  console.log("chosen :>> ", chosen);
 
   return (
     <>
-      <Header homeButton={true} hasCartButton={true}/>
+      <Header homeButton={true} hasCartButton={true} />
 
       <MainConteiner className="new-bet">
         <BoxBetNumbers>
@@ -68,11 +86,14 @@ const NewBet = () => {
             hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
           </Description>
 
-          <Numbers randomValues={random}/>
+          <Numbers randomValues={random} />
 
           <Box className="main-box">
             <Box>
-              <ActionButton name="Complete game" onHandleClick={randomNumbers}/>
+              <ActionButton
+                name="Complete game"
+                onHandleClick={randomNumbers}
+              />
               <ActionButton name="Clear game" />
             </Box>
 
@@ -90,7 +111,7 @@ const NewBet = () => {
         </BoxBetNumbers>
 
         <BoxCart>
-            <Cart/>
+          <Cart />
         </BoxCart>
       </MainConteiner>
 

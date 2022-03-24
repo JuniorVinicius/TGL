@@ -1,22 +1,25 @@
 import GlobalStyle from "./style/global-style";
-import MainRoutes from './routes/routes';
-import { ToastContainer } from 'react-toastify';
+import MainRoutes from "./routes/routes";
+import { ToastContainer } from "react-toastify";
+import { ChosenNumbersProvider } from "./context/test";
 
 function App() {
   return (
     <>
-      <GlobalStyle/>
-      <MainRoutes/>
-      <ToastContainer
-        position="top-right"
-        autoClose={false}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      />
+      <ChosenNumbersProvider>
+        <GlobalStyle />
+        <MainRoutes />
+        <ToastContainer
+          position="top-right"
+          autoClose={false}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+        />
+      </ChosenNumbersProvider>
     </>
   );
 }
