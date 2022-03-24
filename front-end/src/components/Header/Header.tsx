@@ -27,8 +27,10 @@ const Header = (props: HeaderType) => {
   };
 
   const handleLogout = () => {
-    navigate("/");
+    localStorage.removeItem('token')
+    window.location.reload()
   };
+
   return (
     <>
       <HeaderBox className={`${clicked ? "clicked" : ""}`}>
@@ -62,7 +64,7 @@ const Header = (props: HeaderType) => {
               className="header-button"
               onClick={handleLogout}
             >
-              Log out <BsArrowRight style={{ marginLeft: "10px" }} />
+              Log out <BsArrowRight style={{ marginLeft: "10px" }}/>
             </Button>
           </ConteinerButton>
         </Box>

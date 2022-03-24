@@ -10,10 +10,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const isToken = false;
+    const isToken = localStorage.getItem('token');
 
     if (isToken) {
-      config.headers!.Authorization = "Bearer" + isToken;
+      config.headers!.Authorization = `Bearer ${isToken}`;
     }
 
     return config;
@@ -25,9 +25,7 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(async (response) => {
-  console.log("response :>> ", response);
-
-  if(response.status === 200){
+  if(response.status === 200 && response.config.method === 'post'){
     localStorage.setItem('token', response.data.token.token)
   }
 

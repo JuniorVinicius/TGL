@@ -13,6 +13,7 @@ export const TextContent = styled.span<Text>`
   font-weight: ${(props) => props.fontBold && "bold"};
   margin-right: ${(props) =>
     props.marginRight ? props.marginRight + "px" : "45px"};
+  cursor: pointer;
 
   @media (max-width: 1200px) {
     margin-right: 15px;
