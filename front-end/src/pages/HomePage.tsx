@@ -16,26 +16,23 @@ import Bet from "../components/Bets";
 import { useEffect, useState } from "react";
 import bets from "./../shared/services/bet/listbets/index";
 import games from "../shared/services/games";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>();
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>();
-  const [filter, setFilter] = useState<string>('');
+  const [filter, setFilter] = useState<string>("");
+  const [filterBackground, setFilterBackground] = useState<string>("");
   const navigate = useNavigate();
   const { listBets } = bets();
   const { listGames } = games();
 
-
-  const allBets = async (query:string) => {
+  const allBets = async (query: string) => {
     try {
-      const responseBets = await toast.promise(
-        listBets(query),
-        {
-          pending: 'Carregando...',
-          error: 'Erro ao carregar os jogos.'
-        }
-    );
+      const responseBets = await toast.promise(listBets(query), {
+        pending: "Carregando...",
+        error: "Erro ao carregar os jogos.",
+      });
       const responseGame = await listGames();
 
       setDataBets(responseBets?.data);
@@ -47,20 +44,25 @@ const HomePage = () => {
 
   useEffect(() => {
     allBets(filter);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
- 
-  const handleFilters = (type:string) => {
+  const handleFilters = (type: string, color: string) => {
     setFilter(type);
-  }
+    setFilterBackground(color);
+  };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
-      return (
-        <Filter onClick={()=>handleFilters(typeBet.type)} key={Math.random()} color={typeBet.color}>
-          {typeBet.type}
-        </Filter>
-      );
+    return (
+      <Filter
+        onClick={() => handleFilters(typeBet.type, typeBet.color)}
+        key={Math.random()}
+        color={typeBet.color}
+        background={filterBackground}
+      >
+        {typeBet.type}
+      </Filter>
+    );
   });
 
   const listChosenGames = dataBets?.map((game) => {
@@ -71,19 +73,19 @@ const HomePage = () => {
       .reverse()
       .join("/");
 
-      const price:string = `R$ ${Number(game.price)
-          .toFixed(2)
-          ?.toString()
-          .replace(".", ",")
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+    const price: string = `R$ ${Number(game.price)
+      .toFixed(2)
+      ?.toString()
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
 
-    let actualColor: string = ''
-    dataBetsTypes?.forEach(element => {
-      if(element.id === game.type.id){
-        actualColor = element.color
+    let actualColor: string = "";
+    dataBetsTypes?.forEach((element) => {
+      if (element.id === game.type.id) {
+        actualColor = element.color;
       }
-    })
-    
+    });
+
     return (
       <Bet
         key={Math.random()}
@@ -106,7 +108,9 @@ const HomePage = () => {
       <MainConteiner>
         <BoxFilters>
           <Filters>
-            <TextContent fontBold={true} onClick={()=>setFilter('')}>RECENT GAMES</TextContent>
+            <TextContent fontBold={true} onClick={() => setFilter("")}>
+              RECENT GAMES
+            </TextContent>
 
             <Card className="filters">
               <TextContent fontSize={17} marginRight={15}>
@@ -139,7 +143,6 @@ const HomePage = () => {
         </Card>
 
         {listChosenGames}
-
       </MainConteiner>
 
       <Footer />
