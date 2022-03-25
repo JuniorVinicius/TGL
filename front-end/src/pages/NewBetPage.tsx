@@ -27,15 +27,15 @@ const NewBet = () => {
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>([]);
   const [betTitle, setBetTitle] = useState<string>("");
   const [betDescription, setBetDescription] = useState<string>("");
-
   const [filterBackground, setFilterBackground] = useState<string>("");
+  const [dataBetRange, setDataBetRange] = useState<number>(0);
+  const [dataBetMaxNumbers, setDataBetMaxNumbers] = useState<number>(0);
 
-  const { chosenValue } = useContext(ChosenNumbers);
+  const { chosenValue, setChosenValue } = useContext(ChosenNumbers);
   const { listGames } = games();
 
   useEffect(() => {
     const numbers: any[] = [];
-    console.log("chosenValue :>> ", chosenValue);
     chosenValue.forEach((element) => {
       numbers.push(Number(element.id));
     });
@@ -51,17 +51,17 @@ const NewBet = () => {
     const numbers: any[] = [];
 
     numbers.push(...chosen);
-    
+
     let x = 0;
-    while (x <= 6) {
-      const randomNumber = Math.floor(Math.random() * 25) + 1;
+    while (x <= dataBetMaxNumbers) {
+      const randomNumber = Math.floor(Math.random() * dataBetRange) + 1;
       if (
         numbers.some((number) => number === randomNumber) ||
         randomNumber === 0
       ) {
         x--;
       } else {
-        if (numbers.length < 6) {
+        if (numbers.length < dataBetMaxNumbers) {
           numbers.push(randomNumber);
           x++;
         } else {
@@ -73,11 +73,17 @@ const NewBet = () => {
     }
   };
 
+  const clearGame = () => {
+    setRandom([])
+    setChosenValue([])
+  };
+
   const allBets = async () => {
     try {
       const responseGame = await listGames();
       setDataBetsTypes(responseGame?.data.types);
       handleChange(responseGame?.data.types[0]);
+
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +92,10 @@ const NewBet = () => {
     setFilterBackground(typeBet.color);
     setBetTitle(typeBet.type.toUpperCase());
     setBetDescription(typeBet.description);
+    setDataBetRange(typeBet.range);
+    setDataBetMaxNumbers(typeBet.max_number);
+    setChosen([])
+    setChosen([])
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -121,7 +131,12 @@ const NewBet = () => {
             {betDescription}
           </Description>
 
-          <Numbers randomValues={random} numbersColor={filterBackground} />
+          <Numbers
+            maxRange={dataBetRange}
+            maxNumber={dataBetMaxNumbers}
+            randomValues={random}
+            numbersColor={filterBackground}
+          />
 
           <Box className="main-box">
             <Box>
@@ -129,7 +144,7 @@ const NewBet = () => {
                 name="Complete game"
                 onHandleClick={randomNumbers}
               />
-              <ActionButton name="Clear game" />
+              <ActionButton name="Clear game"onHandleClick={clearGame} />
             </Box>
 
             <ActionButton
