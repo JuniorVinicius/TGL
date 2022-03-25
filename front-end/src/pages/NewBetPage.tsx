@@ -16,59 +16,58 @@ import ActionButton from "../UI/Button/ActionButtons";
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Cart from "./../components/Cart/index";
-import { useState } from "react";
-import { useContext } from "react";
+import { useContext, memo, useEffect, useState } from "react";
 import { ChosenNumbers } from "./../context/test";
-import { useEffect } from "react";
-import games from './../shared/services/games/index';
+
+import games from "./../shared/services/games/index";
 
 const NewBet = () => {
   const [random, setRandom] = useState<any[]>([]);
   const [chosen, setChosen] = useState<any[]>([]);
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>([]);
-  const [betTitle, setBetTitle] = useState<string>('');
-  const [betDescription, setBetDescription] = useState<string>('');
+  const [betTitle, setBetTitle] = useState<string>("");
+  const [betDescription, setBetDescription] = useState<string>("");
 
   const [filterBackground, setFilterBackground] = useState<string>("");
-
 
   const { chosenValue } = useContext(ChosenNumbers);
   const { listGames } = games();
 
   useEffect(() => {
     const numbers: any[] = [];
-
+    console.log("chosenValue :>> ", chosenValue);
     chosenValue.forEach((element) => {
       numbers.push(Number(element.id));
     });
     setChosen(numbers);
-    
   }, [chosenValue]);
 
-  useEffect(()=>{
-    allBets()
-  },[])
+  useEffect(() => {
+    allBets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const randomNumbers = () => {
     const numbers: any[] = [];
 
     numbers.push(...chosen);
-      let x = 0;
-      while (x <= 6) {
-        const randomNumber = Math.floor(Math.random() * 25) + 1;
-        if (
-          numbers.some((number) => number === randomNumber) ||
-          randomNumber === 0
-        ) {
-          x--;
+    
+    let x = 0;
+    while (x <= 6) {
+      const randomNumber = Math.floor(Math.random() * 25) + 1;
+      if (
+        numbers.some((number) => number === randomNumber) ||
+        randomNumber === 0
+      ) {
+        x--;
+      } else {
+        if (numbers.length < 6) {
+          numbers.push(randomNumber);
+          x++;
         } else {
-          if (numbers.length < 6) {
-            numbers.push(randomNumber);
-            x++;
-          } else {
-            break;
-          }
+          break;
         }
+      }
 
       setRandom(numbers);
     }
@@ -77,17 +76,16 @@ const NewBet = () => {
   const allBets = async () => {
     try {
       const responseGame = await listGames();
-      console.log(responseGame?.data.types);
       setDataBetsTypes(responseGame?.data.types);
-      handleChange(responseGame?.data.types[0])
+      handleChange(responseGame?.data.types[0]);
     } catch (error) {
       console.log(error);
     }
   };
-  const handleChange = (typeBet:any) => {
+  const handleChange = (typeBet: any) => {
     setFilterBackground(typeBet.color);
-    setBetTitle(typeBet.type.toUpperCase())
-    setBetDescription(typeBet.description)
+    setBetTitle(typeBet.type.toUpperCase());
+    setBetDescription(typeBet.description);
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -115,16 +113,15 @@ const NewBet = () => {
 
           <Label>Choose Game</Label>
 
-          <div>
-            {typeGames}
-          </div>
+          <div>{typeGames}</div>
 
           <Description>
             <Emphasis>Fill your bet Mark</Emphasis>
-            <br />{betDescription}
+            <br />
+            {betDescription}
           </Description>
 
-          <Numbers randomValues={random} numbersColor={filterBackground}/>
+          <Numbers randomValues={random} numbersColor={filterBackground} />
 
           <Box className="main-box">
             <Box>
@@ -158,4 +155,4 @@ const NewBet = () => {
   );
 };
 
-export default NewBet;
+export default memo(NewBet);

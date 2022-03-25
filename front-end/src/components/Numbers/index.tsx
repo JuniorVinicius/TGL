@@ -1,17 +1,13 @@
 import { BoxNumbers, Number } from "./Numbers";
-import { useState, useEffect, useContext, useCallback } from "react";
+import { useState, useEffect, useContext, useCallback, memo } from "react";
 import { ChosenNumbers } from "./../../context/test";
 
 interface IBet {
   randomValues: any[];
-  numbersColor:string
+  numbersColor: string;
 }
 
 let DUMMY_ARRAY: any[] = [];
-
-for (let x = 1; x <= 25; x++) {
-  DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
-}
 
 const generateNumbers = (range: number) => {
   DUMMY_ARRAY = [];
@@ -24,13 +20,11 @@ const Numbers = (props: IBet) => {
   const [color, setColor] = useState("");
   const [choosen, setChoosen] = useState<any[]>([]);
   const [count, setCount] = useState<number>(0);
-  const [click, setClick] = useState<boolean>(false);
   const { setChosenValue } = useContext(ChosenNumbers);
 
   let { randomValues, numbersColor } = props;
 
   const handleClick = (value: any) => {
-    setClick(true);
     if (count >= 6 && value.clicked === false) {
       alert("maximum");
     } else {
@@ -49,31 +43,28 @@ const Numbers = (props: IBet) => {
       });
     }
     verify();
-    setChosenValue(choosen);
+    verifyClickeds();
+
   };
+
+  const verifyClickeds = useCallback(() => {
+    const array = DUMMY_ARRAY.filter((number) => !!number.clicked);
+    setChosenValue(array);
+  }, [setChosenValue]);
 
   const verify = useCallback(() => {
     const array = DUMMY_ARRAY.filter((number) => !!number.clicked);
     setChoosen(array);
+    //setChosenValue(array);
+  }, []);
 
-    // if(click){
-    //   setChosenValue(array);
-    // }
-    
-  },[]);
-
-  // const verify = () => {
-  //   const array = DUMMY_ARRAY.filter((number) => !!number.clicked);
-  //   setChoosen(array);
-
-    // // if(click){
-    // //   setChosenValue(array);
-    // // }
-    // // console.log(click);
-  // };
+  useEffect(()=>{
+    for (let x = 1; x <= 25; x++) {
+      DUMMY_ARRAY.push({ id: x.toString(), clicked: false });
+    }
+  },[])
 
   useEffect(() => {
-    //verify()
     if (randomValues) {
       generateNumbers(25);
       DUMMY_ARRAY.forEach((element) => {
@@ -87,11 +78,11 @@ const Numbers = (props: IBet) => {
       setCount(randomValues.length);
     }
     verify();
-    //setClick(true)
-    console.log(randomValues);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [randomValues]);
 
-  // console.log("Cart :>> ", choosen);
+  console.log("Cart :>> ", choosen);
 
   const numbers = DUMMY_ARRAY.map((number: any) => {
     return (
@@ -113,4 +104,4 @@ const Numbers = (props: IBet) => {
   );
 };
 
-export default Numbers;
+export default memo(Numbers);

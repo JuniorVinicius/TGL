@@ -4,7 +4,7 @@ import { HeaderBox, Box, ConteinerButton, LogoBar } from "./index";
 import { Button } from "./../../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 type HeaderType = {
@@ -90,4 +90,4 @@ const Header = (props: HeaderType) => {
   );
 };
 
-export default Header;
+export default memo(Header);

@@ -1,4 +1,5 @@
 import { Button } from "./ActionButtons";
+import { memo } from 'react';
 
 type ButtonType = {
   name: string;
@@ -19,4 +20,4 @@ const ActionButton = (props: ButtonType) => {
   );
 };
 
-export default ActionButton;
+export default memo(ActionButton);

@@ -3,6 +3,7 @@ import { Button } from "../../UI/Button/Button";
 import { BoxBetSave, Itens, TitleCart, Total, BoxSave } from "./Cart";
 import ItemCart from "./Item";
 import { BsArrowRight } from 'react-icons/bs';
+import { memo } from 'react';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -34,4 +35,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default memo(Cart);
