@@ -5,6 +5,8 @@ import { Conteiner } from "../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle/AplicationTitle";
 import FormAuth from "../components/Form/Form";
+import { toast } from 'react-toastify';
+import createNewUser from './../shared/services/user/index';
 
 
 type Inputs = {
@@ -14,15 +16,31 @@ type Inputs = {
 }
 
 const RegistrationPage = () => {
+
+  const {newUser} = createNewUser()
   const navigate = useNavigate();
 
   const handleBackPage = () =>{
     navigate('/')
   }
 
-  const handleRigister = (props: Inputs) => {
-    console.log(props);
-  }
+  const handleRigister = async (props: Inputs) => {
+      const { name, email, password } = props;
+      try {
+        await toast.promise(
+          newUser({name, email, password }),
+          {
+            pending: 'Carregando...',
+            success: 'Cadastrado com sucesso👌',
+            error: 'Erro ao cadastrar 🤯'
+          }
+      );
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
 
   return (
     <>

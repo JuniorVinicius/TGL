@@ -21,14 +21,14 @@ const LoginPage = () => {
   const handleLogin = async (props: Inputs) => {
     const { email, password } = props;
     try {
-      const response = await toast.promise(
+      await toast.promise(
         login({ email, password }),
         {
-          pending: 'Carregando...',
-          success: 'Seja bem vindo 👌',
-          error: 'Erro ao autenticar 🤯'
+          pending: "Carregando...",
+          success: "Seja bem vindo 👌",
+          error: "Erro ao autenticar 🤯",
         }
-    );
+      );
       navigate("/home");
     } catch (error) {
       console.log(error);
