@@ -50,6 +50,10 @@ const HomePage = () => {
   const handleFilters = (type: string, color: string) => {
     setFilter(type);
     setFilterBackground(color);
+    if(filterBackground === color){
+      setFilter("")
+      setFilterBackground("")
+    }
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -108,7 +112,7 @@ const HomePage = () => {
       <MainConteiner>
         <BoxFilters>
           <Filters>
-            <TextContent fontBold={true} onClick={() => setFilter("")}>
+            <TextContent fontBold={true}>
               RECENT GAMES
             </TextContent>
 
