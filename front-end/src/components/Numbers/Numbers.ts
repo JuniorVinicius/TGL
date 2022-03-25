@@ -12,9 +12,6 @@ export const BoxNumbers = styled.ul`
   grid-gap: 20px 12px;
   margin-bottom: 44px;
 
-  @media (max-width: 1400px) {
-    grid-template-areas: "li li li li li li li li";
-  }
 
   @media (max-width: 1350px) {
     grid-template-areas: "li li li li li li li";

@@ -1,6 +1,7 @@
 import { BoxNumbers, Number } from "./Numbers";
 import { useState, useEffect, useContext, useCallback, memo } from "react";
 import { ChosenNumbers } from "./../../context/test";
+import { toast } from 'react-toastify';
 
 interface IBet {
   randomValues: any[];
@@ -30,7 +31,15 @@ const Numbers = (props: IBet) => {
 
   const handleClick = (value: any) => {
     if (count >= maxNumber && value.clicked === false) {
-      alert("maximum");
+      toast.info(`O número máximo de escolhas são: ${maxNumber} números!`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     } else {
       setColor(numbersColor);
 

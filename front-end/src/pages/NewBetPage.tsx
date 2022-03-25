@@ -20,6 +20,7 @@ import { useContext, memo, useEffect, useState } from "react";
 import { ChosenNumbers } from "./../context/test";
 
 import games from "./../shared/services/games/index";
+import { toast } from "react-toastify";
 
 const NewBet = () => {
   const [random, setRandom] = useState<any[]>([]);
@@ -51,6 +52,20 @@ const NewBet = () => {
     const numbers: any[] = [];
 
     numbers.push(...chosen);
+    if (numbers.length >= dataBetMaxNumbers) {
+      toast.info(
+        `Você já ecolheu todos os ${dataBetMaxNumbers} números! Para selecionar novos números, desmarque algum dos selecionados ou limpe o jogo.`,
+        {
+          position: "top-right",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+    }
 
     let x = 0;
     while (x <= dataBetMaxNumbers) {
@@ -74,8 +89,8 @@ const NewBet = () => {
   };
 
   const clearGame = () => {
-    setRandom([])
-    setChosenValue([])
+    setRandom([]);
+    setChosenValue([]);
   };
 
   const allBets = async () => {
@@ -83,7 +98,6 @@ const NewBet = () => {
       const responseGame = await listGames();
       setDataBetsTypes(responseGame?.data.types);
       handleChange(responseGame?.data.types[0]);
-
     } catch (error) {
       console.log(error);
     }
@@ -94,8 +108,8 @@ const NewBet = () => {
     setBetDescription(typeBet.description);
     setDataBetRange(typeBet.range);
     setDataBetMaxNumbers(typeBet.max_number);
-    setChosen([])
-    setChosen([])
+    setChosen([]);
+    setChosen([]);
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -144,7 +158,7 @@ const NewBet = () => {
                 name="Complete game"
                 onHandleClick={randomNumbers}
               />
-              <ActionButton name="Clear game"onHandleClick={clearGame} />
+              <ActionButton name="Clear game" onHandleClick={clearGame} />
             </Box>
 
             <ActionButton
