@@ -4,6 +4,7 @@ import { ChosenNumbers } from "./../../context/test";
 
 interface IBet {
   randomValues: any[];
+  numbersColor:string
 }
 
 let DUMMY_ARRAY: any[] = [];
@@ -26,14 +27,14 @@ const Numbers = (props: IBet) => {
   const [click, setClick] = useState<boolean>(false);
   const { setChosenValue } = useContext(ChosenNumbers);
 
-  let { randomValues } = props;
+  let { randomValues, numbersColor } = props;
 
   const handleClick = (value: any) => {
     setClick(true);
     if (count >= 6 && value.clicked === false) {
       alert("maximum");
     } else {
-      setColor("#000");
+      setColor(numbersColor);
 
       DUMMY_ARRAY.forEach((element) => {
         if (element.id === value.id) {
@@ -78,7 +79,7 @@ const Numbers = (props: IBet) => {
       DUMMY_ARRAY.forEach((element) => {
         randomValues.forEach((value) => {
           if (element.id === value.toString() && !element.clicked) {
-            setColor("#000");
+            setColor(numbersColor);
             element.clicked = !element.clicked;
           }
         });

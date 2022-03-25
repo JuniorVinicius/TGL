@@ -20,11 +20,20 @@ import { useState } from "react";
 import { useContext } from "react";
 import { ChosenNumbers } from "./../context/test";
 import { useEffect } from "react";
+import games from './../shared/services/games/index';
 
 const NewBet = () => {
   const [random, setRandom] = useState<any[]>([]);
   const [chosen, setChosen] = useState<any[]>([]);
+  const [dataBetsTypes, setDataBetsTypes] = useState<any[]>([]);
+  const [betTitle, setBetTitle] = useState<string>('');
+  const [betDescription, setBetDescription] = useState<string>('');
+
+  const [filterBackground, setFilterBackground] = useState<string>("");
+
+
   const { chosenValue } = useContext(ChosenNumbers);
+  const { listGames } = games();
 
   useEffect(() => {
     const numbers: any[] = [];
@@ -33,7 +42,12 @@ const NewBet = () => {
       numbers.push(Number(element.id));
     });
     setChosen(numbers);
+    
   }, [chosenValue]);
+
+  useEffect(()=>{
+    allBets()
+  },[])
 
   const randomNumbers = () => {
     const numbers: any[] = [];
@@ -60,7 +74,34 @@ const NewBet = () => {
     }
   };
 
-  console.log("chosen :>> ", chosen);
+  const allBets = async () => {
+    try {
+      const responseGame = await listGames();
+      console.log(responseGame?.data.types);
+      setDataBetsTypes(responseGame?.data.types);
+      handleChange(responseGame?.data.types[0])
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleChange = (typeBet:any) => {
+    setFilterBackground(typeBet.color);
+    setBetTitle(typeBet.type.toUpperCase())
+    setBetDescription(typeBet.description)
+  };
+
+  const typeGames = dataBetsTypes?.map((typeBet) => {
+    return (
+      <Filter
+        onClick={() => handleChange(typeBet)}
+        key={Math.random()}
+        color={typeBet.color}
+        background={filterBackground}
+      >
+        {typeBet.type}
+      </Filter>
+    );
+  });
 
   return (
     <>
@@ -69,24 +110,21 @@ const NewBet = () => {
       <MainConteiner className="new-bet">
         <BoxBetNumbers>
           <TitleBet>
-            <Emphasis>NEW BET</Emphasis> FOR MEGA-SENA
+            <Emphasis>NEW BET</Emphasis> FOR {betTitle}
           </TitleBet>
 
           <Label>Choose Game</Label>
 
           <div>
-            <Filter color="#7F3992">Lotofácil</Filter>
-            <Filter color="#01AC66">Mega-Sena</Filter>
-            <Filter color="#F79C31">Lotomania</Filter>
+            {typeGames}
           </div>
 
           <Description>
             <Emphasis>Fill your bet Mark</Emphasis>
-            <br /> as many numbers as you want up to a maximum of 50. Win by
-            hitting 15, 16, 17, 18, 19, 20 or none of the 20 numbers drawn.
+            <br />{betDescription}
           </Description>
 
-          <Numbers randomValues={random} />
+          <Numbers randomValues={random} numbersColor={filterBackground}/>
 
           <Box className="main-box">
             <Box>
