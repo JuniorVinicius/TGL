@@ -5,21 +5,22 @@ type ItemType = {
     color: string
     game: string
     amount: string
+    numbers: string
 }
 
 const ItemCart = (props: ItemType) => {
 
-    const { color, game, amount } = props
+    const { color, game, amount, numbers } = props
   return (
     <>
       <Item>
         <IoTrashOutline
-          size={50}
+          size={40}
           style={{ marginRight: "14px", cursor: "pointer", color: 'var(--text-light)' }}
         />
         <BoxContentItem color={color}>
           <ListNumbers>
-            01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15
+            {numbers}
           </ListNumbers>
 
           <TypeGame color={color}>

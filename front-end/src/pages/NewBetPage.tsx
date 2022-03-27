@@ -30,7 +30,9 @@ const NewBet = () => {
   const [betDescription, setBetDescription] = useState<string>("");
   const [filterBackground, setFilterBackground] = useState<string>("");
   const [dataBetRange, setDataBetRange] = useState<number>(0);
+  const [betPrice, setBetPrice] = useState<number>(0);
   const [dataBetMaxNumbers, setDataBetMaxNumbers] = useState<number>(0);
+  const [clicked, setClicked] = useState<boolean>();
 
   const { chosenValue, setChosenValue } = useContext(ChosenNumbers);
   const { listGames } = games();
@@ -65,6 +67,7 @@ const NewBet = () => {
           progress: undefined,
         }
       );
+      
     }
 
     let x = 0;
@@ -93,6 +96,10 @@ const NewBet = () => {
     setChosenValue([]);
   };
 
+  const addToCart = () => {
+    setClicked(prev => !prev);
+  };
+
   const allBets = async () => {
     try {
       const responseGame = await listGames();
@@ -108,7 +115,7 @@ const NewBet = () => {
     setBetDescription(typeBet.description);
     setDataBetRange(typeBet.range);
     setDataBetMaxNumbers(typeBet.max_number);
-    setChosen([]);
+    setBetPrice(typeBet.price);
     setChosen([]);
   };
 
@@ -150,6 +157,9 @@ const NewBet = () => {
             maxNumber={dataBetMaxNumbers}
             randomValues={random}
             numbersColor={filterBackground}
+            addCart={clicked}
+            betType={betTitle}
+            betPrice={betPrice}
           />
 
           <Box className="main-box">
@@ -163,6 +173,7 @@ const NewBet = () => {
 
             <ActionButton
               name="Add to cart"
+              onHandleClick={addToCart}
               hasBackground={true}
               icon={
                 <AiOutlineShoppingCart

@@ -6,7 +6,7 @@ type ItemType = {
 
 export const BoxBetSave = styled.div`
   width: 317px;
-  height: 484px;
+  max-height: 484px;
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 10px;
@@ -41,6 +41,7 @@ export const BoxContentItem = styled.div<ItemType>`
   padding: 8px 10px;
   border-left: 4px solid ${(props) => props.color};
   border-radius: 4px 0px 0px 4px;
+  width: 100%;
 `;
 
 export const ListNumbers = styled.p`
@@ -49,6 +50,7 @@ export const ListNumbers = styled.p`
   font-weight: bold;
   font-style: italic;
   margin-bottom: 6px;
+
 `;
 export const TypeGame = styled.p<ItemType>`
   color: var(--text-light);
@@ -84,3 +86,12 @@ export const BoxSave = styled.div`
   border-bottom: 1px solid var(--background-save-button-border);
   border-radius: 0px 0px 10px 10px;
 `;
+
+export const EmptyCart = styled.p`
+  color: var(--text-light);
+  text-align: center;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 10px;
+`

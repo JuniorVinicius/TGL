@@ -1,13 +1,18 @@
 import { BoxNumbers, Number } from "./Numbers";
 import { useState, useEffect, useContext, useCallback, memo } from "react";
 import { ChosenNumbers } from "./../../context/test";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { cartActions } from "./../../store/cart-slice";
 
 interface IBet {
   randomValues: any[];
   numbersColor: string;
   maxRange: number;
-  maxNumber: number
+  maxNumber: number;
+  addCart: any;
+  betType: string;
+  betPrice: number;
 }
 
 let DUMMY_ARRAY: any[] = [];
@@ -18,7 +23,16 @@ const Numbers = (props: IBet) => {
   const [numbersRanges, setNumbersRanges] = useState<any[]>([]);
   const [count, setCount] = useState<number>(0);
   const { setChosenValue } = useContext(ChosenNumbers);
-  let { randomValues, numbersColor, maxRange, maxNumber } = props;
+  const dispatch = useDispatch();
+  let {
+    randomValues,
+    numbersColor,
+    maxRange,
+    maxNumber,
+    addCart,
+    betType,
+    betPrice,
+  } = props;
 
   const generateNumbers = (range: number) => {
     DUMMY_ARRAY = [];
@@ -39,7 +53,7 @@ const Numbers = (props: IBet) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     } else {
       setColor(numbersColor);
 
@@ -71,8 +85,10 @@ const Numbers = (props: IBet) => {
 
   useEffect(() => {
     generateNumbers(maxRange);
-    setCount(0)
-  }, [maxRange,maxNumber]);
+    setCount(0);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maxRange, maxNumber]);
 
   useEffect(() => {
     if (randomValues) {
@@ -91,6 +107,50 @@ const Numbers = (props: IBet) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [randomValues]);
+
+  useEffect(() => {
+    if (choosen.length > 0 && choosen.length === maxNumber) {
+      const numbers: string[] = choosen.map((number) =>
+        number.id.toString().padStart(2, "0")
+      );
+      dispatch(
+        cartActions.addItemToCart({
+          id: Math.random() * 1,
+          numbers: numbers.join(",").split(",").join(", "),
+          color: color,
+          typeGame: betType,
+          price: betPrice,
+        })
+      );
+
+      generateNumbers(maxRange);
+      setCount(0);
+      setChosenValue([]);
+      
+    } else {
+      if (addCart) {
+        let missingValue = maxNumber - choosen.length;
+        let baseStrings = ["Faltam", "números", "alguns"];
+        if (missingValue === 1) {
+          baseStrings = ["Falta", "número", "algum"];
+        }
+        toast.info(
+          `${baseStrings[0]} ${missingValue} ${baseStrings[1]}! Escolha mais ${baseStrings[2]}!`,
+          {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addCart]);
 
   const numbers = DUMMY_ARRAY.map((number: any) => {
     return (
@@ -121,7 +181,6 @@ const Numbers = (props: IBet) => {
 
     setNumbersRanges(numbers);
   };
-
 
   return (
     <>

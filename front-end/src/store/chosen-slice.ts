@@ -20,6 +20,8 @@ const chosenSlice = createSlice({
   },
 });
 
+
+
 export const chosenActions = chosenSlice.actions;
 
 export default chosenSlice;

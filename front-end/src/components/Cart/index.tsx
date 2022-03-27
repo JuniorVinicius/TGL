@@ -1,33 +1,83 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../UI/Button/Button";
-import { BoxBetSave, Itens, TitleCart, Total, BoxSave } from "./Cart";
+import {
+  BoxBetSave,
+  Itens,
+  TitleCart,
+  Total,
+  BoxSave,
+  EmptyCart,
+} from "./Cart";
 import ItemCart from "./Item";
-import { BsArrowRight } from 'react-icons/bs';
-import { memo } from 'react';
+import { BsArrowRight } from "react-icons/bs";
+import { useState, useEffect, memo } from "react";
+import { useSelector } from "react-redux";
+
+interface ICart {
+  items: any[];
+}
+
+interface ICartItems {
+  cart: ICart;
+}
 
 const Cart = () => {
   const navigate = useNavigate();
+  const [total, setTotal] = useState<number>(0);
+
+  const CART = useSelector((state: ICartItems) => state.cart.items);
+
+  const convertValues = (value: number) => {
+    return `R$ ${Number(value)
+      .toFixed(2)
+      ?.toString()
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+  };
+
+  useEffect(() => {
+    let total = 0;
+    CART.forEach((item) => {
+      total += item.price;
+    });
+    setTotal(total);
+  }, [CART]);
+
+  const items = CART.map((item) => {
+    return (
+      <ItemCart
+        key={item.id}
+        color={item.color}
+        game={item.typeGame}
+        amount={convertValues(item.price)}
+        numbers={item.numbers}
+      />
+    );
+  });
 
   const handleClickSave = () => {
-    navigate('/home')
-  }
+    navigate("/home");
+  };
   return (
     <>
       <BoxBetSave>
         <TitleCart>CART</TitleCart>
         <Itens>
-          <ItemCart color="#7F3992" game="Lotofácil" amount="R$ 2,50" />
-          <ItemCart color="#01AC66" game="Mega-Sena" amount="R$ 4,00" />
-          <ItemCart color="#F79C31" game="Lotomania" amount="R$ 3,50" />
+          {CART.length > 0 ? items : <EmptyCart>Empty cart</EmptyCart>}
         </Itens>
 
         <Total>
-          <span>CART</span> TOTAL: <span>R$ 10,00</span>
+          <span>CART</span> TOTAL: {convertValues(total)}
         </Total>
 
         <BoxSave>
-          <Button fontSize={35} color="var(--main-button)" onClick={handleClickSave}>
-            Save<BsArrowRight style={{ marginLeft: "18px" }} />
+          <Button
+            fontSize={35}
+            color="var(--main-button)"
+            onClick={handleClickSave}
+          >
+            Save
+            <BsArrowRight style={{ marginLeft: "18px" }} />
           </Button>
         </BoxSave>
       </BoxBetSave>
