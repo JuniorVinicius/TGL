@@ -6,6 +6,7 @@ import { ChosenNumbersProvider } from "./context/test";
 function App() {
   return (
     <>
+
       <ChosenNumbersProvider>
         <GlobalStyle />
         <MainRoutes />
@@ -19,6 +20,7 @@ function App() {
           pauseOnFocusLoss
           draggable
         />
+
       </ChosenNumbersProvider>
     </>
   );
