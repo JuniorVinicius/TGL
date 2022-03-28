@@ -4,11 +4,11 @@ type ItemType = {
   color?: string;
   border?: boolean;
   marginTop?: boolean;
-  width?: boolean;
+  hasWidth?: boolean;
 };
 
 export const BoxBetSave = styled.div<ItemType>`
-  width: ${(props) => props.width ? "317px" : 'auto'};
+  width: ${(props) => props.hasWidth ? "317px" : 'auto'};
   max-height: 484px;
   background: #fff;
   border: 1px solid ${props => !props.border ? 'transparent' : '#e6e6e6'};

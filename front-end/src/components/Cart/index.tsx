@@ -52,6 +52,9 @@ const Cart = (props: IProps) => {
   }, [CART]);
 
   const items = CART.map((item) => {
+    const numbers: string[] = item.numbers.map((number:any) => 
+      number.toString().padStart(2, "0")
+    );
     return (
       <ItemCart
         id={item.id}
@@ -59,7 +62,7 @@ const Cart = (props: IProps) => {
         color={item.color}
         game={item.typeGame}
         amount={convertValues(item.price)}
-        numbers={item.numbers}
+        numbers={numbers.join(', ')}
       />
     );
   });
@@ -69,7 +72,11 @@ const Cart = (props: IProps) => {
   };
   return (
     <>
-      <BoxBetSave border={hasBorder} marginTop={hasMarginTop} width={hasWidth}>
+      <BoxBetSave
+        border={hasBorder}
+        marginTop={hasMarginTop}
+        hasWidth={hasWidth}
+      >
         <TitleCart>CART</TitleCart>
         <Itens>
           {CART.length > 0 ? items : <EmptyCart>Empty cart</EmptyCart>}
@@ -79,16 +86,18 @@ const Cart = (props: IProps) => {
           <span>CART</span> TOTAL: {convertValues(total)}
         </Total>
 
-        {hasSave && <BoxSave>
-          <Button
-            fontSize={35}
-            color="var(--main-button)"
-            onClick={handleClickSave}
-          >
-            Save
-            <BsArrowRight style={{ marginLeft: "18px" }} />
-          </Button>
-        </BoxSave>}
+        {hasSave && (
+          <BoxSave>
+            <Button
+              fontSize={35}
+              color="var(--main-button)"
+              onClick={handleClickSave}
+            >
+              Save
+              <BsArrowRight style={{ marginLeft: "18px" }} />
+            </Button>
+          </BoxSave>
+        )}
       </BoxBetSave>
     </>
   );

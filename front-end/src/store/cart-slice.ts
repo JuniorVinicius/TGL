@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface Items {
   id: number;
-  numbers: string;
+  numbers: number[];
   price: number;
   color: string;
   typeGame: string;

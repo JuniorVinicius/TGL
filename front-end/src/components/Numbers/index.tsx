@@ -110,13 +110,13 @@ const Numbers = (props: IBet) => {
 
   useEffect(() => {
     if (choosen.length > 0 && choosen.length === maxNumber) {
-      const numbers: string[] = choosen.map((number) =>
-        number.id.toString().padStart(2, "0")
+      const numbers = choosen.map((number) =>
+        parseInt(number.id)
       );
       dispatch(
         cartActions.addItemToCart({
           id: Math.random() * 1,
-          numbers: numbers.join(",").split(",").join(", "),
+          numbers: numbers,
           color: color,
           typeGame: betType,
           price: betPrice,

@@ -21,7 +21,8 @@ const ItemCart = (props: ItemType) => {
           content={"Deseja realmente excluir esta aposta?"}
           idElement={id}
           open={
-            <IoTrashOutline
+            <button style={{background: 'unset', border:'none'}}>
+              <IoTrashOutline
               size={35}
               style={{
                 marginRight: "14px",
@@ -29,6 +30,7 @@ const ItemCart = (props: ItemType) => {
                 color: "var(--text-light)",
               }}
             />
+            </button>
           }
         />
         <BoxContentItem color={color}>
