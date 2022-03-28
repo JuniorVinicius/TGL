@@ -46,6 +46,7 @@ const Cart = () => {
   const items = CART.map((item) => {
     return (
       <ItemCart
+        id={item.id}
         key={item.id}
         color={item.color}
         game={item.typeGame}
