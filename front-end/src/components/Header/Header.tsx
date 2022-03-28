@@ -6,14 +6,26 @@ import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
 import { memo, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import CustomPopup from "./../../UI/Modal/index";
+import Cart from "../Cart";
+import { useSelector } from 'react-redux';
 
 type HeaderType = {
   homeButton?: boolean;
   hasCartButton?: boolean;
 };
 
+interface ITotal {
+  totalQuantity: number;
+}
+
+interface ITotalCart{
+  cart: ITotal
+}
+
 const Header = (props: HeaderType) => {
   const navigate = useNavigate();
+  const totalQuantityInCart = useSelector((state: ITotalCart) => state.cart.totalQuantity);
 
   const { homeButton, hasCartButton } = props;
   const [clicked, setClicked] = useState(false);
@@ -27,8 +39,8 @@ const Header = (props: HeaderType) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    window.location.reload()
+    localStorage.removeItem("token");
+    window.location.reload();
   };
 
   return (
@@ -64,7 +76,7 @@ const Header = (props: HeaderType) => {
               className="header-button"
               onClick={handleLogout}
             >
-              Log out <BsArrowRight style={{ marginLeft: "10px" }}/>
+              Log out <BsArrowRight style={{ marginLeft: "10px" }} />
             </Button>
           </ConteinerButton>
         </Box>
@@ -75,12 +87,18 @@ const Header = (props: HeaderType) => {
           </button>
 
           {hasCartButton && (
-            <div>
-              <button>
-                <AiOutlineShoppingCart size={20} />
-              </button>
-              10
-            </div>
+            <CustomPopup
+              open={
+                <div>
+                  <button>
+                    <AiOutlineShoppingCart size={20} />
+                  </button>
+                  {totalQuantityInCart}
+                </div>
+              }
+              content={<Cart />}
+              titleButton={"Salvar"}
+            />
           )}
         </div>
       </HeaderBox>

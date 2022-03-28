@@ -4,13 +4,14 @@ import { StyledPopup } from './style';
 
 interface IModal{
     open: any;
-    idElement: number;
-    title: string;
+    idElement?: number;
+    title?: string;
     content: any;
+    titleButton?: string;
 }
 
 const CustomPopup = (props: IModal) => {
-    const {open, idElement, title, content} = props;
+    const {open, idElement, title, content, titleButton} = props;
     const dispatch = useDispatch();
 
     const removeItem = () => {
@@ -46,7 +47,7 @@ const CustomPopup = (props: IModal) => {
                     removeItem()
                   }}
                 >
-                  Confirmar
+                  {titleButton ? titleButton : "Confirmar"}
                 </button>
               </div>
             </div>

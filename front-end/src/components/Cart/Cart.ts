@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
 type ItemType = {
-  color: string;
+  color?: string;
+  border?: boolean;
+  marginTop?: boolean;
+  width?: boolean;
 };
 
-export const BoxBetSave = styled.div`
-  width: 317px;
+export const BoxBetSave = styled.div<ItemType>`
+  width: ${(props) => props.width ? "317px" : 'auto'};
   max-height: 484px;
   background: #fff;
-  border: 1px solid #e2e2e2;
+  border: 1px solid ${props => !props.border ? 'transparent' : '#e6e6e6'};
   border-radius: 10px;
-  margin-top: 41px;
+  margin-top: ${props => props.marginTop ? '41px' : '0px'};
  
 `;
 

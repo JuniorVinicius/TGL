@@ -13,7 +13,6 @@ export const StyledPopup = styled(Popup)`
     border-radius: 10px;
     padding: 20px;
     width: 400px;
-    text-align: center;
     border: 2px solid var(--border);
     color: var(--text);
     font-size: 18px;

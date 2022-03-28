@@ -6,18 +6,16 @@ interface Items {
   price: number;
   color: string;
   typeGame: string;
-  //quantity?: number;
-  //totalPrice?: number;
 }
 
 interface ICart {
   items: Items[];
-  //totalQuantity: number;
+  totalQuantity: number;
 }
 
 const initialState: ICart = {
   items: [],
-  //totalQuantity: 0,
+  totalQuantity: 0,
 };
 
 const cartSlice = createSlice({
@@ -27,7 +25,7 @@ const cartSlice = createSlice({
     addItemToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
-      //state.totalQuantity++;
+      state.totalQuantity++;
         if (!existingItem) {
             state.items.push({
                 id: newItem.id,
@@ -43,7 +41,7 @@ const cartSlice = createSlice({
     removeItemFromCart(state, action) {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
-      //state.totalQuantity--;
+      state.totalQuantity--;
       if (existingItem) {
         state.items = state.items.filter((item) => item.id !== id);
       } else {

@@ -21,7 +21,15 @@ interface ICartItems {
   cart: ICart;
 }
 
-const Cart = () => {
+interface IProps {
+  hasBorder?: boolean;
+  hasSave?: boolean;
+  hasMarginTop?: boolean;
+  hasWidth?: boolean;
+}
+
+const Cart = (props: IProps) => {
+  const { hasBorder, hasSave, hasMarginTop, hasWidth } = props;
   const navigate = useNavigate();
   const [total, setTotal] = useState<number>(0);
 
@@ -61,7 +69,7 @@ const Cart = () => {
   };
   return (
     <>
-      <BoxBetSave>
+      <BoxBetSave border={hasBorder} marginTop={hasMarginTop} width={hasWidth}>
         <TitleCart>CART</TitleCart>
         <Itens>
           {CART.length > 0 ? items : <EmptyCart>Empty cart</EmptyCart>}
@@ -71,7 +79,7 @@ const Cart = () => {
           <span>CART</span> TOTAL: {convertValues(total)}
         </Total>
 
-        <BoxSave>
+        {hasSave && <BoxSave>
           <Button
             fontSize={35}
             color="var(--main-button)"
@@ -80,7 +88,7 @@ const Cart = () => {
             Save
             <BsArrowRight style={{ marginLeft: "18px" }} />
           </Button>
-        </BoxSave>
+        </BoxSave>}
       </BoxBetSave>
     </>
   );

@@ -67,7 +67,6 @@ const NewBet = () => {
           progress: undefined,
         }
       );
-      
     }
 
     let x = 0;
@@ -97,7 +96,7 @@ const NewBet = () => {
   };
 
   const addToCart = () => {
-    setClicked(prev => !prev);
+    setClicked((prev) => !prev);
   };
 
   const allBets = async () => {
@@ -186,7 +185,12 @@ const NewBet = () => {
         </BoxBetNumbers>
 
         <BoxCart>
-          <Cart />
+          <Cart
+            hasBorder={true}
+            hasSave={true}
+            hasMarginTop={true}
+            hasWidth={true}
+          />
         </BoxCart>
       </MainConteiner>
 
