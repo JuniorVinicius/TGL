@@ -6,6 +6,7 @@ interface Items {
   price: number;
   color: string;
   typeGame: string;
+  typeGameId: number;
 }
 
 interface ICart {
@@ -33,6 +34,7 @@ const cartSlice = createSlice({
                 color: newItem.color,
                 typeGame: newItem.typeGame,
                 price: newItem.price,
+                typeGameId: newItem.typeGameId,
               });
         }
 

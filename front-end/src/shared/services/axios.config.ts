@@ -25,7 +25,7 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(async (response) => {
-  if(response.status === 200 && response.config.method === 'post'){
+  if(!!response.data.token){
     localStorage.setItem('token', response.data.token.token)
   }
 

@@ -32,6 +32,7 @@ const NewBet = () => {
   const [dataBetRange, setDataBetRange] = useState<number>(0);
   const [betPrice, setBetPrice] = useState<number>(0);
   const [dataBetMaxNumbers, setDataBetMaxNumbers] = useState<number>(0);
+  const [dataTypeId, setDataTypeId] = useState<number>(0);
   const [clicked, setClicked] = useState<boolean>();
 
   const { chosenValue, setChosenValue } = useContext(ChosenNumbers);
@@ -115,6 +116,7 @@ const NewBet = () => {
     setDataBetRange(typeBet.range);
     setDataBetMaxNumbers(typeBet.max_number);
     setBetPrice(typeBet.price);
+    setDataTypeId(typeBet.id);
     setChosen([]);
   };
 
@@ -159,6 +161,7 @@ const NewBet = () => {
             addCart={clicked}
             betType={betTitle}
             betPrice={betPrice}
+            betId={dataTypeId}
           />
 
           <Box className="main-box">

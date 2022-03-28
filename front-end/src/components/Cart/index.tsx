@@ -12,6 +12,7 @@ import ItemCart from "./Item";
 import { BsArrowRight } from "react-icons/bs";
 import { useState, useEffect, memo } from "react";
 import { useSelector } from "react-redux";
+import saveBet from './../../shared/services/bet/newbets/index';
 
 interface ICart {
   items: any[];
@@ -30,6 +31,9 @@ interface IProps {
 
 const Cart = (props: IProps) => {
   const { hasBorder, hasSave, hasMarginTop, hasWidth } = props;
+
+  const { save } = saveBet();
+
   const navigate = useNavigate();
   const [total, setTotal] = useState<number>(0);
 
@@ -67,7 +71,16 @@ const Cart = (props: IProps) => {
     );
   });
 
-  const handleClickSave = () => {
+  const handleClickSave = async () => {
+    const saved: any[] = []
+    CART.forEach((item) => {
+      saved.push({
+        game_id: item.typeGameId,
+        numbers: item.numbers,
+
+      })
+    });
+    await save(JSON.stringify({games:[...saved]}));
     navigate("/home");
   };
   return (

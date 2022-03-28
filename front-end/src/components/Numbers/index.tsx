@@ -13,6 +13,8 @@ interface IBet {
   addCart: any;
   betType: string;
   betPrice: number;
+  betId: number;
+
 }
 
 let DUMMY_ARRAY: any[] = [];
@@ -32,6 +34,7 @@ const Numbers = (props: IBet) => {
     addCart,
     betType,
     betPrice,
+    betId
   } = props;
 
   const generateNumbers = (range: number) => {
@@ -120,6 +123,7 @@ const Numbers = (props: IBet) => {
           color: color,
           typeGame: betType,
           price: betPrice,
+          typeGameId: betId,
         })
       );
 
