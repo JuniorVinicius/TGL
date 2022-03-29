@@ -1,22 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import saveBet from "./../shared/services/bet/newbets/index";
+import { ICart } from './interfaces/index';
 
 const { save } = saveBet();
-
-interface Items {
-  id: number;
-  numbers: number[];
-  price: number;
-  color: string;
-  typeGame: string;
-  typeGameId: number;
-}
-
-interface ICart {
-  items: Items[];
-  totalQuantity: number;
-  min_cart_value: number;
-}
 
 const initialState: ICart = {
   items: [],

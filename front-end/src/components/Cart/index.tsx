@@ -12,36 +12,24 @@ import ItemCart from "./Item";
 import { BsArrowRight } from "react-icons/bs";
 import { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from './../../store/cart-slice';
-import { toast } from 'react-toastify';
-
-interface ICart {
-  items: any[];
-  min_cart_value: number;
-}
-
-interface ICartItems {
-  cart: ICart;
-}
-
-interface IProps {
-  hasBorder?: boolean;
-  hasSave?: boolean;
-  hasMarginTop?: boolean;
-  hasWidth?: boolean;
-}
+import { cartActions } from "./../../store/cart-slice";
+import { toast } from "react-toastify";
+import { IProps } from "./interfaces";
+import { ICartItems } from "./interfaces";
 
 const Cart = (props: IProps) => {
   const { hasBorder, hasSave, hasMarginTop, hasWidth } = props;
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   const [total, setTotal] = useState<number>(0);
 
   const CART = useSelector((state: ICartItems) => state.cart.items);
-  const min_cart_value = useSelector((state: ICartItems) => state.cart.min_cart_value);
+  const min_cart_value = useSelector(
+    (state: ICartItems) => state.cart.min_cart_value
+  );
 
   const convertValues = (value: number) => {
     return `R$ ${Number(value)
@@ -60,7 +48,7 @@ const Cart = (props: IProps) => {
   }, [CART]);
 
   const items = CART.map((item) => {
-    const numbers: string[] = item.numbers.map((number:any) => 
+    const numbers: string[] = item.numbers.map((number: any) =>
       number.toString().padStart(2, "0")
     );
     return (
@@ -70,7 +58,7 @@ const Cart = (props: IProps) => {
         color={item.color}
         game={item.typeGame}
         amount={convertValues(item.price)}
-        numbers={numbers.join(', ')}
+        numbers={numbers.join(", ")}
       />
     );
   });
@@ -78,9 +66,11 @@ const Cart = (props: IProps) => {
   const handleClickSave = () => {
     let message: string;
     if (total < min_cart_value) {
-      message = `⚠️ O valor minímo é de: ${convertValues(min_cart_value)}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`
-    }else{
-      message = '✅ Aposta adicionada com sucesso!';
+      message = `⚠️ O valor minímo é de: ${convertValues(
+        min_cart_value
+      )}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`;
+    } else {
+      message = "✅ Aposta adicionada com sucesso!";
       dispatch(cartActions.saveBetData());
       navigate("/home");
     }
@@ -92,7 +82,7 @@ const Cart = (props: IProps) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      });
+    });
   };
 
   return (

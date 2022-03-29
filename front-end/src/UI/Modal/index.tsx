@@ -1,13 +1,6 @@
 import { StyledPopup } from "./style";
+import { IModal } from './interfaces';
 
-interface IModal {
-  open: any;
-  idElement?: number;
-  title?: string;
-  content: any;
-  titleButton?: string;
-  execute?: any;
-}
 
 const CustomPopup = (props: IModal) => {
   const { open, title, content, titleButton, execute } = props;

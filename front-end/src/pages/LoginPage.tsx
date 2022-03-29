@@ -7,12 +7,8 @@ import FormAuth from "../components/Form";
 import { auth } from "../shared/services";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Inputs } from "./interfaces";
 
-type Inputs = {
-  name?: string;
-  email: string;
-  password: string;
-};
 
 const LoginPage = () => {
   const navigate = useNavigate();

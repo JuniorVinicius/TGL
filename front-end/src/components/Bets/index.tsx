@@ -1,3 +1,4 @@
+import { IGameType } from "./interface";
 import {
   BoxBet,
   Barr,
@@ -7,25 +8,15 @@ import {
   TagGame,
 } from "./style";
 
-type GameType = {
-  numbers?: string;
-  date?: string;
-  amount?: string;
-  typeGame?: string;
-  color?: string;
-};
-
-const Bet = (props: GameType) => {
+const Bet = (props: IGameType) => {
   const { numbers, date, amount, typeGame, color } = props;
-  
+
   return (
     <>
       <BoxBet>
-        <Barr color={color}/>
+        <Barr color={color} />
         <Content>
-          <ConteinerText className="first-conteiner">
-            {numbers}
-          </ConteinerText>
+          <ConteinerText className="first-conteiner">{numbers}</ConteinerText>
 
           <ConteinerText>
             <Register>{date}</Register> - <Register>({amount})</Register>

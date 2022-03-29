@@ -7,13 +7,8 @@ import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
 import { toast } from 'react-toastify';
 import createNewUser from './../shared/services/user/index';
+import { Inputs } from "./interfaces";
 
-
-type Inputs = {
-  name?: string
-  email?: string
-  password?: string
-}
 
 const RegistrationPage = () => {
 

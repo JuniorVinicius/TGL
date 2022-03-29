@@ -1,14 +1,9 @@
 import { Button } from "./style";
 import { memo } from 'react';
+import { IButtonType } from "./interfaces";
 
-type ButtonType = {
-  name: string;
-  hasBackground?: boolean;
-  icon?: any;
-  onHandleClick?: any;
-};
 
-const ActionButton = (props: ButtonType) => {
+const ActionButton = (props: IButtonType) => {
   const { name, hasBackground, icon, onHandleClick } = props;
   return (
     <>

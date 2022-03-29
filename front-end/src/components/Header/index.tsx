@@ -8,38 +8,26 @@ import { memo, useState, useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CustomPopup from "../../UI/Modal/index";
 import Cart from "../Cart";
-import { useSelector, useDispatch } from 'react-redux';
-import { cartActions } from '../../store/cart-slice';
-import { toast } from 'react-toastify';
-
-
-type HeaderType = {
-  homeButton?: boolean;
-  hasCartButton?: boolean;
-};
-
-interface ITotal {
-  totalQuantity: number;
-  items: any[];
-  min_cart_value: number;
-}
-
-interface ITotalCart{
-  cart: ITotal
-}
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
+import { toast } from "react-toastify";
+import { HeaderType, ITotalCart } from "./interfaces";
 
 const Header = (props: HeaderType) => {
-  const [total, setTotal] = useState<number>(0); 
+  const [total, setTotal] = useState<number>(0);
   const { homeButton, hasCartButton } = props;
   const [clicked, setClicked] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const totalQuantityInCart = useSelector((state: ITotalCart) => state.cart.totalQuantity);
+  const totalQuantityInCart = useSelector(
+    (state: ITotalCart) => state.cart.totalQuantity
+  );
   const CART = useSelector((state: ITotalCart) => state.cart.items);
-  const min_cart_value = useSelector((state: ITotalCart) => state.cart.min_cart_value);
-
+  const min_cart_value = useSelector(
+    (state: ITotalCart) => state.cart.min_cart_value
+  );
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -70,13 +58,14 @@ const Header = (props: HeaderType) => {
     setTotal(total);
   }, [CART]);
 
-
   const handleClickSave = () => {
     let message: string;
     if (total < min_cart_value) {
-      message = `⚠️ O valor minímo é de: ${convertValues(min_cart_value)}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`
-    }else{
-      message = '✅ Aposta adicionada com sucesso!';
+      message = `⚠️ O valor minímo é de: ${convertValues(
+        min_cart_value
+      )}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`;
+    } else {
+      message = "✅ Aposta adicionada com sucesso!";
       dispatch(cartActions.saveBetData());
       navigate("/home");
     }
@@ -88,12 +77,15 @@ const Header = (props: HeaderType) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      });
+    });
   };
 
   return (
     <>
-      <HeaderBox hasCartButton={hasCartButton} className={`${clicked ? "clicked" : ""}`}>
+      <HeaderBox
+        hasCartButton={hasCartButton}
+        className={`${clicked ? "clicked" : ""}`}
+      >
         <Box>
           <span
             className={`${clicked && "clicked-logo"}`}

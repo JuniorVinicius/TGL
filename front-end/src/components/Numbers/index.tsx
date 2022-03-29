@@ -4,18 +4,7 @@ import { ChosenNumbers } from "../../context";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { cartActions } from "./../../store/cart-slice";
-
-interface IBet {
-  randomValues: any[];
-  numbersColor: string;
-  maxRange: number;
-  maxNumber: number;
-  addCart: any;
-  betType: string;
-  betPrice: number;
-  betId: number;
-
-}
+import { IBet } from "./interfaces";
 
 let DUMMY_ARRAY: any[] = [];
 

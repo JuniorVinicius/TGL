@@ -13,34 +13,15 @@ import { Button } from "../../UI/Button/Button";
 
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-type FormType = {
-  marginTop?: boolean;
-  title: string;
-  buttonSubmitColor?: string;
-  buttonSubmitTitle?: string;
-  buttonActionTitle?: string;
-  arrowSubmitLeft?: boolean;
-  arrowSubmitRight?: boolean;
-  arrowActionLeft?: boolean;
-  arrowActionRight?: boolean;
-  sizeButton?: number;
-  onSubmitForm: SubmitHandler<Inputs>;
-  onForgetPassword?: () => void;
-  onGoTo?: () => void;
-};
+import { IFormType, Inputs } from "./interfaces";
 
-type Inputs = {
-  name: string;
-  email: string;
-  password: string;
-};
-const FormAuth = (props: FormType) => {
+const FormAuth = (props: IFormType) => {
   const {
     marginTop,
     title,
