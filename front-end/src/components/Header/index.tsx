@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
-import { HeaderBox, Box, ConteinerButton, LogoBar } from "./index";
-import { Button } from "./../../UI/Button/Button";
+import { HeaderBox, Box, ConteinerButton, LogoBar } from "./style";
+import { Button } from "../../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
 import { memo, useState, useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import CustomPopup from "./../../UI/Modal/index";
+import CustomPopup from "../../UI/Modal/index";
 import Cart from "../Cart";
 import { useSelector, useDispatch } from 'react-redux';
-import { cartActions } from './../../store/cart-slice';
+import { cartActions } from '../../store/cart-slice';
 import { toast } from 'react-toastify';
 
 

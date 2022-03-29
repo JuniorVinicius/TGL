@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Button } from "../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
-import Header from "./../components/Header/Header";
+import Header from "../components/Header";
 import { MainConteiner } from "../UI/Conteiner/MainConteiner";
 import {
   BoxFilters,
@@ -90,12 +90,16 @@ const HomePage = () => {
       }
     });
 
+    const numbers:string[] = game.choosen_numbers.split(",").map((number:string) => {
+      return number.padStart(2,  "0")
+    })
+
     return (
       <Bet
         key={Math.random()}
         date={date}
         typeGame={game.type.type}
-        numbers={game.choosen_numbers}
+        numbers={numbers.join(", ")}
         amount={price}
         color={actualColor}
       />

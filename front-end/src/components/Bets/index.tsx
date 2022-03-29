@@ -5,7 +5,7 @@ import {
   ConteinerText,
   Register,
   TagGame,
-} from "./BetsSave";
+} from "./style";
 
 type GameType = {
   numbers?: string;
@@ -17,7 +17,7 @@ type GameType = {
 
 const Bet = (props: GameType) => {
   const { numbers, date, amount, typeGame, color } = props;
-
+  
   return (
     <>
       <BoxBet>

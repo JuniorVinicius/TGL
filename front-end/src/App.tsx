@@ -1,7 +1,7 @@
 import GlobalStyle from "./style/global-style";
 import MainRoutes from "./routes/routes";
 import { ToastContainer } from "react-toastify";
-import { ChosenNumbersProvider } from "./context/test";
+import { ChosenNumbersProvider } from "./context";
 
 function App() {
   return (

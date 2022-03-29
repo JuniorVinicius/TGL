@@ -7,7 +7,7 @@ import {
   Total,
   BoxSave,
   EmptyCart,
-} from "./Cart";
+} from "./style";
 import ItemCart from "./Item";
 import { BsArrowRight } from "react-icons/bs";
 import { useState, useEffect, memo } from "react";

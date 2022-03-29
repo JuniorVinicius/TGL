@@ -1,4 +1,4 @@
-import { BoxContentItem, Item, ListNumbers, TypeGame } from "./Cart";
+import { BoxContentItem, Item, ListNumbers, TypeGame } from "./style";
 import { IoTrashOutline } from "react-icons/io5";
 import CustomPopup from "../../UI/Modal";
 import { cartActions } from "../../store/cart-slice";

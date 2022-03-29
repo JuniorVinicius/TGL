@@ -1,6 +1,4 @@
-import { BoxText, Text, Span } from ".";
-
-
+import { BoxText, Text, Span } from "./style";
 
 const AplicationTitle = () => {
   return (

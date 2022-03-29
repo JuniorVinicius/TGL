@@ -1,4 +1,4 @@
-import { Button } from "./ActionButtons";
+import { Button } from "./style";
 import { memo } from 'react';
 
 type ButtonType = {

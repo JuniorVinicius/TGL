@@ -1,6 +1,6 @@
-import { BoxNumbers, Number } from "./Numbers";
+import { BoxNumbers, Number } from "./style";
 import { useState, useEffect, useContext, useCallback, memo } from "react";
-import { ChosenNumbers } from "./../../context/test";
+import { ChosenNumbers } from "../../context";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { cartActions } from "./../../store/cart-slice";

@@ -1,6 +1,6 @@
 import { Filter } from "../components/Filter";
 import Footer from "../components/Footer";
-import Header from "../components/Header/Header";
+import Header from "../components/Header";
 import { MainConteiner } from "../UI/Conteiner/MainConteiner";
 import Numbers from "./../components/Numbers/index";
 import {
@@ -17,7 +17,7 @@ import ActionButton from "../UI/Button/ActionButtons";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Cart from "./../components/Cart/index";
 import { useContext, memo, useEffect, useState } from "react";
-import { ChosenNumbers } from "./../context/test";
+import { ChosenNumbers } from "../context";
 
 import games from "./../shared/services/games/index";
 import { toast } from "react-toastify";

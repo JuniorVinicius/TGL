@@ -7,7 +7,7 @@ interface IHeader{
 export const HeaderBox = styled.header<IHeader>`
   width: 100vw;
   height: 79px;
-  border: 2px solid var(--lines-gray);
+  border-bottom: 2px solid var(--lines-gray);
   display: flex;
   align-items: center;
   justify-content: space-between;

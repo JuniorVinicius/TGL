@@ -7,9 +7,9 @@ import {
   BoxButtonSubmit,
   BoxButton,
   Title,
-} from "./index";
+} from "./style";
 
-import { Button } from "./../../UI/Button/Button";
+import { Button } from "../../UI/Button/Button";
 
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
