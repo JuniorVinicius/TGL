@@ -121,9 +121,12 @@ const FormAuth = (props: FormType) => {
               <Input type="text" placeholder="Name" {...register("name")} />
             </BoxInput>
           )}
-          <BoxInput>
-            <Input type="text" placeholder="Email" {...register("email")} />
-          </BoxInput>
+
+          {title !== "New password" && (
+            <BoxInput>
+              <Input type="text" placeholder="Email" {...register("email")} />
+            </BoxInput>
+          )}
 
           {title !== "Reset password" && (
             <BoxInput>

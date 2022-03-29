@@ -12,7 +12,7 @@ type Inputs = {
   password?: string
 }
 
-const ResetPage = () => {
+const ResetPasswordPage = () => {
   const navigate = useNavigate();
 
   const handleBackPage = () => {
@@ -20,7 +20,7 @@ const ResetPage = () => {
   }
 
   const handleResetPassword = (props: Inputs) => {
-    navigate('/reset-password');
+    console.log(props);
   }
   return (
     <>
@@ -28,9 +28,9 @@ const ResetPage = () => {
         <AplicationTitle />
         <FormAuth
           marginTop={true}
-          title="Reset password"
+          title="New password"
           buttonSubmitColor="var(--main-green)"
-          buttonSubmitTitle="Send Link"
+          buttonSubmitTitle="Reset password"
           buttonActionTitle="Back"
           arrowSubmitRight={true}
           arrowActionLeft={true}
@@ -45,4 +45,4 @@ const ResetPage = () => {
   );
 };
 
-export default ResetPage;
+export default ResetPasswordPage;

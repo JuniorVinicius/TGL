@@ -93,7 +93,7 @@ const Header = (props: HeaderType) => {
 
   return (
     <>
-      <HeaderBox className={`${clicked ? "clicked" : ""}`}>
+      <HeaderBox hasCartButton={hasCartButton} className={`${clicked ? "clicked" : ""}`}>
         <Box>
           <span
             className={`${clicked && "clicked-logo"}`}

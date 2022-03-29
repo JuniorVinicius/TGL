@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const HeaderBox = styled.header`
+interface IHeader{
+  hasCartButton?: boolean;
+}
+
+export const HeaderBox = styled.header<IHeader>`
   width: 100vw;
   height: 79px;
   border: 2px solid var(--lines-gray);
@@ -34,7 +38,12 @@ export const HeaderBox = styled.header`
     }
 
     @media (max-width: 1000px) {
+      display: ${props => props.hasCartButton ? 'flex' : 'none'}flex;
+      
+    }
+    @media (max-width: 768px) {
       display: flex;
+      
     }
   }
   & > div > button:first-child {
@@ -77,9 +86,7 @@ export const Box = styled.div`
 
   &.box-logout {
     margin-right: 16%;
-    @media (max-width: 1000px) {
-      margin-right: 0%;
-    }
+
     @media (max-width: 768px) {
       display: none;
       &.clicked {
@@ -89,7 +96,7 @@ export const Box = styled.div`
         height: 120px;
         background-color: #fff;
         border-bottom: 2px solid var(--border);
-        justify-content: center;
+        justify-content: space-center;
         align-items: center;
         flex-direction: column;
         top: 79px;
