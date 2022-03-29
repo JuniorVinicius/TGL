@@ -12,13 +12,14 @@ function App() {
         <MainRoutes />
         <ToastContainer
           position="top-right"
-          autoClose={false}
-          hideProgressBar={false}
+          autoClose={1000}
+          hideProgressBar
           newestOnTop={false}
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
           draggable
+          pauseOnHover
         />
 
       </ChosenNumbersProvider>

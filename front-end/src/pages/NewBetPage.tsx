@@ -21,6 +21,8 @@ import { ChosenNumbers } from "./../context/test";
 
 import games from "./../shared/services/games/index";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/cart-slice";
 
 const NewBet = () => {
   const [random, setRandom] = useState<any[]>([]);
@@ -36,6 +38,7 @@ const NewBet = () => {
   const [clicked, setClicked] = useState<boolean>();
 
   const { chosenValue, setChosenValue } = useContext(ChosenNumbers);
+  const dispatch = useDispatch();
   const { listGames } = games();
 
   useEffect(() => {
@@ -104,6 +107,7 @@ const NewBet = () => {
     try {
       const responseGame = await listGames();
       setDataBetsTypes(responseGame?.data.types);
+      dispatch(cartActions.getMinCartValue(responseGame?.data.min_cart_value));
       handleChange(responseGame?.data.types[0]);
     } catch (error) {
       console.log(error);

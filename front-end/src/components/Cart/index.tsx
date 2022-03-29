@@ -11,11 +11,13 @@ import {
 import ItemCart from "./Item";
 import { BsArrowRight } from "react-icons/bs";
 import { useState, useEffect, memo } from "react";
-import { useSelector } from "react-redux";
-import saveBet from './../../shared/services/bet/newbets/index';
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from './../../store/cart-slice';
+import { toast } from 'react-toastify';
 
 interface ICart {
   items: any[];
+  min_cart_value: number;
 }
 
 interface ICartItems {
@@ -32,12 +34,14 @@ interface IProps {
 const Cart = (props: IProps) => {
   const { hasBorder, hasSave, hasMarginTop, hasWidth } = props;
 
-  const { save } = saveBet();
-
   const navigate = useNavigate();
+
+  const dispatch = useDispatch(); 
+
   const [total, setTotal] = useState<number>(0);
 
   const CART = useSelector((state: ICartItems) => state.cart.items);
+  const min_cart_value = useSelector((state: ICartItems) => state.cart.min_cart_value);
 
   const convertValues = (value: number) => {
     return `R$ ${Number(value)
@@ -71,18 +75,26 @@ const Cart = (props: IProps) => {
     );
   });
 
-  const handleClickSave = async () => {
-    const saved: any[] = []
-    CART.forEach((item) => {
-      saved.push({
-        game_id: item.typeGameId,
-        numbers: item.numbers,
-
-      })
-    });
-    await save(JSON.stringify({games:[...saved]}));
-    navigate("/home");
+  const handleClickSave = () => {
+    let message: string;
+    if (total < min_cart_value) {
+      message = `⚠️ O valor minímo é de: ${convertValues(min_cart_value)}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`
+    }else{
+      message = '✅ Aposta adicionada com sucesso!';
+      dispatch(cartActions.saveBetData());
+      navigate("/home");
+    }
+    toast(message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
   };
+
   return (
     <>
       <BoxBetSave

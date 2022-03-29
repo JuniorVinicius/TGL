@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-import { cartActions } from "./../../store/cart-slice";
 import { StyledPopup } from "./style";
 
 interface IModal {
@@ -8,16 +6,12 @@ interface IModal {
   title?: string;
   content: any;
   titleButton?: string;
+  execute?: any;
 }
 
 const CustomPopup = (props: IModal) => {
-  const { open, idElement, title, content, titleButton } = props;
-  const dispatch = useDispatch();
-
-  const removeItem = () => {
-    dispatch(cartActions.removeItemFromCart(idElement));
-  };
-
+  const { open, title, content, titleButton, execute } = props;
+ 
   return (
     <StyledPopup trigger={open} modal nested>
       {(close: any) => (
@@ -37,7 +31,7 @@ const CustomPopup = (props: IModal) => {
             <button
               className="confirm"
               onClick={() => {
-                removeItem();
+                execute();
               }}
             >
               {titleButton ? titleButton : "Confirmar"}

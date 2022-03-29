@@ -4,11 +4,14 @@ import { HeaderBox, Box, ConteinerButton, LogoBar } from "./index";
 import { Button } from "./../../UI/Button/Button";
 import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
-import { memo, useState } from "react";
+import { memo, useState, useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CustomPopup from "./../../UI/Modal/index";
 import Cart from "../Cart";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { cartActions } from './../../store/cart-slice';
+import { toast } from 'react-toastify';
+
 
 type HeaderType = {
   homeButton?: boolean;
@@ -17,6 +20,8 @@ type HeaderType = {
 
 interface ITotal {
   totalQuantity: number;
+  items: any[];
+  min_cart_value: number;
 }
 
 interface ITotalCart{
@@ -24,11 +29,17 @@ interface ITotalCart{
 }
 
 const Header = (props: HeaderType) => {
-  const navigate = useNavigate();
-  const totalQuantityInCart = useSelector((state: ITotalCart) => state.cart.totalQuantity);
-
+  const [total, setTotal] = useState<number>(0); 
   const { homeButton, hasCartButton } = props;
   const [clicked, setClicked] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const totalQuantityInCart = useSelector((state: ITotalCart) => state.cart.totalQuantity);
+  const CART = useSelector((state: ITotalCart) => state.cart.items);
+  const min_cart_value = useSelector((state: ITotalCart) => state.cart.min_cart_value);
+
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -41,6 +52,43 @@ const Header = (props: HeaderType) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
+  };
+
+  const convertValues = (value: number) => {
+    return `R$ ${Number(value)
+      .toFixed(2)
+      ?.toString()
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+  };
+
+  useEffect(() => {
+    let total = 0;
+    CART.forEach((item) => {
+      total += item.price;
+    });
+    setTotal(total);
+  }, [CART]);
+
+
+  const handleClickSave = () => {
+    let message: string;
+    if (total < min_cart_value) {
+      message = `⚠️ O valor minímo é de: ${convertValues(min_cart_value)}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`
+    }else{
+      message = '✅ Aposta adicionada com sucesso!';
+      dispatch(cartActions.saveBetData());
+      navigate("/home");
+    }
+    toast(message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
   };
 
   return (
@@ -88,6 +136,7 @@ const Header = (props: HeaderType) => {
 
           {hasCartButton && (
             <CustomPopup
+              execute={handleClickSave}
               open={
                 <div>
                   <button>
