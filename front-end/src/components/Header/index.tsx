@@ -16,7 +16,7 @@ import { HeaderBox, Box, ConteinerButton, LogoBar } from "./style";
 const Header = (props: HeaderType) => {
   const [total, setTotal] = useState<number>(0);
   const { homeButton, hasCartButton } = props;
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

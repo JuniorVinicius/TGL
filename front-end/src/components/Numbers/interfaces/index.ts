@@ -9,3 +9,8 @@ export interface IBet {
     betId: number;
   
   }
+
+export interface INumbers{
+    id: string;
+    clicked: boolean;
+}

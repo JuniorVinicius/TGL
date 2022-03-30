@@ -27,8 +27,8 @@ import games from "./../shared/services/games/index";
 
 
 const NewBet = () => {
-  const [random, setRandom] = useState<any[]>([]);
-  const [chosen, setChosen] = useState<any[]>([]);
+  const [random, setRandom] = useState<number[]>([]);
+  const [chosen, setChosen] = useState<number[]>([]);
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>([]);
   const [betTitle, setBetTitle] = useState<string>("");
   const [betDescription, setBetDescription] = useState<string>("");
@@ -44,7 +44,7 @@ const NewBet = () => {
   const { listGames } = games();
 
   useEffect(() => {
-    const numbers: any[] = [];
+    const numbers: number[] = [];
     chosenValue.forEach((element) => {
       numbers.push(Number(element.id));
     });
@@ -57,7 +57,7 @@ const NewBet = () => {
   }, []);
 
   const randomNumbers = () => {
-    const numbers: any[] = [];
+    const numbers: number[] = [];
 
     numbers.push(...chosen);
     if (numbers.length >= dataBetMaxNumbers) {
@@ -103,6 +103,7 @@ const NewBet = () => {
 
   const addToCart = () => {
     setClicked((prev) => !prev);
+    clearGame();
   };
 
   const allBets = async () => {

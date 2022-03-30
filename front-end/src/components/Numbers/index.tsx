@@ -4,15 +4,15 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "./../../store/cart-slice";
 import { ChosenNumbers } from "../../context";
 
-import { IBet } from "./interfaces";
+import { IBet, INumbers } from "./interfaces";
 import { BoxNumbers, Number } from "./style";
 
-let NUMBERS_BET: any[] = [];
+let NUMBERS_BET: INumbers[] = [];
 
 const Numbers = (props: IBet) => {
   const [color, setColor] = useState("");
-  const [choosen, setChoosen] = useState<any[]>([]);
-  const [, setNumbersRanges] = useState<any[]>([]);
+  const [choosen, setChoosen] = useState<INumbers[]>([]);
+  const [, setNumbersRanges] = useState<JSX.Element[]>([]);
   const [count, setCount] = useState<number>(0);
   const { setChosenValue } = useContext(ChosenNumbers);
   const dispatch = useDispatch();
@@ -79,6 +79,23 @@ const Numbers = (props: IBet) => {
     const array = NUMBERS_BET.filter((number) => !!number.clicked);
     setChoosen(array);
   }, []);
+
+  const newNumbers = () => {
+    const numbers = NUMBERS_BET.map((number: any) => {
+      return (
+        <Number
+          key={Math.random() * number.id}
+          clicked={number.clicked}
+          color={color}
+          onClick={() => handleClick(number)}
+        >
+          {number.id.padStart(2, "0")}
+        </Number>
+      );
+    });
+
+    setNumbersRanges(numbers);
+  };
 
   useEffect(() => {
     generateNumbers(maxRange);
@@ -150,22 +167,6 @@ const Numbers = (props: IBet) => {
     );
   });
 
-  const newNumbers = () => {
-    const numbers = NUMBERS_BET.map((number: any) => {
-      return (
-        <Number
-          key={Math.random() * number.id}
-          clicked={number.clicked}
-          color={color}
-          onClick={() => handleClick(number)}
-        >
-          {number.id.padStart(2, "0")}
-        </Number>
-      );
-    });
-
-    setNumbersRanges(numbers);
-  };
 
   return (
     <>
