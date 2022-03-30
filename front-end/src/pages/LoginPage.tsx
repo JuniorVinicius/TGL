@@ -7,14 +7,14 @@ import FormAuth from "../components/Form";
 import { auth } from "../shared/services";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Inputs } from "./interfaces";
+import { InputsLogin } from "./interfaces";
 
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = auth();
 
-  const handleLogin = async (props: Inputs) => {
+  const handleLogin = async (props: InputsLogin) => {
     const { email, password } = props;
     try {
       await toast.promise(

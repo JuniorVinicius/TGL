@@ -1,10 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Conteiner } from "../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
+import resetPasswordSendNewPassword from "../shared/services/auth/resetPassword/sendPassword";
 
 type Inputs = {
   name?: string
@@ -15,12 +15,24 @@ type Inputs = {
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
 
+  const { send } = resetPasswordSendNewPassword()
+
   const handleBackPage = () => {
-    navigate('/')
+    navigate('/reset')
   }
 
-  const handleResetPassword = (props: Inputs) => {
-    console.log(props);
+  const handleResetPassword = async (props: Inputs) => {
+    const { password } = props;
+
+    try {
+      const response = await send(JSON.stringify({ password }));
+      console.log(response);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+
+    navigate('/');
   }
   return (
     <>

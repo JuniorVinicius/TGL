@@ -71,7 +71,9 @@ const FormAuth = (props: IFormType) => {
         await nameSchema.validate({ name: name });
       }
 
-      await emailSchema.validate({ email: email });
+      if (title !== "New password") {
+        await emailSchema.validate({ email: email });
+      }
 
       if (title !== "Reset password") {
         await passworSchema.validate({ password: password });

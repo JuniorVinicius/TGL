@@ -1,7 +1,4 @@
-
 import instance from './../../axios.config';
-
-
 
 const bets = () => {
   async function listBets(filter?:string){
