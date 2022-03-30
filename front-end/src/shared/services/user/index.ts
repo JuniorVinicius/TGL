@@ -1,8 +1,10 @@
+import { IBodyUser, ICreateUserResponse } from "../../interfaces/CreateUserInterface";
 import instance from "./../axios.config";
+import { IUserCreate } from "./interface";
 
 
-const createNewUser = () => {
-  async function newUser(body: any){
+const createNewUser = (): IUserCreate => {
+  async function newUser(body: IBodyUser): Promise<ICreateUserResponse> {
     return instance.post("/user/create", body);
   }
 

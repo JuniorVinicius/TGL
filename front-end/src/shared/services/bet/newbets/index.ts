@@ -1,10 +1,12 @@
 
+import { IBetResponse, IBodyGame } from '../../../interfaces';
 import instance from './../../axios.config';
+import { IBetDatas } from './interface';
 
 
-const saveBet = () => {
-  async function save(body:any) {
-    return instance.post("/bet/new-bet", body);
+const saveBet = ():IBetDatas => {
+  async function save(body:IBodyGame):Promise<IBetResponse> {
+    return instance.post("/bet/new-bet", JSON.stringify(body));
   }
 
   return { save};

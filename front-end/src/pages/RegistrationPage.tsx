@@ -6,7 +6,7 @@ import AplicationTitle from "../components/AplicationTitle";
 
 import { Conteiner } from "../UI/Conteiner/Conteiner";
 import createNewUser from "./../shared/services/user/index";
-import { Inputs } from "./interfaces";
+import { InputsCreateUser } from "./interfaces";
 
 const RegistrationPage = () => {
   const { newUser } = createNewUser();
@@ -16,7 +16,7 @@ const RegistrationPage = () => {
     navigate("/");
   };
 
-  const handleRigister = async (props: Inputs) => {
+  const handleRigister = async (props: InputsCreateUser) => {
     const { name, email, password } = props;
     try {
       await toast.promise(newUser({ name, email, password }), {

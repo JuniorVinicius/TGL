@@ -1,7 +1,10 @@
+import { IAllBet } from '../../../interfaces';
 import instance from './../../axios.config';
+import { IUserBets } from './interface';
 
-const bets = () => {
-  async function listBets(filter?:string){
+
+const bets = ():IUserBets => {
+  async function listBets(filter?:string): Promise<IAllBet>{
     return instance.get(`/bet/all-bets${filter && '?type%5B%5D='+filter}`);
   }
 

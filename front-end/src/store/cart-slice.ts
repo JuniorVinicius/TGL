@@ -56,7 +56,7 @@ const cartSlice = createSlice({
             });
           });
 
-          await toast.promise(save(JSON.stringify({ games: [...saved] })), {
+          await toast.promise(save({ games: [...saved] }), {
             pending: "Carregando...",
             success: "Apostas cadastradas 👌",
             error:
