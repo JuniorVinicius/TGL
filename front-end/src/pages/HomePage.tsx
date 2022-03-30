@@ -10,7 +10,7 @@ import {
   ConteinerButton,
   Card,
 } from "./../UI/Conteiner/BoxFilters";
-import { TextContent } from "./../components/HomePageText/index";
+import { TextContent, EmptyBox } from "./../components/HomePageText/index";
 import { Filter } from "./../components/Filter/index";
 import Bet from "../components/Bets";
 import { useEffect, useState } from "react";
@@ -50,9 +50,9 @@ const HomePage = () => {
   const handleFilters = (type: string, color: string) => {
     setFilter(type);
     setFilterBackground(color);
-    if(filterBackground === color){
-      setFilter("")
-      setFilterBackground("")
+    if (filterBackground === color) {
+      setFilter("");
+      setFilterBackground("");
     }
   };
 
@@ -90,9 +90,11 @@ const HomePage = () => {
       }
     });
 
-    const numbers:string[] = game.choosen_numbers.split(",").map((number:string) => {
-      return number.padStart(2,  "0")
-    })
+    const numbers: string[] = game.choosen_numbers
+      .split(",")
+      .map((number: string) => {
+        return number.padStart(2, "0");
+      });
 
     return (
       <Bet
@@ -116,9 +118,7 @@ const HomePage = () => {
       <MainConteiner>
         <BoxFilters>
           <Filters>
-            <TextContent fontBold={true}>
-              RECENT GAMES
-            </TextContent>
+            <TextContent fontBold={true}>RECENT GAMES</TextContent>
 
             <Card className="filters">
               <TextContent fontSize={17} marginRight={15}>
@@ -150,7 +150,15 @@ const HomePage = () => {
           {typeGames}
         </Card>
 
-        {listChosenGames}
+        {!!listChosenGames && listChosenGames?.length > 0 ? (
+          listChosenGames
+        ) : (
+          <EmptyBox>
+            <TextContent fontSize={50} fontBold={true}>
+              Empty bets {filterBackground && `for ${filter}`}
+            </TextContent>
+          </EmptyBox>
+        )}
       </MainConteiner>
 
       <Footer />

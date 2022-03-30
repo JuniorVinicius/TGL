@@ -64,25 +64,25 @@ const Cart = (props: IProps) => {
   });
 
   const handleClickSave = () => {
-    let message: string;
     if (total < min_cart_value) {
-      message = `⚠️ O valor minímo é de: ${convertValues(
-        min_cart_value
-      )}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`;
+      toast(
+        `⚠️ O valor minímo é de: ${convertValues(
+          min_cart_value
+        )}. Adicione mais ${convertValues(min_cart_value - total)} em apostas.`,
+        {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     } else {
-      message = "✅ Aposta adicionada com sucesso!";
       dispatch(cartActions.saveBetData());
       navigate("/home");
     }
-    toast(message, {
-      position: "top-right",
-      autoClose: 1500,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
   };
 
   return (

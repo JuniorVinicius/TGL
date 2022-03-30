@@ -16,6 +16,7 @@ export interface IFormType {
     arrowActionLeft?: boolean;
     arrowActionRight?: boolean;
     sizeButton?: number;
+    fontSizeButton?: number;
     onSubmitForm: SubmitHandler<Inputs>;
     onForgetPassword?: () => void;
     onGoTo?: () => void;

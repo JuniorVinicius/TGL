@@ -6,31 +6,35 @@ import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
 import { Inputs } from "./interfaces";
-import resetPasswordSendEmail from './../shared/services/auth/resetPassword/sendLink';
-
+import resetPasswordSendEmail from "./../shared/services/auth/resetPassword/sendLink";
+import { toast } from "react-toastify";
 
 const ResetPage = () => {
   const navigate = useNavigate();
   const { send } = resetPasswordSendEmail();
 
   const handleBackPage = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   const handleResetPassword = async (props: Inputs) => {
     const { email } = props;
 
     try {
       const response = await send(JSON.stringify({ email }));
-      console.log('response :>> ', response?.data.token);
-      localStorage.setItem('token', response?.data.token);
-      navigate('/');
+      await toast.promise(send(JSON.stringify({ email })), {
+        pending: "Carregando...",
+        success: "O link foi enviado para o seu email 👌",
+        error: "Erro ao enviar o link, por favor cheque o email informado 🤯",
+      });
+      localStorage.setItem("token", response?.data.token);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
 
-    navigate('/reset-password');
-  }
+    navigate("/reset-password");
+  };
   return (
     <>
       <Conteiner>

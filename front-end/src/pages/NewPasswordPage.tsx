@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
 import resetPasswordSendNewPassword from "../shared/services/auth/resetPassword/sendPassword";
+import { toast } from "react-toastify";
 
 type Inputs = {
   name?: string
@@ -25,8 +26,15 @@ const ResetPasswordPage = () => {
     const { password } = props;
 
     try {
-      const response = await send(JSON.stringify({ password }));
-      console.log(response);
+      await toast.promise(
+        send(JSON.stringify({ password })),
+        {
+          pending: "Carregando...",
+          success: "Senha alterada com sucesso 👌",
+          error: "Erro ao cadastrar a nova senha 🤯",
+        }
+      );
+
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -47,6 +55,7 @@ const ResetPasswordPage = () => {
           arrowSubmitRight={true}
           arrowActionLeft={true}
           sizeButton={56}
+          fontSizeButton={28}
           onSubmitForm={handleResetPassword}
           onGoTo={handleBackPage}
         />

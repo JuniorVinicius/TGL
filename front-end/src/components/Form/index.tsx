@@ -33,6 +33,7 @@ const FormAuth = (props: IFormType) => {
     arrowActionLeft,
     arrowActionRight,
     sizeButton,
+    fontSizeButton,
     onSubmitForm,
     onForgetPassword,
     onGoTo,
@@ -43,8 +44,8 @@ const FormAuth = (props: IFormType) => {
   const notifyError = (message: string) =>
     toast.error(message, {
       position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
+      autoClose: 2000,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -128,7 +129,7 @@ const FormAuth = (props: IFormType) => {
           )}
 
           <BoxButtonSubmit marginTop={marginTop}>
-            <Button type="submit" color={buttonSubmitColor} size={sizeButton}>
+            <Button type="submit" color={buttonSubmitColor} size={sizeButton} fontSize={fontSizeButton}>
               {arrowSubmitLeft && (
                 <BsArrowLeft style={{ marginRight: "19px" }} />
               )}

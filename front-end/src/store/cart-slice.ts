@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import saveBet from "./../shared/services/bet/newbets/index";
-import { ICart } from './interfaces/index';
+import { ICart } from "./interfaces/index";
 
 const { save } = saveBet();
 
@@ -46,19 +47,27 @@ const cartSlice = createSlice({
 
     saveBetData(state) {
       (async () => {
-        const saved: any[] = [];
-        state.items.forEach((item) => {
-          saved.push({
-            game_id: item.typeGameId,
-            numbers: item.numbers,
+        try {
+          const saved: any[] = [];
+          state.items.forEach((item) => {
+            saved.push({
+              game_id: item.typeGameId,
+              numbers: item.numbers,
+            });
           });
-        });
-        await save(JSON.stringify({ games: [...saved] }));
+
+          await toast.promise(save(JSON.stringify({ games: [...saved] })), {
+            pending: "Carregando...",
+            success: "Apostas cadastradas 👌",
+            error:
+              "Erro ao cadastrar apostas 🤯",
+          });
+        } catch (error) {
+          console.log(error);
+        }
       })();
       state.items = [];
     },
-
-
   },
 });
 
