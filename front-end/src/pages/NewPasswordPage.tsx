@@ -5,14 +5,8 @@ import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
 
 import { Conteiner } from "../UI/Conteiner/Conteiner";
-
 import resetPasswordSendNewPassword from "../shared/services/auth/resetPassword/sendPassword";
-
-type Inputs = {
-  name?: string;
-  email?: string;
-  password?: string;
-};
+import { IIputPassword } from "./interfaces";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
@@ -23,11 +17,11 @@ const ResetPasswordPage = () => {
     navigate("/reset");
   };
 
-  const handleResetPassword = async (props: Inputs) => {
+  const handleResetPassword = async (props: IIputPassword) => {
     const { password } = props;
 
     try {
-      await toast.promise(send(JSON.stringify({ password })), {
+      await toast.promise(send({ password }), {
         pending: "Carregando...",
         success: "Senha alterada com sucesso 👌",
         error: "Erro ao cadastrar a nova senha 🤯",

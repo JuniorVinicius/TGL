@@ -1,8 +1,9 @@
-
 import instance from './../../../axios.config';
+import { IBodyEmail, ISendEmailResponse } from '../../../../interfaces';
+import { IEmailAuth } from './interface';
 
-const resetPasswordSendEmail = () => {
-  async function send(body: any){
+const resetPasswordSendEmail = ():IEmailAuth => {
+  async function send(body: IBodyEmail): Promise<ISendEmailResponse> {
     return instance.post("/reset", body);
   }
 

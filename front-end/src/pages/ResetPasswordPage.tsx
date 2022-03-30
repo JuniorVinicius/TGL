@@ -7,7 +7,7 @@ import FormAuth from "../components/Form";
 
 import { Conteiner } from "../UI/Conteiner/Conteiner";
 
-import { Inputs } from "./interfaces";
+import { InputsResetEmail } from "./interfaces";
 import resetPasswordSendEmail from "./../shared/services/auth/resetPassword/sendLink";
 
 const ResetPage = () => {
@@ -18,17 +18,15 @@ const ResetPage = () => {
     navigate("/");
   };
 
-  const handleResetPassword = async (props: Inputs) => {
+  const handleResetPassword = async (props: InputsResetEmail) => {
     const { email } = props;
 
     try {
-      const response = await send(JSON.stringify({ email }));
-      await toast.promise(send(JSON.stringify({ email })), {
+      await toast.promise(send({ email }), {
         pending: "Carregando...",
         success: "O link foi enviado para o seu email 👌",
         error: "Erro ao enviar o link, por favor cheque o email informado 🤯",
       });
-      localStorage.setItem("token", response?.data.token);
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -5,7 +5,14 @@ export interface Inputs {
   };
 
   export interface InputsLogin {
-    name?: string;
     email: string;
     password: string;
   };
+
+  export interface InputsResetEmail{
+    email: string;
+  }
+
+  export interface IIputPassword{
+    password: string;
+  }

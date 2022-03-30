@@ -25,8 +25,13 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(async (response) => {
-  if(!!response.data.token){
+  if(!!response.data.token && response.data.token.token){
     localStorage.setItem('token', response.data.token.token)
+    localStorage.removeItem('resetToken');
+  }
+
+  if(!!response.data.token && !response.data.token.token){
+    localStorage.setItem("resetToken", response?.data.token);
   }
 
   return response;
