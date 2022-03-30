@@ -1,3 +1,11 @@
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+
+import { Button } from "../../UI/Button/Button";
+import { IFormType, Inputs } from "./interfaces";
 import {
   BoxForm,
   Form,
@@ -8,18 +16,6 @@ import {
   BoxButton,
   Title,
 } from "./style";
-
-import { Button } from "../../UI/Button/Button";
-
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-
-import { useForm } from "react-hook-form";
-
-import * as Yup from "yup";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-import { IFormType, Inputs } from "./interfaces";
 
 const FormAuth = (props: IFormType) => {
   const {
@@ -129,7 +125,12 @@ const FormAuth = (props: IFormType) => {
           )}
 
           <BoxButtonSubmit marginTop={marginTop}>
-            <Button type="submit" color={buttonSubmitColor} size={sizeButton} fontSize={fontSizeButton}>
+            <Button
+              type="submit"
+              color={buttonSubmitColor}
+              size={sizeButton}
+              fontSize={fontSizeButton}
+            >
               {arrowSubmitLeft && (
                 <BsArrowLeft style={{ marginRight: "19px" }} />
               )}

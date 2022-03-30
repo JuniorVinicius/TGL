@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { Conteiner } from "./../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
-import { auth } from "../shared/services";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { InputsLogin } from "./interfaces";
 
+import { Conteiner } from "./../UI/Conteiner/Conteiner";
+import { auth } from "../shared/services";
+import { InputsLogin } from "./interfaces";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,14 +17,11 @@ const LoginPage = () => {
   const handleLogin = async (props: InputsLogin) => {
     const { email, password } = props;
     try {
-      await toast.promise(
-        login({ email, password }),
-        {
-          pending: "Carregando...",
-          success: "Seja bem vindo 👌",
-          error: "Erro ao autenticar 🤯",
-        }
-      );
+      await toast.promise(login({ email, password }), {
+        pending: "Carregando...",
+        success: "Seja bem vindo 👌",
+        error: "Erro ao autenticar 🤯",
+      });
       navigate("/home");
     } catch (error) {
       console.log(error);

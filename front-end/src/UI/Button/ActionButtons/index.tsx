@@ -1,7 +1,6 @@
+import { memo } from "react";
 import { Button } from "./style";
-import { memo } from 'react';
 import { IButtonType } from "./interfaces";
-
 
 const ActionButton = (props: IButtonType) => {
   const { name, hasBackground, icon, onHandleClick } = props;

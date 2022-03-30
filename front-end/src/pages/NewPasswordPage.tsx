@@ -1,47 +1,45 @@
 import { useNavigate } from "react-router-dom";
-
-import { Conteiner } from "../UI/Conteiner/Conteiner";
+import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
+
+import { Conteiner } from "../UI/Conteiner/Conteiner";
+
 import resetPasswordSendNewPassword from "../shared/services/auth/resetPassword/sendPassword";
-import { toast } from "react-toastify";
 
 type Inputs = {
-  name?: string
-  email?: string
-  password?: string
-}
+  name?: string;
+  email?: string;
+  password?: string;
+};
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
 
-  const { send } = resetPasswordSendNewPassword()
+  const { send } = resetPasswordSendNewPassword();
 
   const handleBackPage = () => {
-    navigate('/reset')
-  }
+    navigate("/reset");
+  };
 
   const handleResetPassword = async (props: Inputs) => {
     const { password } = props;
 
     try {
-      await toast.promise(
-        send(JSON.stringify({ password })),
-        {
-          pending: "Carregando...",
-          success: "Senha alterada com sucesso 👌",
-          error: "Erro ao cadastrar a nova senha 🤯",
-        }
-      );
+      await toast.promise(send(JSON.stringify({ password })), {
+        pending: "Carregando...",
+        success: "Senha alterada com sucesso 👌",
+        error: "Erro ao cadastrar a nova senha 🤯",
+      });
 
-      navigate('/');
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
 
-    navigate('/');
-  }
+    navigate("/");
+  };
   return (
     <>
       <Conteiner>

@@ -1,10 +1,11 @@
-import { BoxContentItem, Item, ListNumbers, TypeGame } from "./style";
-import { IoTrashOutline } from "react-icons/io5";
-import CustomPopup from "../../UI/Modal";
-import { cartActions } from "../../store/cart-slice";
 import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
+import { IoTrashOutline } from "react-icons/io5";
 
-type ItemType = {
+import CustomPopup from "../../UI/Modal";
+import { BoxContentItem, Item, ListNumbers, TypeGame } from "./style";
+
+interface ItemType {
   color: string;
   game: string;
   amount: string;
@@ -15,7 +16,7 @@ type ItemType = {
 const ItemCart = (props: ItemType) => {
   const { color, game, amount, numbers, id } = props;
   const dispatch = useDispatch();
-  
+
   const removeItem = () => {
     dispatch(cartActions.removeItemFromCart(id));
   };
@@ -28,15 +29,15 @@ const ItemCart = (props: ItemType) => {
           content={"Deseja realmente excluir esta aposta?"}
           execute={removeItem}
           open={
-            <button style={{background: 'unset', border:'none'}}>
+            <button style={{ background: "unset", border: "none" }}>
               <IoTrashOutline
-              size={35}
-              style={{
-                marginRight: "14px",
-                cursor: "pointer",
-                color: "var(--text-light)",
-              }}
-            />
+                size={35}
+                style={{
+                  marginRight: "14px",
+                  cursor: "pointer",
+                  color: "var(--text-light)",
+                }}
+              />
             </button>
           }
         />

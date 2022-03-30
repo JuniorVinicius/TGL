@@ -1,5 +1,14 @@
+import { useState, useEffect, memo } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "./../../store/cart-slice";
+import { BsArrowRight } from "react-icons/bs";
+
 import { Button } from "../../UI/Button/Button";
+import ItemCart from "./Item";
+import { IProps } from "./interfaces";
+import { ICartItems } from "./interfaces";
 import {
   BoxBetSave,
   Itens,
@@ -8,25 +17,16 @@ import {
   BoxSave,
   EmptyCart,
 } from "./style";
-import ItemCart from "./Item";
-import { BsArrowRight } from "react-icons/bs";
-import { useState, useEffect, memo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "./../../store/cart-slice";
-import { toast } from "react-toastify";
-import { IProps } from "./interfaces";
-import { ICartItems } from "./interfaces";
 
 const Cart = (props: IProps) => {
   const { hasBorder, hasSave, hasMarginTop, hasWidth } = props;
-
+  const [total, setTotal] = useState<number>(0);
+  
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  const [total, setTotal] = useState<number>(0);
-
   const CART = useSelector((state: ICartItems) => state.cart.items);
+  
   const min_cart_value = useSelector(
     (state: ICartItems) => state.cart.min_cart_value
   );

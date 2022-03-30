@@ -1,8 +1,15 @@
-import { Filter } from "../components/Filter";
+import { useContext, memo, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../store/cart-slice";
+import { ChosenNumbers } from "../context";
+
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { MainConteiner } from "../UI/Conteiner/MainConteiner";
+import { Filter } from "../components/Filter";
 import Numbers from "./../components/Numbers/index";
+import Cart from "./../components/Cart/index";
 import {
   TitleBet,
   Emphasis,
@@ -11,18 +18,13 @@ import {
   BoxBetNumbers,
   BoxCart,
 } from "./../components/NewBetContent/index";
+
+import { MainConteiner } from "../UI/Conteiner/MainConteiner";
 import { Box } from "../UI/Conteiner/Conteiner";
 import ActionButton from "../UI/Button/ActionButtons";
 
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import Cart from "./../components/Cart/index";
-import { useContext, memo, useEffect, useState } from "react";
-import { ChosenNumbers } from "../context";
-
 import games from "./../shared/services/games/index";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { cartActions } from "../store/cart-slice";
+
 
 const NewBet = () => {
   const [random, setRandom] = useState<any[]>([]);
@@ -122,6 +124,7 @@ const NewBet = () => {
     setBetPrice(typeBet.price);
     setDataTypeId(typeBet.id);
     setChosen([]);
+    clearGame()
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {

@@ -1,22 +1,20 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import { Button } from "../UI/Button/Button";
+import { toast } from "react-toastify";
 import { BsArrowRight } from "react-icons/bs";
+
 import Header from "../components/Header";
-import { MainConteiner } from "../UI/Conteiner/MainConteiner";
-import {
-  BoxFilters,
-  Filters,
-  ConteinerButton,
-  Card,
-} from "./../UI/Conteiner/BoxFilters";
+import Footer from "../components/Footer";
 import { TextContent, EmptyBox } from "./../components/HomePageText/index";
 import { Filter } from "./../components/Filter/index";
 import Bet from "../components/Bets";
-import { useEffect, useState } from "react";
+
+import { Button } from "../UI/Button/Button";
+import { MainConteiner } from "../UI/Conteiner/MainConteiner";
+import {BoxFilters, Filters, ConteinerButton, Card} from "./../UI/Conteiner/BoxFilters";
+
 import bets from "./../shared/services/bet/listbets/index";
 import games from "../shared/services/games";
-import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>();

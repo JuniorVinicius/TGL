@@ -1,13 +1,14 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { Conteiner } from "../UI/Conteiner/Conteiner";
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form";
+
+import { Conteiner } from "../UI/Conteiner/Conteiner";
+
 import { Inputs } from "./interfaces";
 import resetPasswordSendEmail from "./../shared/services/auth/resetPassword/sendLink";
-import { toast } from "react-toastify";
 
 const ResetPage = () => {
   const navigate = useNavigate();
