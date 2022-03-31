@@ -62,9 +62,11 @@ const cartSlice = createSlice({
             error:
               "Erro ao cadastrar apostas 🤯",
           });
+
         } catch (error) {
           console.log(error);
         }
+        
       })();
       state.items = [];
     },

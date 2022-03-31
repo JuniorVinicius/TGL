@@ -67,7 +67,9 @@ const Header = (props: HeaderType) => {
     } else {
       message = "✅ Aposta adicionada com sucesso!";
       dispatch(cartActions.saveBetData());
-      navigate("/home");
+      setTimeout(() => {
+        navigate("/home");
+      } , 1000);
     }
     toast(message, {
       position: "top-right",

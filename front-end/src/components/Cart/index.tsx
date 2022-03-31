@@ -81,7 +81,9 @@ const Cart = (props: IProps) => {
       );
     } else {
       dispatch(cartActions.saveBetData());
-      navigate("/home");
+      setTimeout(() => {
+        navigate("/home");
+      } , 1000);
     }
   };
 

@@ -11,5 +11,6 @@ interface Items {
     items: Items[];
     totalQuantity: number;
     min_cart_value: number;
+  
   }
   

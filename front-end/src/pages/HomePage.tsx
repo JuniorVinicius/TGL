@@ -11,16 +11,23 @@ import Bet from "../components/Bets";
 
 import { Button } from "../UI/Button/Button";
 import { MainConteiner } from "../UI/Conteiner/MainConteiner";
-import {BoxFilters, Filters, ConteinerButton, Card} from "./../UI/Conteiner/BoxFilters";
+import {
+  BoxFilters,
+  Filters,
+  ConteinerButton,
+  Card,
+} from "./../UI/Conteiner/BoxFilters";
 
 import bets from "./../shared/services/bet/listbets/index";
 import games from "../shared/services/games";
+import ReactPaginate from "react-paginate";
 
 const HomePage = () => {
-  const [dataBets, setDataBets] = useState<any[]>();
+  const [dataBets, setDataBets] = useState<any[]>([]);
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>();
   const [filter, setFilter] = useState<string>("");
   const [filterBackground, setFilterBackground] = useState<string>("");
+  const [pageNumber, setPageNumber] = useState<number>(0);
   const navigate = useNavigate();
   const { listBets } = bets();
   const { listGames } = games();
@@ -33,7 +40,7 @@ const HomePage = () => {
       });
       const responseGame = await listGames();
 
-      setDataBets(responseBets?.data);
+      setDataBets(responseBets?.data.reverse());
       setDataBetsTypes(responseGame?.data.types);
     } catch (error) {
       console.log(error);
@@ -67,44 +74,55 @@ const HomePage = () => {
     );
   });
 
-  const listChosenGames = dataBets?.map((game) => {
-    const date = game.created_at
-      .replace(/-/gi, "/")
-      .match(/\d{4}\/\d{2}\/\d{2}/gi)[0]
-      .split("/")
-      .reverse()
-      .join("/");
+  const betsPerPage = 10;
+  const pagesVisited = pageNumber * betsPerPage;
 
-    const price: string = `R$ ${Number(game.price)
-      .toFixed(2)
-      ?.toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+  const listChosenGames = dataBets
+    ?.slice(pagesVisited, pagesVisited + betsPerPage)
+    ?.map((game) => {
+      const date = game.created_at
+        .replace(/-/gi, "/")
+        .match(/\d{4}\/\d{2}\/\d{2}/gi)[0]
+        .split("/")
+        .reverse()
+        .join("/");
 
-    let actualColor: string = "";
-    dataBetsTypes?.forEach((element) => {
-      if (element.id === game.type.id) {
-        actualColor = element.color;
-      }
-    });
+      const price: string = `R$ ${Number(game.price)
+        .toFixed(2)
+        ?.toString()
+        .replace(".", ",")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
 
-    const numbers: string[] = game.choosen_numbers
-      .split(",")
-      .map((number: string) => {
-        return number.padStart(2, "0");
+      let actualColor: string = "";
+      dataBetsTypes?.forEach((element) => {
+        if (element.id === game.type.id) {
+          actualColor = element.color;
+        }
       });
 
-    return (
-      <Bet
-        key={Math.random()}
-        date={date}
-        typeGame={game.type.type}
-        numbers={numbers.join(", ")}
-        amount={price}
-        color={actualColor}
-      />
-    );
-  });
+      const numbers: string[] = game.choosen_numbers
+        .split(",")
+        .map((number: string) => {
+          return number.padStart(2, "0");
+        });
+
+      return (
+        <Bet
+          key={Math.random()}
+          date={date}
+          typeGame={game.type.type}
+          numbers={numbers.join(", ")}
+          amount={price}
+          color={actualColor}
+        />
+      );
+    });
+
+  const pageCount = Math.ceil(dataBets?.length / betsPerPage);
+
+  const changePage = ({ selected }: any) => {
+    setPageNumber(selected);
+  };
 
   const handleClickNewBet = () => {
     navigate("/newbet");
@@ -157,6 +175,18 @@ const HomePage = () => {
             </TextContent>
           </EmptyBox>
         )}
+
+        <ReactPaginate className="pagination"
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          previousLinkClassName={"previousBttn"}
+          nextLinkClassName={"nextBttn"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
       </MainConteiner>
 
       <Footer />
