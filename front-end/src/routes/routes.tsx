@@ -6,6 +6,7 @@ import RegistrationPage from "./../pages/RegistrationPage";
 import ResetPage from "../pages/ResetPasswordPage";
 import ProtectedRoutes from "./protectedRoutes/Protected";
 import ResetPasswordPage from './../pages/NewPasswordPage';
+import Profile from "../pages/AccountPage";
 
 const MainRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const MainRoutes = () => {
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/home" element={<HomePage />} />
+          <Route path="/account" element={<Profile />} />
           <Route path="/newbet" element={<NewBet />} />
         </Route>
       </Routes>

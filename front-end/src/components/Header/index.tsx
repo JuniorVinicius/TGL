@@ -15,7 +15,7 @@ import { HeaderBox, Box, ConteinerButton, LogoBar } from "./style";
 
 const Header = (props: HeaderType) => {
   const [total, setTotal] = useState<number>(0);
-  const { homeButton, hasCartButton } = props;
+  const { homeButton, hasCartButton, hasAccountButton } = props;
   const [clicked, setClicked] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -82,6 +82,10 @@ const Header = (props: HeaderType) => {
     });
   };
 
+  const handleClickAccount = () =>{
+    navigate("/account");
+  }
+
   return (
     <>
       <HeaderBox
@@ -108,9 +112,9 @@ const Header = (props: HeaderType) => {
 
         <Box className={`box-logout ${clicked ? "clicked" : ""}`}>
           <ConteinerButton>
-            <Button fontSize={20} className="header-button">
+            {!hasAccountButton && <Button fontSize={20} className="header-button" onClick={handleClickAccount}>
               Account
-            </Button>
+            </Button>}
           </ConteinerButton>
           <ConteinerButton className="button-logout">
             <Button

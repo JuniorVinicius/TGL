@@ -1,6 +1,7 @@
 export interface HeaderType {
   homeButton?: boolean;
   hasCartButton?: boolean;
+  hasAccountButton?: boolean;
 }
 
 interface ITotal {
