@@ -39,7 +39,7 @@ const Numbers = (props: IBet) => {
     toast.info(message, {
       position: "top-right",
       autoClose: 2000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,

@@ -24,15 +24,21 @@ const ResetPage = () => {
     try {
       await toast.promise(send({ email }), {
         pending: "Carregando...",
-        success: "O link foi enviado para o seu email 👌",
-        error: "Erro ao enviar o link, por favor cheque o email informado 🤯",
+        success: "O link foi enviado para o seu email",
       });
-      navigate("/");
-    } catch (error) {
-      console.log(error);
+      navigate("/reset-password");
+    } catch (error:any) {
+      toast.error(error.data.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
 
-    navigate("/reset-password");
   };
   return (
     <>

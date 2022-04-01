@@ -22,9 +22,9 @@ const ResetPasswordPage = () => {
 
     try {
       await toast.promise(send({ password }), {
-        pending: "Carregando...",
-        success: "Senha alterada com sucesso 👌",
-        error: "Erro ao cadastrar a nova senha 🤯",
+        pending: "Loading...",
+        success: "Password changed successfully",
+        error: "Error registering new password",
       });
 
       navigate("/");

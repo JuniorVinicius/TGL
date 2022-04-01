@@ -35,8 +35,8 @@ const HomePage = () => {
   const allBets = async (query: string) => {
     try {
       const responseBets = await toast.promise(listBets(query), {
-        pending: "Carregando...",
-        error: "Erro ao carregar os jogos.",
+        pending: "Loading...",
+        error: "Error loading games.",
       });
       const responseGame = await listGames();
 
@@ -58,8 +58,14 @@ const HomePage = () => {
     if (filterBackground === color) {
       setFilter("");
       setFilterBackground("");
+      
     }
+    // setPageNumber(1);
   };
+
+  useEffect(() => {
+    changePage({ selected: 1 });
+  },[filterBackground])
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
     return (
@@ -74,7 +80,7 @@ const HomePage = () => {
     );
   });
 
-  const betsPerPage = 10;
+  const betsPerPage = 20;
   const pagesVisited = pageNumber * betsPerPage;
 
   const listChosenGames = dataBets
@@ -177,9 +183,11 @@ const HomePage = () => {
         )}
 
         <ReactPaginate className="pagination"
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
+          previousLabel={"<"}
+          nextLabel={">"}
           pageCount={pageCount}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={3}
           onPageChange={changePage}
           containerClassName={"paginationBttns"}
           previousLinkClassName={"previousBttn"}

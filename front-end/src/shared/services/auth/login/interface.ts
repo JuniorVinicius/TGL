@@ -1,4 +1,5 @@
-import { IBodyAuth, ILoginResponse } from "./../../interfaces";
+import { IBodyAuth, ILoginResponse } from "../../../interfaces";
+
 
 
 export interface IAuth {

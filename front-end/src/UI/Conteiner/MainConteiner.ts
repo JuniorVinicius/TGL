@@ -15,6 +15,7 @@ export const MainConteiner = styled.main`
     list-style: none;
     height: 50px;
     justify-content: center;
+    margin: 40px 0px;
 
     a {
       padding: 10px;
@@ -38,6 +39,18 @@ export const MainConteiner = styled.main`
     > .paginationDisabled a {
       color: var(--text);
       background-color: var(--light-grey);
+    }
+
+    
+    @media (max-width: 450px) {
+      margin: 20px 0px;
+      a {
+      padding: 5px;
+      margin: 4px;
+      border-radius: 3px;
+
+    }
+
     }
   }
 `;

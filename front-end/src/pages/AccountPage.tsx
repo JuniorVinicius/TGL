@@ -33,8 +33,8 @@ const Profile = () => {
   const getUserData = async () => {
     try {
       const responseAccountData = await toast.promise(accountUser(), {
-        pending: "Carregando...",
-        error: "Erro ao carregar os jogos.",
+        pending: "loading...",
+        error: "Error loading games.",
       });
       setUserAccountData(responseAccountData?.data);
     } catch (error) {

@@ -13,9 +13,11 @@ import {
   Input,
 } from "./style";
 import { InputUser } from "./interface";
+import updateUser from "../../../shared/services/user/updateUser";
 
 const FormUpdateUser = () => {
   const { register, handleSubmit  } = useForm<InputUser>();
+  const { newDataUser } = updateUser()
 
   const notifyError = (message: string) =>
     toast.error(message, {
@@ -44,7 +46,8 @@ const FormUpdateUser = () => {
       await nameSchema.validate({ name: name });
       await emailSchema.validate({ email: email });
 
-      console.table({ name, email });
+      await newDataUser({ email, name });
+      window.location.reload();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         console.log(err.message);

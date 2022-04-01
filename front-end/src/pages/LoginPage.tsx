@@ -7,8 +7,9 @@ import AplicationTitle from "../components/AplicationTitle";
 import FormAuth from "../components/Form/FormLogin";
 
 import { Conteiner } from "./../UI/Conteiner/Conteiner";
-import { auth } from "../shared/services";
+
 import { InputsLogin } from "./interfaces";
+import auth from "../shared/services/auth/login";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,13 +19,20 @@ const LoginPage = () => {
     const { email, password } = props;
     try {
       await toast.promise(login({ email, password }), {
-        pending: "Carregando...",
-        success: "Seja bem vindo 👌",
-        error: "Erro ao autenticar 🤯",
+        pending: "Loading...",
+        success: "Sucess👌",
       });
       navigate("/home");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.data.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   const handleForgetPassword = () => {

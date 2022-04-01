@@ -9,3 +9,4 @@ export type { ICartGames } from "./CartGamesInterface";
 export type { IAllBet } from "./AllBetsInterface";
 export type { IBodyGame, IBetResponse } from "./NewBetInterface";
 export type { IAccountResponse } from "./AccountInterface";
+export type { IBodyUpdate, IUpdateResponse } from "./UpdateUserInterface";

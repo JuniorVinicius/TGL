@@ -1,7 +1,8 @@
-import { IBodyAuth } from "./../../interfaces";
-import instance from "./../axios.config";
-import { IAuth } from "./interface";
-import { ILoginResponse } from './../../interfaces';
+import { IBodyAuth, ILoginResponse } from "../../../interfaces";
+import instance from "../../axios.config";
+import  { IAuth }  from "./interface";
+
+
 
 const auth = (): IAuth => {
   async function login(body: IBodyAuth): Promise<ILoginResponse> {

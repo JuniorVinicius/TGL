@@ -5,8 +5,9 @@ import FormAuth from "../components/Form/FormLogin";
 import AplicationTitle from "../components/AplicationTitle";
 
 import { Conteiner } from "../UI/Conteiner/Conteiner";
-import createNewUser from "./../shared/services/user/index";
+import createNewUser from "../shared/services/user/createUser";
 import { InputsCreateUser } from "./interfaces";
+
 
 const RegistrationPage = () => {
   const { newUser } = createNewUser();
@@ -20,13 +21,22 @@ const RegistrationPage = () => {
     const { name, email, password } = props;
     try {
       await toast.promise(newUser({ name, email, password }), {
-        pending: "Carregando...",
-        success: "Cadastrado com sucesso👌",
-        error: "Erro ao cadastrar 🤯",
+        pending: "Loading...",
+        success: "Sucess",
       });
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+
+        toast.error(error.data.error.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
     }
   };
 

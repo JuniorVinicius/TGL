@@ -98,13 +98,13 @@ const FormAuth = (props: IFormType) => {
         <Form>
           {title === "Registration" && (
             <BoxInput>
-              <Input type="text" placeholder="Name" {...register("name")} />
+              <Input type="text" placeholder="Name" {...register("name")} autoComplete="off"/>
             </BoxInput>
           )}
 
           {title !== "New password" && (
             <BoxInput>
-              <Input type="text" placeholder="Email" {...register("email")} />
+              <Input type="text" placeholder="Email" {...register("email")} autoComplete="off" />
             </BoxInput>
           )}
 
@@ -114,6 +114,7 @@ const FormAuth = (props: IFormType) => {
                 type="password"
                 placeholder="Password"
                 {...register("password")}
+                autoComplete="off"
               />
             </BoxInput>
           )}
@@ -144,7 +145,7 @@ const FormAuth = (props: IFormType) => {
 
         <BoxButton>
           <Button size={sizeButton} onClick={onGoTo}>
-            {arrowActionLeft && <BsArrowLeft style={{ marginRight: "19px" }} />}
+            {arrowActionLeft && <BsArrowLeft style={{ marginRight: "19px" }}  />}
             {buttonActionTitle}
             {arrowActionRight && (
               <BsArrowRight style={{ marginLeft: "19px" }} />

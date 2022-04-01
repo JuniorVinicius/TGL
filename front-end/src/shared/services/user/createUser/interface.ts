@@ -1,4 +1,4 @@
-import { IBodyUser, ICreateUserResponse } from "../../interfaces/CreateUserInterface";
+import { IBodyUser, ICreateUserResponse } from "../../../interfaces/CreateUserInterface";
 
 
 
