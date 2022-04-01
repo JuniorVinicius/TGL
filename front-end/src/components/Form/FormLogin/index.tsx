@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-import { Button } from "../../UI/Button/Button";
+import { Button } from "../../../UI/Button/Button";
 import { IFormType, Inputs } from "./interfaces";
 import {
   BoxForm,

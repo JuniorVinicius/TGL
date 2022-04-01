@@ -7,4 +7,5 @@ export type {
 export type { IBodyUser, ICreateUserResponse } from "./CreateUserInterface";
 export type { ICartGames } from "./CartGamesInterface";
 export type { IAllBet } from "./AllBetsInterface";
-export type {IBodyGame, IBetResponse} from "./NewBetInterface";
+export type { IBodyGame, IBetResponse } from "./NewBetInterface";
+export type { IAccountResponse } from "./AccountInterface";

@@ -19,11 +19,19 @@ export const Form = styled.form`
   justify-content: center;
   flex-direction: column;
   padding: 20px;
+  @media (max-width: 525px) {
+    width: 300px;
+  }
 `;
 
 export const BoxInput = styled.div`
   width: 50%;
   margin-bottom: 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+
 `;
 export const Label = styled.label`
   font-size: 18px;
@@ -39,6 +47,7 @@ export const InputConteiner = styled.div`
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
+ 
 `;
 
 export const Input = styled.input`

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
-import FormAuth from "../components/Form";
+import FormAuth from "../components/Form/FormLogin";
 import AplicationTitle from "../components/AplicationTitle";
 
 import { Conteiner } from "../UI/Conteiner/Conteiner";

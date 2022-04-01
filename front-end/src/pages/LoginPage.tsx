@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Footer from "../components/Footer";
 import AplicationTitle from "../components/AplicationTitle";
-import FormAuth from "../components/Form";
+import FormAuth from "../components/Form/FormLogin";
 
 import { Conteiner } from "./../UI/Conteiner/Conteiner";
 import { auth } from "../shared/services";
