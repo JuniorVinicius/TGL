@@ -20,14 +20,12 @@ import {
 
 import bets from "./../shared/services/bet/listbets/index";
 import games from "../shared/services/games";
-import ReactPaginate from "react-paginate";
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>([]);
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>();
   const [filter, setFilter] = useState<string>("");
   const [filterBackground, setFilterBackground] = useState<string>("");
-  const [pageNumber, setPageNumber] = useState<number>(0);
   const navigate = useNavigate();
   const { listBets } = bets();
   const { listGames } = games();
@@ -58,14 +56,8 @@ const HomePage = () => {
     if (filterBackground === color) {
       setFilter("");
       setFilterBackground("");
-      
     }
-    // setPageNumber(1);
   };
-
-  useEffect(() => {
-    changePage({ selected: 1 });
-  },[filterBackground])
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
     return (
@@ -80,55 +72,44 @@ const HomePage = () => {
     );
   });
 
-  const betsPerPage = 20;
-  const pagesVisited = pageNumber * betsPerPage;
+  const listChosenGames = dataBets?.map((game) => {
+    const date = game.created_at
+      .replace(/-/gi, "/")
+      .match(/\d{4}\/\d{2}\/\d{2}/gi)[0]
+      .split("/")
+      .reverse()
+      .join("/");
 
-  const listChosenGames = dataBets
-    ?.slice(pagesVisited, pagesVisited + betsPerPage)
-    ?.map((game) => {
-      const date = game.created_at
-        .replace(/-/gi, "/")
-        .match(/\d{4}\/\d{2}\/\d{2}/gi)[0]
-        .split("/")
-        .reverse()
-        .join("/");
+    const price: string = `R$ ${Number(game.price)
+      .toFixed(2)
+      ?.toString()
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
 
-      const price: string = `R$ ${Number(game.price)
-        .toFixed(2)
-        ?.toString()
-        .replace(".", ",")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
-
-      let actualColor: string = "";
-      dataBetsTypes?.forEach((element) => {
-        if (element.id === game.type.id) {
-          actualColor = element.color;
-        }
-      });
-
-      const numbers: string[] = game.choosen_numbers
-        .split(",")
-        .map((number: string) => {
-          return number.padStart(2, "0");
-        });
-
-      return (
-        <Bet
-          key={Math.random()}
-          date={date}
-          typeGame={game.type.type}
-          numbers={numbers.join(", ")}
-          amount={price}
-          color={actualColor}
-        />
-      );
+    let actualColor: string = "";
+    dataBetsTypes?.forEach((element) => {
+      if (element.id === game.type.id) {
+        actualColor = element.color;
+      }
     });
 
-  const pageCount = Math.ceil(dataBets?.length / betsPerPage);
+    const numbers: string[] = game.choosen_numbers
+      .split(",")
+      .map((number: string) => {
+        return number.padStart(2, "0");
+      });
 
-  const changePage = ({ selected }: any) => {
-    setPageNumber(selected);
-  };
+    return (
+      <Bet
+        key={Math.random()}
+        date={date}
+        typeGame={game.type.type}
+        numbers={numbers.join(", ")}
+        amount={price}
+        color={actualColor}
+      />
+    );
+  });
 
   const handleClickNewBet = () => {
     navigate("/newbet");
@@ -172,29 +153,17 @@ const HomePage = () => {
           {typeGames}
         </Card>
 
-        {!!listChosenGames && listChosenGames?.length > 0 ? (
-          listChosenGames
-        ) : (
-          <EmptyBox>
-            <TextContent fontSize={50} fontBold={true}>
-              Empty bets {filterBackground && `for ${filter}`}
-            </TextContent>
-          </EmptyBox>
-        )}
+    
+          {!!listChosenGames && listChosenGames?.length > 0 ? (
+            listChosenGames
+          ) : (
+            <EmptyBox>
+              <TextContent fontSize={50} fontBold={true}>
+                Empty bets {filterBackground && `for ${filter}`}
+              </TextContent>
+            </EmptyBox>
+          )}
 
-        <ReactPaginate className="pagination"
-          previousLabel={"<"}
-          nextLabel={">"}
-          pageCount={pageCount}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={3}
-          onPageChange={changePage}
-          containerClassName={"paginationBttns"}
-          previousLinkClassName={"previousBttn"}
-          nextLinkClassName={"nextBttn"}
-          disabledClassName={"paginationDisabled"}
-          activeClassName={"paginationActive"}
-        />
       </MainConteiner>
 
       <Footer />

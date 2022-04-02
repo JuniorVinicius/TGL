@@ -96,7 +96,7 @@ export const Box = styled.div`
         height: 120px;
         background-color: #fff;
         border-bottom: 2px solid var(--border);
-        justify-content: space-center;
+        justify-content: center;
         align-items: center;
         flex-direction: column;
         top: 79px;
