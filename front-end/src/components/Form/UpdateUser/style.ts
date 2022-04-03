@@ -30,8 +30,6 @@ export const BoxInput = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-
-
 `;
 export const Label = styled.label`
   font-size: 18px;
@@ -47,10 +45,10 @@ export const InputConteiner = styled.div`
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
- 
 `;
 
 export const Input = styled.input`
+  width: 100%;
   background: none;
   border: none;
   padding: 10px;

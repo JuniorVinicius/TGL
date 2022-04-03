@@ -49,7 +49,8 @@ export const BoxName = styled.div`
   & > div > .edit-icon-responsive {
     display: none;
   }
-  @media (max-width: 525px) {
+  
+  @media (max-width: 728px) {
     flex-direction: column;
     & > div > .edit-icon-responsive {
       display: block;
@@ -63,9 +64,11 @@ export const BoxName = styled.div`
 export const UserName = styled.h3`
   margin-right: 20px;
   font-size: 30px;
+  @media (max-width: 768px) {
+    margin-right: 0px;
+  }
   @media (max-width: 525px) {
     font-size: 20px;
-    margin-right: 0px;
   }
 `;
 

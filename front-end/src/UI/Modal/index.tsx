@@ -25,6 +25,7 @@ const CustomPopup = (props: IModal) => {
               className="confirm"
               onClick={() => {
                 execute();
+                close();
               }}
             >
               {titleButton ? titleButton : "Confirmar"}
