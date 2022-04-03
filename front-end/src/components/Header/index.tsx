@@ -11,7 +11,7 @@ import Cart from "../Cart";
 import { Button } from "../../UI/Button/Button";
 import CustomPopup from "../../UI/Modal/index";
 import { HeaderType, ITotalCart } from "./interfaces";
-import { HeaderBox, Box, ConteinerButton, LogoBar } from "./style";
+import { HeaderBox, Box, ConteinerButton, LogoBar} from "./style";
 
 const Header = (props: HeaderType) => {
   const [total, setTotal] = useState<number>(0);
@@ -69,7 +69,7 @@ const Header = (props: HeaderType) => {
       dispatch(cartActions.saveBetData());
       setTimeout(() => {
         navigate("/home");
-      } , 1000);
+      } , 900);
     }
     toast(message, {
       position: "top-right",
@@ -110,6 +110,7 @@ const Header = (props: HeaderType) => {
           )}
         </Box>
 
+
         <Box className={`box-logout ${clicked ? "clicked" : ""}`}>
           <ConteinerButton>
             {!hasAccountButton && <Button fontSize={20} className="header-button" onClick={handleClickAccount}>
@@ -148,6 +149,7 @@ const Header = (props: HeaderType) => {
             />
           )}
         </div>
+
       </HeaderBox>
 
       <LogoBar className={`${clicked && "clicked-bar"}`} />

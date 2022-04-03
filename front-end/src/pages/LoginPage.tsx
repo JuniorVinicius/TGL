@@ -19,8 +19,8 @@ const LoginPage = () => {
     const { email, password } = props;
     try {
       await toast.promise(login({ email, password }), {
-        pending: "Loading...",
-        success: "Sucess👌",
+        pending: "Carregando...",
+        success: "Sucesso👌",
       });
       navigate("/home");
     } catch (error: any) {

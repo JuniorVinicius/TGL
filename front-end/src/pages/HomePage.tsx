@@ -19,7 +19,8 @@ import {
 } from "./../UI/Conteiner/BoxFilters";
 
 import bets from "./../shared/services/bet/listbets/index";
-import games from "../shared/services/games";
+import { games } from "../shared/services";
+
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>([]);
@@ -33,8 +34,8 @@ const HomePage = () => {
   const allBets = async (query: string) => {
     try {
       const responseBets = await toast.promise(listBets(query), {
-        pending: "Loading...",
-        error: "Error loading games.",
+        pending: "Carregando...",
+        error: "Erro ao carregar os jogos.",
       });
       const responseGame = await listGames();
 

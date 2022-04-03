@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { games } from "../../shared/services";
 import { Filter } from "../Filter";
+import { useDispatch } from 'react-redux';
+import { showUpdateActions } from "../../store/showUpdate-slice";
 import {
   BoxAdmPanel,
   BoxDescription,
@@ -11,8 +13,7 @@ import {
 
 import FormAdm from "./../Form/FormAdm";
 import { IProps } from "./interfaces";
-import { useDispatch } from 'react-redux';
-import { showUpdateActions } from "../../store/showUpdate-slice";
+
 
 const AdmPanel = (props: IProps) => {
   const { show } = props;

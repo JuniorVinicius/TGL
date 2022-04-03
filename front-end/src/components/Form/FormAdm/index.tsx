@@ -48,46 +48,47 @@ const FormAdm = (props: IProps) => {
 
   const createOrUpdateGame = async () => {
     const { type, color, description, range, price, max_number } = dataInputs;
-    console.log({ type, color, description, range, price, max_number });
-    try {
-      if (!id) {
-        await toast.promise(
-          create({
-            type,
-            color,
-            description,
-            range,
-            price,
-            max_number,
-          }),
-          {
-            pending: "Carregando...",
-            success: "Jogo cadastrado com sucesso!",
-          }
-        );
-      } else {
-        await toast.promise(
-          update(
-            {
+    if (type && color && description && range && price && max_number) {
+      try {
+        if (!id) {
+          await toast.promise(
+            create({
               type,
               color,
               description,
               range,
               price,
               max_number,
-            },
-            id
-          ),
-          {
-            pending: "Carregando...",
-            success: "Jogo atualizado com sucesso!",
-          }
-        );
-      }
+            }),
+            {
+              pending: "Carregando...",
+              success: "Jogo cadastrado com sucesso!",
+            }
+          );
+        } else {
+          await toast.promise(
+            update(
+              {
+                type,
+                color,
+                description,
+                range,
+                price,
+                max_number,
+              },
+              id
+            ),
+            {
+              pending: "Carregando...",
+              success: "Jogo atualizado com sucesso!",
+            }
+          );
+        }
 
-      window.location.reload();
-    } catch (err) {
-      notifyError("Erro ao cadastrar o jogo.");
+        window.location.reload();
+      } catch (err) {
+        notifyError("Erro ao cadastrar o jogo.");
+      }
     }
   };
 
@@ -152,7 +153,7 @@ const FormAdm = (props: IProps) => {
         price: Number(
           price.toString().split(/R\$\s/gi).join("").replace(",", ".")
         ),
-        max_number: Math.round(convertToNumber(range)),
+        max_number: Math.round(convertToNumber(max_number)),
       };
       setDataInputs({ ...inputs });
     } catch (err) {

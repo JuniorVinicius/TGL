@@ -1,6 +1,6 @@
+import { ICartGames } from "../../../interfaces";
+import instance from "../../axios.config";
 
-import { ICartGames } from '../../interfaces';
-import instance from './../axios.config';
 
 
 

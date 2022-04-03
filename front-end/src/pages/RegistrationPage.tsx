@@ -21,8 +21,8 @@ const RegistrationPage = () => {
     const { name, email, password } = props;
     try {
       await toast.promise(newUser({ name, email, password }), {
-        pending: "Loading...",
-        success: "Sucess",
+        pending: "Carregando...",
+        success: "Sucesso",
       });
       navigate("/");
     } catch (error:any) {

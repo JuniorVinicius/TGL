@@ -22,8 +22,8 @@ import {
 import { MainConteiner } from "../UI/Conteiner/MainConteiner";
 import { Box } from "../UI/Conteiner/Conteiner";
 import ActionButton from "../UI/Button/ActionButtons";
+import { games } from "../shared/services";
 
-import games from "./../shared/services/games/index";
 
 
 const NewBet = () => {

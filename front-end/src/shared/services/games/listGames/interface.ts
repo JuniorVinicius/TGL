@@ -1,4 +1,4 @@
-import { ICartGames } from "../../interfaces";
+import { ICartGames } from "../../../interfaces";
 
 
 export interface IUserCreate {

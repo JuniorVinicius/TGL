@@ -46,7 +46,7 @@ export const Label = styled.p`
   font-weight: bold;
   color: var(--text-light);
   margin-top: 33px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const Description = styled.p`
@@ -54,6 +54,7 @@ export const Description = styled.p`
   font-style: italic;
   color: var(--text-light);
   margin: 28px 0px;
+  margin-top: 10px;
 
   @media (max-width: 470px) {
     font-size: 14px;

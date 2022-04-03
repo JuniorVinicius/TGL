@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
-import ActionButtons from "../../../UI/Button/ActionButtons";
 import {
   BoxForm,
   TitleForm,
@@ -14,10 +14,13 @@ import {
 } from "./style";
 import { InputUser } from "./interface";
 import updateUser from "../../../shared/services/user/updateUser";
+import { Button } from "../FormAdm/style";
+import CustomPopup from "../../../UI/Modal";
 
 const FormUpdateUser = () => {
-  const { register, handleSubmit  } = useForm<InputUser>();
-  const { newDataUser } = updateUser()
+  const { register, handleSubmit } = useForm<InputUser>();
+  const [dataInputs, setDataInputs] = useState<any>({ email: "", name: "" });
+  const { newDataUser } = updateUser();
 
   const notifyError = (message: string) =>
     toast.error(message, {
@@ -29,6 +32,22 @@ const FormUpdateUser = () => {
       draggable: true,
       progress: undefined,
     });
+
+  const updateAcccount = async () => {
+    const { email, name } = dataInputs;
+    if (email && name) {
+      try {
+        await toast.promise(newDataUser({ email, name }), {
+          pending: "Carregando...",
+          success: "Conta atualizada com sucesso!",
+        });
+
+        window.location.reload();
+      } catch (err) {
+        notifyError("Erro ao atualizar conta.");
+      }
+    }
+  };
 
   async function validateInputs(inputData: InputUser) {
     const { name, email } = inputData;
@@ -46,8 +65,7 @@ const FormUpdateUser = () => {
       await nameSchema.validate({ name: name });
       await emailSchema.validate({ email: email });
 
-      await newDataUser({ email, name });
-      window.location.reload();
+      setDataInputs({ email, name });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         console.log(err.message);
@@ -62,6 +80,25 @@ const FormUpdateUser = () => {
     }
   }
 
+  // const newButtons = useCallback(() => {
+  //   const renderButtons =
+  //     dataInputs.email && dataInputs.name ? (
+  //       <CustomPopup
+  //         title="Update User"
+  //         content={"Deseja realmente atualizar esta conta?"}
+  //         execute={updateAcccount}
+  //         open={<Button type="submit">Update</Button>}
+  //       />
+  //     ) : (
+  //       <Button type="submit">Update</Button>
+  //     );
+
+  //   return renderButtons;
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dataInputs.email && dataInputs.name]);
+
+  // const renderButtons = newButtons();
+
   return (
     <>
       <BoxForm onSubmit={handleSubmit(validateInputs)}>
@@ -74,7 +111,7 @@ const FormUpdateUser = () => {
                 id="name"
                 type="text"
                 placeholder="Name"
-                {...register("name") }
+                {...register("name")}
                 autoComplete="off"
               />
             </InputConteiner>
@@ -92,7 +129,12 @@ const FormUpdateUser = () => {
             </InputConteiner>
           </BoxInput>
 
-          <ActionButtons name="Update" submit={true} onHandleClick={() => {}} />
+          <CustomPopup
+            title="Update User"
+            content={"Deseja realmente atualizar esta conta?"}
+            execute={updateAcccount}
+            open={<Button type="submit">Update</Button>}
+          />
         </Form>
       </BoxForm>
     </>

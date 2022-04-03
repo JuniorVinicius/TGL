@@ -17,7 +17,9 @@ export const Filter = styled.button<FilterType>`
   font-size: 14px;
   font-style: italic;
   font-weight: bold;
+  margin: 10px 0px;
   margin-right: 25px;
+
   color: ${(props) =>
     props.background && props.background === props.color
       ? "var(--card-color)"
