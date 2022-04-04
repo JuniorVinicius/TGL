@@ -18,23 +18,22 @@ import {
   ConteinerButton,
   Card,
   Button,
-  MainConteiner
+  MainConteiner,
 } from "./../UI";
 
 import { games, bets } from "../shared/services";
-import { convertValues } from './../shared/helpers/convertMonetaryValues';
-import { convertDates } from "../shared/helpers";
+import { convertDates, convertValues } from "../shared/helpers";
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>([]);
   const [dataBetsTypes, setDataBetsTypes] = useState<any[]>();
-  const [filter, setFilter] = useState<string>("");
-  const [filterBackground, setFilterBackground] = useState<string>("");
+  const [filter, setFilter] = useState<string[]>([]);
+  const [filterBackground, setFilterBackground] = useState<string[]>([]);
   const navigate = useNavigate();
   const { listBets } = bets();
   const { listGames } = games();
 
-  const allBets = async (query: string) => {
+  const allBets = async (query?: string) => {
     try {
       const responseBets = await toast.promise(listBets(query), {
         pending: "Carregando...",
@@ -50,17 +49,54 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    allBets(filter);
+    if(filter.length <= 0){
+      allBets("");
+    }else{
+      allBets(filter.join("&type%5B%5D="));
+    }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
+  // useEffect(() => {
+  //   const filterBets = dataBets.filter((bet) => {
+  //     if (filter.length === 0) {
+  //       return bet;
+  //     }
+  //     return filter.every((item) => bet.type.includes(item));
+  //   });
+  //   setDataBets(filterBets);
+  //   console.log(filterBets);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[])
+
+  // useEffect(() => {
+  //   console.log(filter);
+  //   console.log(filterBackground);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filter]);
+
   const handleFilters = (type: string, color: string) => {
-    setFilter(type);
-    setFilterBackground(color);
-    if (filterBackground === color) {
-      setFilter("");
-      setFilterBackground("");
+    if (!filter.includes(type)) {
+      setFilter([...filter, type]);
+    } else {
+      const filterBets = filter.filter((item) => item !== type);
+      setFilter([...filterBets]);
     }
+
+    if (!filterBackground.includes(color)) {
+      setFilterBackground([...filterBackground, color]);
+    } else {
+      const filterColors = filterBackground.filter((item) => item !== color);
+      setFilterBackground([...filterColors]);
+    }
+
+    // //setFilterBackground(color);
+
+    // if (filterBackground === color) {
+    //   setFilter([]);
+    //   //setFilterBackground("");
+    // }
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -69,7 +105,7 @@ const HomePage = () => {
         onClick={() => handleFilters(typeBet.type, typeBet.color)}
         key={Math.random()}
         color={typeBet.color}
-        background={filterBackground}
+        background={filterBackground.find(element => element === typeBet.color)}
       >
         {typeBet.type}
       </Filter>
@@ -79,7 +115,7 @@ const HomePage = () => {
   const listChosenGames = dataBets?.map((game) => {
     const date = convertDates(game.created_at);
 
-    const price: string = convertValues(game.price).toString()
+    const price: string = convertValues(game.price).toString();
 
     let actualColor: string = "";
     dataBetsTypes?.forEach((element) => {
@@ -153,7 +189,7 @@ const HomePage = () => {
         ) : (
           <EmptyBox>
             <TextContent fontSize={50} fontBold={true}>
-              Empty bets {filterBackground && `for ${filter}`}
+              Empty bets
             </TextContent>
           </EmptyBox>
         )}

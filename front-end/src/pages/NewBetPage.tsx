@@ -100,7 +100,12 @@ const NewBet = () => {
 
   const addToCart = () => {
     setClicked((prev) => !prev);
-    clearGame();
+    if (
+      chosenValue.length === dataBetMaxNumbers ||
+      random.length === dataBetMaxNumbers
+    ) {
+      clearGame();
+    }
   };
 
   const allBets = async () => {
