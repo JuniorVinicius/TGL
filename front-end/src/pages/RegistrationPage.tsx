@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Footer from "../components/Footer";
-import FormAuth from "../components/Form/FormLogin";
-import AplicationTitle from "../components/AplicationTitle";
 
-import { Conteiner } from "../UI/Conteiner/Conteiner";
-import createNewUser from "../shared/services/user/createUser";
+import { AplicationTitle, FormAuth, Footer } from "../components";
+
+import { Conteiner } from "../UI";
+import { createNewUser } from "../shared/services";
 import { InputsCreateUser } from "./interfaces";
-
 
 const RegistrationPage = () => {
   const { newUser } = createNewUser();
@@ -25,18 +23,16 @@ const RegistrationPage = () => {
         success: "Sucesso",
       });
       navigate("/");
-    } catch (error:any) {
-
-        toast.error(error.data.error.message, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-
+    } catch (error: any) {
+      toast.error(error.data.error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

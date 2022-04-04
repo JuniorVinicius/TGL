@@ -1,12 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import NewBet from "../pages/NewBetPage";
-import RegistrationPage from "./../pages/RegistrationPage";
-import ResetPage from "../pages/ResetPasswordPage";
+
 import ProtectedRoutes from "./protectedRoutes/Protected";
-import ResetPasswordPage from './../pages/NewPasswordPage';
-import Profile from "../pages/AccountPage";
+
+import {
+  HomePage,
+  LoginPage,
+  NewBet,
+  RegistrationPage,
+  ResetPage,
+  ResetPasswordPage,
+  Profile,
+} from "../pages";
 
 const MainRoutes = () => {
   return (

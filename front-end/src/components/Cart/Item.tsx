@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 import { IoTrashOutline } from "react-icons/io5";
 
-import CustomPopup from "../../UI/Modal";
+import CustomPopup from "../../UI";
 import { BoxContentItem, Item, ListNumbers, TypeGame } from "./style";
 
 interface ItemType {

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "./../../store/cart-slice";
 import { BsArrowRight } from "react-icons/bs";
 
-import { Button } from "../../UI/Button/Button";
+import { Button } from "../../UI";
 import ItemCart from "./Item";
-import { IProps } from "./interfaces";
-import { ICartItems } from "./interfaces";
+import { IProps, ICartItems } from "./interfaces";
+
 import {
   BoxBetSave,
   Itens,
@@ -17,6 +17,7 @@ import {
   BoxSave,
   EmptyCart,
 } from "./style";
+import { convertValues } from "../../shared/helpers";
 
 const Cart = (props: IProps) => {
   const { hasBorder, hasSave, hasMarginTop, hasWidth } = props;
@@ -30,14 +31,6 @@ const Cart = (props: IProps) => {
   const min_cart_value = useSelector(
     (state: ICartItems) => state.cart.min_cart_value
   );
-
-  const convertValues = (value: number) => {
-    return `R$ ${Number(value)
-      .toFixed(2)
-      ?.toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
-  };
 
   useEffect(() => {
     let total = 0;
@@ -57,7 +50,7 @@ const Cart = (props: IProps) => {
         key={item.id}
         color={item.color}
         game={item.typeGame}
-        amount={convertValues(item.price)}
+        amount={convertValues(item.price).toString()}
         numbers={numbers.join(", ")}
       />
     );

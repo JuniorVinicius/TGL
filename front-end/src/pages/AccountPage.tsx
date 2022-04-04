@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { FiEdit } from "react-icons/fi";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import FormUpdateUser from "./../components/Form/UpdateUser/index";
-import AdmPanel from "./../components/AdmPanel/index";
 import {
+  Footer,
+  Header,
+  FormUpdateUser,
+  AdmPanel,
   AdminLabel,
   BoxImage,
   BoxInfo,
@@ -15,17 +16,16 @@ import {
   Image,
   UserName,
   Email,
-} from "../components/Profile";
-import { MainConteiner } from "./../UI/Conteiner/MainConteiner";
+} from "../components";
 
-import userData from "../shared/services/user/myAccount";
-import { useSelector } from "react-redux";
+import { MainConteiner } from "./../UI";
+import { userData } from "../shared/services";
 
-interface showUpdateFields{
-  showUpdateFields: boolean
+interface showUpdateFields {
+  showUpdateFields: boolean;
 }
-interface IState{
-  showUpdate: showUpdateFields
+interface IState {
+  showUpdate: showUpdateFields;
 }
 
 const Profile = () => {
@@ -36,9 +36,11 @@ const Profile = () => {
     "https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
 
   const handleClick = () => {
-    setShowEditFields(prevState => !prevState);
+    setShowEditFields((prevState) => !prevState);
   };
-  const showFields = useSelector((state: IState) => state.showUpdate.showUpdateFields);
+  const showFields = useSelector(
+    (state: IState) => state.showUpdate.showUpdateFields
+  );
   const getUserData = async () => {
     try {
       const responseAccountData = await toast.promise(accountUser(), {
@@ -57,9 +59,9 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-      setShowEditFields(false);
+    setShowEditFields(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[showFields])
+  }, [showFields]);
 
   return (
     <>
@@ -106,7 +108,7 @@ const Profile = () => {
         </BoxProfile>
         {userAccountData?.is_admin === 1 && <AdmPanel show={!showEditFields} />}
 
-        {showEditFields  && <FormUpdateUser />}
+        {showEditFields && <FormUpdateUser />}
       </MainConteiner>
       <Footer />
     </>

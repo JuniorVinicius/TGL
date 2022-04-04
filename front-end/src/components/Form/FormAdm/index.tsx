@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -16,11 +17,15 @@ import {
 } from "./style";
 import { InputUser, IProps } from "./interface";
 
-import createGames from "../../../shared/services/games/createGame";
-import CustomPopup from "../../../UI/Modal";
-import { useState } from "react";
-import updateGames from "../../../shared/services/games/updateGame";
-import deleteGames from "../../../shared/services/games/deleteGame";
+import { CustomPopup } from "../../../UI";
+
+import {
+  updateGames,
+  deleteGames,
+  createGames,
+} from "../../../shared/services";
+import { convertValues } from "../../../shared/helpers";
+
 
 const FormAdm = (props: IProps) => {
   const { id } = props;
@@ -150,9 +155,7 @@ const FormAdm = (props: IProps) => {
         type,
         description,
         range: Math.round(convertToNumber(range)),
-        price: Number(
-          price.toString().split(/R\$\s/gi).join("").replace(",", ".")
-        ),
+        price: convertValues(price, "COMMA_TO_DOT"),
         max_number: Math.round(convertToNumber(max_number)),
       };
       setDataInputs({ ...inputs });

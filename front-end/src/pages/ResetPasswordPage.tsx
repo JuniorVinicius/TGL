@@ -1,14 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import Footer from "../components/Footer";
-import AplicationTitle from "../components/AplicationTitle";
-import FormAuth from "../components/Form/FormLogin";
+import { FormAuth, AplicationTitle, Footer } from "../components";
 
-import { Conteiner } from "../UI/Conteiner/Conteiner";
+import { Conteiner } from "../UI";
 
 import { InputsResetEmail } from "./interfaces";
-import resetPasswordSendEmail from "./../shared/services/auth/resetPassword/sendLink";
+import { resetPasswordSendEmail } from "./../shared/services";
 
 const ResetPage = () => {
   const navigate = useNavigate();
@@ -27,7 +25,7 @@ const ResetPage = () => {
         success: "O link foi enviado para o seu email",
       });
       navigate("/reset-password");
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error.data.message, {
         position: "top-right",
         autoClose: 2000,
@@ -38,7 +36,6 @@ const ResetPage = () => {
         progress: undefined,
       });
     }
-
   };
   return (
     <>

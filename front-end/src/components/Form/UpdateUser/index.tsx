@@ -12,10 +12,14 @@ import {
   InputConteiner,
   Input,
 } from "./style";
+
+import { CustomPopup } from "../../../UI";
+
 import { InputUser } from "./interface";
-import updateUser from "../../../shared/services/user/updateUser";
+
+import { updateUser } from "../../../shared/services";
 import { Button } from "../FormAdm/style";
-import CustomPopup from "../../../UI/Modal";
+
 
 const FormUpdateUser = () => {
   const { register, handleSubmit } = useForm<InputUser>();
@@ -79,25 +83,6 @@ const FormUpdateUser = () => {
       }
     }
   }
-
-  // const newButtons = useCallback(() => {
-  //   const renderButtons =
-  //     dataInputs.email && dataInputs.name ? (
-  //       <CustomPopup
-  //         title="Update User"
-  //         content={"Deseja realmente atualizar esta conta?"}
-  //         execute={updateAcccount}
-  //         open={<Button type="submit">Update</Button>}
-  //       />
-  //     ) : (
-  //       <Button type="submit">Update</Button>
-  //     );
-
-  //   return renderButtons;
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [dataInputs.email && dataInputs.name]);
-
-  // const renderButtons = newButtons();
 
   return (
     <>

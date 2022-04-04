@@ -8,10 +8,12 @@ import { GoThreeBars } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import Cart from "../Cart";
-import { Button } from "../../UI/Button/Button";
-import CustomPopup from "../../UI/Modal/index";
+
+import { CustomPopup, Button } from "../../UI";
 import { HeaderType, ITotalCart } from "./interfaces";
-import { HeaderBox, Box, ConteinerButton, LogoBar} from "./style";
+import { HeaderBox, Box, ConteinerButton, LogoBar } from "./style";
+
+import { convertValues } from "../../shared/helpers";
 
 const Header = (props: HeaderType) => {
   const [total, setTotal] = useState<number>(0);
@@ -42,14 +44,6 @@ const Header = (props: HeaderType) => {
     window.location.reload();
   };
 
-  const convertValues = (value: number) => {
-    return `R$ ${Number(value)
-      .toFixed(2)
-      ?.toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
-  };
-
   useEffect(() => {
     let total = 0;
     CART.forEach((item) => {
@@ -69,7 +63,7 @@ const Header = (props: HeaderType) => {
       dispatch(cartActions.saveBetData());
       setTimeout(() => {
         navigate("/home");
-      } , 900);
+      }, 900);
     }
     toast(message, {
       position: "top-right",
@@ -82,9 +76,9 @@ const Header = (props: HeaderType) => {
     });
   };
 
-  const handleClickAccount = () =>{
+  const handleClickAccount = () => {
     navigate("/account");
-  }
+  };
 
   return (
     <>
@@ -110,12 +104,17 @@ const Header = (props: HeaderType) => {
           )}
         </Box>
 
-
         <Box className={`box-logout ${clicked ? "clicked" : ""}`}>
           <ConteinerButton>
-            {!hasAccountButton && <Button fontSize={20} className="header-button" onClick={handleClickAccount}>
-              Account
-            </Button>}
+            {!hasAccountButton && (
+              <Button
+                fontSize={20}
+                className="header-button"
+                onClick={handleClickAccount}
+              >
+                Account
+              </Button>
+            )}
           </ConteinerButton>
           <ConteinerButton className="button-logout">
             <Button
@@ -149,7 +148,6 @@ const Header = (props: HeaderType) => {
             />
           )}
         </div>
-
       </HeaderBox>
 
       <LogoBar className={`${clicked && "clicked-bar"}`} />

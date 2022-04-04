@@ -2,14 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Footer from "../components/Footer";
-import AplicationTitle from "../components/AplicationTitle";
-import FormAuth from "../components/Form/FormLogin";
+import { Footer, AplicationTitle, FormAuth } from "../components";
 
-import { Conteiner } from "./../UI/Conteiner/Conteiner";
+import { Conteiner } from "./../UI";
 
 import { InputsLogin } from "./interfaces";
-import auth from "../shared/services/auth/login";
+import { auth } from "../shared/services";
 
 const LoginPage = () => {
   const navigate = useNavigate();

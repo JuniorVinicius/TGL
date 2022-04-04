@@ -3,24 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BsArrowRight } from "react-icons/bs";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { TextContent, EmptyBox } from "./../components/HomePageText/index";
-import { Filter } from "./../components/Filter/index";
-import Bet from "../components/Bets";
+import {
+  Header,
+  Footer,
+  Bet,
+  TextContent,
+  EmptyBox,
+  Filter,
+} from "../components";
 
-import { Button } from "../UI/Button/Button";
-import { MainConteiner } from "../UI/Conteiner/MainConteiner";
 import {
   BoxFilters,
   Filters,
   ConteinerButton,
   Card,
-} from "./../UI/Conteiner/BoxFilters";
+  Button,
+  MainConteiner
+} from "./../UI";
 
-import bets from "./../shared/services/bet/listbets/index";
-import { games } from "../shared/services";
-
+import { games, bets } from "../shared/services";
+import { convertValues } from './../shared/helpers/convertMonetaryValues';
+import { convertDates } from "../shared/helpers";
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>([]);
@@ -74,18 +77,9 @@ const HomePage = () => {
   });
 
   const listChosenGames = dataBets?.map((game) => {
-    const date = game.created_at
-      .replace(/-/gi, "/")
-      .match(/\d{4}\/\d{2}\/\d{2}/gi)[0]
-      .split("/")
-      .reverse()
-      .join("/");
+    const date = convertDates(game.created_at);
 
-    const price: string = `R$ ${Number(game.price)
-      .toFixed(2)
-      ?.toString()
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+    const price: string = convertValues(game.price).toString()
 
     let actualColor: string = "";
     dataBetsTypes?.forEach((element) => {
@@ -154,17 +148,15 @@ const HomePage = () => {
           {typeGames}
         </Card>
 
-    
-          {!!listChosenGames && listChosenGames?.length > 0 ? (
-            listChosenGames
-          ) : (
-            <EmptyBox>
-              <TextContent fontSize={50} fontBold={true}>
-                Empty bets {filterBackground && `for ${filter}`}
-              </TextContent>
-            </EmptyBox>
-          )}
-
+        {!!listChosenGames && listChosenGames?.length > 0 ? (
+          listChosenGames
+        ) : (
+          <EmptyBox>
+            <TextContent fontSize={50} fontBold={true}>
+              Empty bets {filterBackground && `for ${filter}`}
+            </TextContent>
+          </EmptyBox>
+        )}
       </MainConteiner>
 
       <Footer />

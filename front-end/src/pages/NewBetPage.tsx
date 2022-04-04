@@ -5,26 +5,23 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../store/cart-slice";
 import { ChosenNumbers } from "../context";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import { Filter } from "../components/Filter";
-import Numbers from "./../components/Numbers/index";
-import Cart from "./../components/Cart/index";
 import {
+  Footer,
+  Header,
+  Filter,
+  Numbers,
+  Cart,
   TitleBet,
   Emphasis,
   Label,
   Description,
   BoxBetNumbers,
   BoxCart,
-} from "./../components/NewBetContent/index";
+} from "./../components";
 
-import { MainConteiner } from "../UI/Conteiner/MainConteiner";
-import { Box } from "../UI/Conteiner/Conteiner";
-import ActionButton from "../UI/Button/ActionButtons";
+import { MainConteiner, Box, ActionButtons } from "../UI";
+
 import { games } from "../shared/services";
-
-
 
 const NewBet = () => {
   const [random, setRandom] = useState<number[]>([]);
@@ -125,7 +122,7 @@ const NewBet = () => {
     setBetPrice(typeBet.price);
     setDataTypeId(typeBet.id);
     setChosen([]);
-    clearGame()
+    clearGame();
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -174,14 +171,14 @@ const NewBet = () => {
 
           <Box className="main-box">
             <Box>
-              <ActionButton
+              <ActionButtons
                 name="Complete game"
                 onHandleClick={randomNumbers}
               />
-              <ActionButton name="Clear game" onHandleClick={clearGame} />
+              <ActionButtons name="Clear game" onHandleClick={clearGame} />
             </Box>
 
-            <ActionButton
+            <ActionButtons
               name="Add to cart"
               onHandleClick={addToCart}
               hasBackground={true}
