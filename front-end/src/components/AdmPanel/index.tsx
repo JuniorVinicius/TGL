@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { games } from "../../shared/services";
 import { Filter } from "../Filter";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { showUpdateActions } from "../../store/showUpdate-slice";
 import {
   BoxAdmPanel,
@@ -13,7 +13,6 @@ import {
 
 import FormAdm from "./../Form/FormAdm";
 import { IProps } from "./interfaces";
-
 
 const AdmPanel = (props: IProps) => {
   const { show } = props;
@@ -49,6 +48,8 @@ const AdmPanel = (props: IProps) => {
   const handleChange = (typeBet: any) => {
     setFilterBackground(typeBet.color);
     setDataBet({
+      color: typeBet.color,
+      type: typeBet.type,
       description: typeBet.description,
       price: typeBet.price,
       range: typeBet.range,
@@ -63,7 +64,6 @@ const AdmPanel = (props: IProps) => {
 
     setShowItems(true);
     dispatch(showUpdateActions.toggle());
-
   };
 
   const typeGames = dataBetsTypes?.map((typeBet) => {
@@ -88,7 +88,6 @@ const AdmPanel = (props: IProps) => {
     }
 
     dispatch(showUpdateActions.toggle());
-  
   };
 
   return (
@@ -114,7 +113,17 @@ const AdmPanel = (props: IProps) => {
           )}
         </BoxDescription>
       )}
-      {filterBackground && showItems && <FormAdm id={dataBet.id} />}
+      {filterBackground && showItems && (
+        <FormAdm
+          id={dataBet.id}
+          type={dataBet.type}
+          description={dataBet.description}
+          color={dataBet.color}
+          range={dataBet.range}
+          max_number={dataBet.max_number}
+          price={dataBet.price}
+        />
+      )}
     </>
   );
 };

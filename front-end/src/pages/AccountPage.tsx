@@ -108,7 +108,7 @@ const Profile = () => {
         </BoxProfile>
         {userAccountData?.is_admin === 1 && <AdmPanel show={!showEditFields} />}
 
-        {showEditFields && <FormUpdateUser />}
+        {showEditFields && <FormUpdateUser name={userAccountData?.name} email={userAccountData?.email}/>}
       </MainConteiner>
       <Footer />
     </>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -28,13 +28,24 @@ import { convertValues } from "../../../shared/helpers";
 
 
 const FormAdm = (props: IProps) => {
-  const { id } = props;
-  const { register, handleSubmit } = useForm<InputUser>();
+  const { id, type, color, description, range, price, max_number } = props;
+  const { register, handleSubmit, setValue } = useForm<InputUser>({
+    defaultValues: {
+      type: type,
+      color: color,
+      description: description,
+      range: range,
+      price: price,
+      max_number: max_number,
+    }
+  });
   const [dataInputs, setDataInputs] = useState<any>({});
 
   const { create } = createGames();
   const { update } = updateGames();
   const { remove } = deleteGames();
+
+
 
   const notifyError = (message: string) =>
     toast.error(message, {
@@ -96,6 +107,16 @@ const FormAdm = (props: IProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    setValue("type", type);
+    setValue("color", color);
+    setValue("description", description);
+    setValue("range", range);
+    setValue("price", price);
+    setValue("max_number", max_number);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[id])
 
   const removeGame = async () => {
     try {

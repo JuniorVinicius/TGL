@@ -21,8 +21,13 @@ import { updateUser } from "../../../shared/services";
 import { Button } from "../FormAdm/style";
 
 
-const FormUpdateUser = () => {
-  const { register, handleSubmit } = useForm<InputUser>();
+const FormUpdateUser = (props: InputUser) => {
+  const { register, handleSubmit } = useForm<InputUser>({
+    defaultValues: {
+      name: props.name,
+      email: props.email,
+    }
+  });
   const [dataInputs, setDataInputs] = useState<any>({ email: "", name: "" });
   const { newDataUser } = updateUser();
 
