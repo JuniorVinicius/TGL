@@ -2,8 +2,8 @@ import { useContext, memo, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { cartActions } from "../store/cart-slice";
-import { ChosenNumbers } from "../context";
+import { cartActions } from "@store/cart-slice";
+import { ChosenNumbers } from "@context/index";
 
 import {
   Footer,
@@ -17,11 +17,11 @@ import {
   Description,
   BoxBetNumbers,
   BoxCart,
-} from "./../components";
+} from "@components/index";
 
-import { MainConteiner, Box, ActionButtons } from "../UI";
+import { MainConteiner, Box, ActionButtons } from "@ui/index";
 
-import { games } from "../shared/services";
+import { games } from "@shared/services";
 
 const NewBet = () => {
   const [random, setRandom] = useState<number[]>([]);

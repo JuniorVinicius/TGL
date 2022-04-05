@@ -1,5 +1,5 @@
-import { ICartGames } from "../../../interfaces";
-import instance from "../../axios.config";
+import { ICartGames } from "@shared/interfaces";
+import instance from "@shared/services/axios.config";
 
 
 

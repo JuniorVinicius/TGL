@@ -16,10 +16,10 @@ import {
   Image,
   UserName,
   Email,
-} from "../components";
+} from "@components/index";
 
-import { MainConteiner } from "./../UI";
-import { userData } from "../shared/services";
+import { MainConteiner } from "@ui/index";
+import { userData } from "@shared/services";
 
 interface showUpdateFields {
   showUpdateFields: boolean;

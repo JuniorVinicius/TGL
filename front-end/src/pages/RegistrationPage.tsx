@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { AplicationTitle, FormAuth, Footer } from "../components";
+import { AplicationTitle, FormAuth, Footer } from "@components/index";
 
-import { Conteiner } from "../UI";
-import { createNewUser } from "../shared/services";
+import { Conteiner } from "@ui/index";
+import { createNewUser } from "@shared/services";
 import { InputsCreateUser } from "./interfaces";
 
 const RegistrationPage = () => {

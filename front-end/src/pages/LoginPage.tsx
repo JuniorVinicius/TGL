@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Footer, AplicationTitle, FormAuth } from "../components";
+import { Footer, AplicationTitle, FormAuth } from "@components/index";
 
-import { Conteiner } from "./../UI";
+import { Conteiner } from "@ui/index";
 
 import { InputsLogin } from "./interfaces";
-import { auth } from "../shared/services";
+import { auth } from "@shared/services";
 
 const LoginPage = () => {
   const navigate = useNavigate();

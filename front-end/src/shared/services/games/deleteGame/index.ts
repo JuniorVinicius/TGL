@@ -1,4 +1,4 @@
-import instance from "../../axios.config";
+import instance from "@shared/services/axios.config";
 
 const deleteGames = () => {
   async function remove(id: number) {

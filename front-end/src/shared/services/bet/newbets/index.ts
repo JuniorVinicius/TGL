@@ -1,6 +1,6 @@
 
-import { IBetResponse, IBodyGame } from '../../../interfaces';
-import instance from './../../axios.config';
+import { IBetResponse, IBodyGame } from '@shared/interfaces';
+import instance from '@shared/services/axios.config';
 import { IBetDatas } from './interface';
 
 

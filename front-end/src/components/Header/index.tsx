@@ -2,18 +2,18 @@ import { memo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../../store/cart-slice";
+import { cartActions } from "@store/cart-slice";
 import { BsArrowRight } from "react-icons/bs";
 import { GoThreeBars } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import Cart from "../Cart";
+import Cart from "@components/Cart";
 
-import { CustomPopup, Button } from "../../UI";
+import { CustomPopup, Button } from "@ui/index";
 import { HeaderType, ITotalCart } from "./interfaces";
 import { HeaderBox, Box, ConteinerButton, LogoBar } from "./style";
 
-import { convertValues } from "../../shared/helpers";
+import { convertValues } from "@shared/helpers";
 
 const Header = (props: HeaderType) => {
   const [total, setTotal] = useState<number>(0);

@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { FormAuth, AplicationTitle, Footer } from "../components";
+import { FormAuth, AplicationTitle, Footer } from "@components/index";
 
-import { Conteiner } from "../UI";
-import { resetPasswordSendNewPassword } from "../shared/services";
+import { Conteiner } from "@ui/index";
+import { resetPasswordSendNewPassword } from "@shared/services";
 import { IIputPassword } from "./interfaces";
 
 const ResetPasswordPage = () => {

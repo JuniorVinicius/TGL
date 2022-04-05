@@ -1,5 +1,5 @@
-import { IAllBet } from '../../../interfaces';
-import instance from './../../axios.config';
+import { IAllBet } from '@shared/interfaces';
+import instance from '@shared/services/axios.config';
 import { IUserBets } from './interface';
 
 

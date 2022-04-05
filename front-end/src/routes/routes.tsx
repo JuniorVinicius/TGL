@@ -10,7 +10,7 @@ import {
   ResetPage,
   ResetPasswordPage,
   Profile,
-} from "../pages";
+} from "@pages/index";
 
 const MainRoutes = () => {
   return (

@@ -1,5 +1,5 @@
-import instance from './../../../axios.config';
-import { IBodyEmail, ISendEmailResponse } from '../../../../interfaces';
+import instance from '@shared/services/axios.config';
+import { IBodyEmail, ISendEmailResponse } from '@shared/interfaces';
 import { IEmailAuth } from './interface';
 
 const resetPasswordSendEmail = ():IEmailAuth => {

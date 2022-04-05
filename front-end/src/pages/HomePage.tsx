@@ -10,7 +10,7 @@ import {
   TextContent,
   EmptyBox,
   Filter,
-} from "../components";
+} from "@components/index";
 
 import {
   BoxFilters,
@@ -19,10 +19,10 @@ import {
   Card,
   Button,
   MainConteiner,
-} from "./../UI";
+} from "@ui/index";
 
-import { games, bets } from "../shared/services";
-import { convertDates, convertValues } from "../shared/helpers";
+import { games, bets } from "@shared/services";
+import { convertDates, convertValues } from "@shared/helpers";
 
 const HomePage = () => {
   const [dataBets, setDataBets] = useState<any[]>([]);

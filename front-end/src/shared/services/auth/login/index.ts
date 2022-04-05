@@ -1,5 +1,5 @@
-import { IBodyAuth, ILoginResponse } from "../../../interfaces";
-import instance from "../../axios.config";
+import { IBodyAuth, ILoginResponse } from "@shared/interfaces";
+import instance from "@shared/services/axios.config";
 import  { IAuth }  from "./interface";
 
 

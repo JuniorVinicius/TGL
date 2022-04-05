@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext, useCallback, memo } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { cartActions } from "./../../store/cart-slice";
-import { ChosenNumbers } from "../../context";
+import { cartActions } from "@store/cart-slice";
+import { ChosenNumbers } from "@context/index";
 
 import { IBet, INumbers } from "./interfaces";
 import { BoxNumbers, Number } from "./style";

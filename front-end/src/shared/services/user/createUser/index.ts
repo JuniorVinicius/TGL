@@ -1,6 +1,6 @@
 
-import { IBodyUser, ICreateUserResponse } from "../../../interfaces";
-import instance from "../../axios.config";
+import { IBodyUser, ICreateUserResponse } from "@shared/interfaces";
+import instance from "@shared/services/axios.config";
 import { IUserCreate } from "./interface";
 
 

@@ -1,5 +1,5 @@
-import { IAccountResponse } from "../../../interfaces";
-import instance from "../../axios.config";
+import { IAccountResponse } from "@shared/interfaces";
+import instance from "@shared/services/axios.config";
 
 
 

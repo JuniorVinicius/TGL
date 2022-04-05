@@ -13,11 +13,11 @@ import {
   Input,
 } from "./style";
 
-import { CustomPopup } from "../../../UI";
+import { CustomPopup } from "@ui/index";
 
 import { InputUser } from "./interface";
 
-import { updateUser } from "../../../shared/services";
+import { updateUser } from "@shared/services";
 import { Button } from "../FormAdm/style";
 
 

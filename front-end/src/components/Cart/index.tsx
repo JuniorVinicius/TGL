@@ -2,10 +2,10 @@ import { useState, useEffect, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "./../../store/cart-slice";
+import { cartActions } from "@store/cart-slice";
 import { BsArrowRight } from "react-icons/bs";
 
-import { Button } from "../../UI";
+import { Button } from "@ui/index";
 import ItemCart from "./Item";
 import { IProps, ICartItems } from "./interfaces";
 

@@ -1,5 +1,5 @@
-import instance from "../../axios.config";
-import { IGameBody } from './../../../interfaces';
+import instance from "@shared/services/axios.config";
+import { IGameBody } from '@shared/interfaces';
 
 const updateGames = () => {
   async function update(body: IGameBody, id: number): Promise<any> {

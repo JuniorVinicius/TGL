@@ -17,15 +17,10 @@ import {
 } from "./style";
 import { InputUser, IProps } from "./interface";
 
-import { CustomPopup } from "../../../UI";
+import { CustomPopup } from "@ui/index";
 
-import {
-  updateGames,
-  deleteGames,
-  createGames,
-} from "../../../shared/services";
-import { convertValues } from "../../../shared/helpers";
-
+import { updateGames, deleteGames, createGames } from "@shared/services";
+import { convertValues } from "@shared/helpers";
 
 const FormAdm = (props: IProps) => {
   const { id, type, color, description, range, price, max_number } = props;
@@ -37,15 +32,13 @@ const FormAdm = (props: IProps) => {
       range: range,
       price: price,
       max_number: max_number,
-    }
+    },
   });
   const [dataInputs, setDataInputs] = useState<any>({});
 
   const { create } = createGames();
   const { update } = updateGames();
   const { remove } = deleteGames();
-
-
 
   const notifyError = (message: string) =>
     toast.error(message, {
@@ -115,8 +108,9 @@ const FormAdm = (props: IProps) => {
     setValue("range", range);
     setValue("price", price);
     setValue("max_number", max_number);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[id])
+  }, [id]);
 
   const removeGame = async () => {
     try {

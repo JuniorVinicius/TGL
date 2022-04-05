@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { saveBet } from "./../shared/services";
+import { saveBet } from "@shared/services";
 import { ICart } from "./interfaces";
 
 const { save } = saveBet();

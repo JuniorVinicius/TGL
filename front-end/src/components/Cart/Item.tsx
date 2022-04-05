@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { cartActions } from "../../store/cart-slice";
+import { cartActions } from "@store/cart-slice";
 import { IoTrashOutline } from "react-icons/io5";
 
-import {CustomPopup} from "../../UI";
+import { CustomPopup } from "@ui/index";
 import { BoxContentItem, Item, ListNumbers, TypeGame } from "./style";
 
 interface ItemType {
@@ -11,7 +11,7 @@ interface ItemType {
   amount: string;
   numbers: string;
   id: number;
-};
+}
 
 const ItemCart = (props: ItemType) => {
   const { color, game, amount, numbers, id } = props;

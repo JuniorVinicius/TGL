@@ -1,6 +1,6 @@
 
-import { IBodyPassword, IResetPasswordResponse } from '../../../../interfaces';
-import instance from './../../../axios.config';
+import { IBodyPassword, IResetPasswordResponse } from '@shared/interfaces';
+import instance from '@shared/services/axios.config';
 import { IResetPasswordAuth } from './interface';
 
 const resetPasswordSendNewPassword = (): IResetPasswordAuth => {
